@@ -14,13 +14,14 @@
 
         #container {
             display: flex;
-            width: 100%;
-            height: 100%;
+            width: 100vw; /* Usar 100vw para abranger a largura completa da viewport */
+            height: 100vh; /* Usar 100vh para abranger a altura completa da viewport */
+            overflow: hidden; /* Ocultar barras de rolagem */
         }
 
         iframe {
-            width: 50%;
-            height: 100%;
+            width: 50%; /* Cada iframe ocupa metade da largura */
+            height: 100%; /* Ocupa a altura completa */
             border: none;
         }
 
@@ -96,15 +97,28 @@
 
         captureButton.addEventListener('click', () => {
             const container = document.getElementById('container');
-            const width = container.offsetWidth * 2; // Ancho combinado de los iframes
-            const height = container.offsetHeight;
 
+            // Calcular dimensiones para capturar ambos iframes
+            const width = container.offsetWidth; // Largura do container
+            const height = container.offsetHeight; // Altura do container
+
+            // Criar elemento canvas com as dimensões apropriadas
+            const canvas = document.createElement('canvas');
+            canvas.width = width * 2; // Largura dobrada para capturar ambos iframes lado a lado
+            canvas.height = height;
+
+            const context = canvas.getContext('2d');
+            context.scale(2, 2); // Escala para melhorar a qualidade (4k)
+
+            // Capturar conteúdo e desenhar no canvas
             html2canvas(container, {
-                width: width,
+                width: width * 2,
                 height: height,
-                scale: 2, // Escala para mejorar la calidad (4k)
+                scale: 2,
+                windowWidth: document.documentElement.offsetWidth,
+                windowHeight: document.documentElement.offsetHeight,
             }).then(canvas => {
-                // Crear un enlace para descargar la imagen
+                // Criar um link para download da imagem
                 const link = document.createElement('a');
                 link.download = 'captured-image.png';
                 link.href = canvas.toDataURL('image/png');

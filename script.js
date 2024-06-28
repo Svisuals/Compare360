@@ -8,18 +8,16 @@ const lockIcon = document.getElementById('lockIcon');
 function syncScrolling(event) {
     if (!syncScroll) return;
 
-    const otherIframe = event.target === iframe1 ? iframe2 : iframe1;
-    otherIframe.contentWindow.scrollTo(event.target.contentWindow.scrollX, event.target.contentWindow.scrollY);
+    const otherIframe = event.target === iframe1.contentWindow ? iframe2.contentWindow : iframe1.contentWindow;
+    otherIframe.scrollTo(event.target.scrollX, event.target.scrollY);
 }
 
 iframe1.addEventListener('load', () => {
-    const iframe1Doc = iframe1.contentDocument || iframe1.contentWindow.document;
-    iframe1Doc.addEventListener('scroll', syncScrolling);
+    iframe1.contentWindow.addEventListener('scroll', syncScrolling);
 });
 
 iframe2.addEventListener('load', () => {
-    const iframe2Doc = iframe2.contentDocument || iframe2.contentWindow.document;
-    iframe2Doc.addEventListener('scroll', syncScrolling);
+    iframe2.contentWindow.addEventListener('scroll', syncScrolling);
 });
 
 syncToggle.addEventListener('click', () => {

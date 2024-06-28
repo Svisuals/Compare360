@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iframe Sync with Capture</title>
+    <title>Iframe Sync</title>
     <style>
         body, html {
             margin: 0;
@@ -24,34 +24,6 @@
             height: 100%; /* Ocupa a altura completa */
             border: none;
         }
-
-        #syncToggle {
-            position: fixed;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-        }
-
-        #syncToggle img {
-            width: 32px;
-            height: 32px;
-        }
-
-        #captureButton {
-            position: fixed;
-            bottom: 60px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-size: 16px;
-        }
     </style>
 </head>
 <body>
@@ -59,14 +31,9 @@
         <iframe id="iframe1" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/" onload="setupIframe(this)"></iframe>
         <iframe id="iframe2" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/" onload="setupIframe(this)"></iframe>
     </div>
-    <button id="syncToggle"><img id="lockIcon" src="locked.png" alt="Lock Icon"></button>
-    <button id="captureButton">Capture and Download</button>
     <script>
         let syncScroll = true;
         const iframes = document.querySelectorAll('iframe');
-        const syncToggle = document.getElementById('syncToggle');
-        const lockIcon = document.getElementById('lockIcon');
-        const captureButton = document.getElementById('captureButton');
 
         function setupIframe(iframe) {
             iframe.contentWindow.addEventListener('scroll', function(event) {
@@ -94,48 +61,8 @@
                 }
             });
         }
-
-        captureButton.addEventListener('click', () => {
-            const container = document.getElementById('container');
-
-            // Calcular dimensiones para capturar ambos iframes
-            const width = container.offsetWidth; // Largura do container
-            const height = container.offsetHeight; // Altura do container
-
-            // Criar elemento canvas com as dimensões apropriadas
-            const canvas = document.createElement('canvas');
-            canvas.width = width * 2; // Largura dobrada para capturar ambos iframes lado a lado
-            canvas.height = height;
-
-            const context = canvas.getContext('2d');
-            context.scale(2, 2); // Escala para melhorar a qualidade (4k)
-
-            // Capturar conteúdo e desenhar no canvas
-            html2canvas(container, {
-                width: width * 2,
-                height: height,
-                scale: 2,
-                windowWidth: document.documentElement.offsetWidth,
-                windowHeight: document.documentElement.offsetHeight,
-            }).then(canvas => {
-                // Criar um link para download da imagem
-                const link = document.createElement('a');
-                link.download = 'captured-image.png';
-                link.href = canvas.toDataURL('image/png');
-                link.click();
-            });
-        });
-
-        syncToggle.addEventListener('click', () => {
-            syncScroll = !syncScroll;
-            lockIcon.src = syncScroll ? 'locked.png' : 'unlocked.png';
-
-            // Envía mensaje a las iframes para sincronizar estado
-            for (let iframe of iframes) {
-                iframe.contentWindow.postMessage({ type: 'syncToggle', syncScroll }, '*');
-            }
-        });
     </script>
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </body>
 </html>
+
+      

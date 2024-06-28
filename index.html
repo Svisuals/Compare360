@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iframe Toggle with Canvas</title>
+    <title>Iframe Toggle</title>
     <style>
         body, html {
             margin: 0;
@@ -17,7 +17,7 @@
         #container {
             display: flex;
             width: 100%;
-            height: 100%;
+            height: 100%; /* Ajuste para ocupar toda a página */
             position: relative;
         }
 
@@ -34,51 +34,80 @@
         #toggleButton {
             position: fixed;
             top: 10px;
-            left: 10px;
-            background-color: red; /* Quadrado vermelho */
-            width: 50px;
-            height: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
             cursor: pointer;
+            z-index: 1000; /* Colocar acima do iframe */
         }
 
-        #canvasContainer {
-            position: absolute;
-            top: 50%; /* Posicionamento central vertical */
-            left: 50%; /* Posicionamento central horizontal */
-            transform: translate(-50%, -50%);
-            width: 80%; /* 80% das dimensões do iframe1 */
-            height: 80%;
-            display: none; /* Inicialmente escondido */
-            background-color: white; /* Fundo branco */
-            border: 1px solid black;
-            z-index: 999; /* Garante que o canvas esteja sobre o iframe */
+        @media (max-width: 768px) {
+            #container {
+                flex-direction: column;
+            }
+
+            iframe {
+                width: 100%;
+                height: 50%;
+            }
+
+            #iframe2 {
+                display: block;
+            }
+
+            #toggleButton {
+                top: auto;
+                bottom: 10px;
+            }
         }
     </style>
 </head>
 <body>
+    <button id="toggleButton">Toggle Second Iframe</button>
     <div id="container">
         <iframe id="iframe1" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/"></iframe>
         <iframe id="iframe2" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/"></iframe>
     </div>
-    <div id="toggleButton"></div> <!-- Botão quadrado vermelho -->
-    <div id="canvasContainer">
-        <!-- Aqui será inserido o canvas com gráficos -->
-    </div>
     <script>
         const toggleButton = document.getElementById('toggleButton');
-        const canvasContainer = document.getElementById('canvasContainer');
         const iframe1 = document.getElementById('iframe1');
+        const iframe2 = document.getElementById('iframe2');
 
-        // Event listener para mostrar/esconder o canvas ao clicar no botão
+        // Alternar visibilidade do segundo iframe
         toggleButton.addEventListener('click', () => {
-            canvasContainer.style.display = canvasContainer.style.display === 'none' ? 'block' : 'none';
+            if (iframe2.style.display === 'none') {
+                iframe2.style.display = 'block';
+                iframe1.style.width = '50%';
+                iframe2.style.width = '50%';
+            } else {
+                iframe2.style.display = 'none';
+                iframe1.style.width = '100%';
+            }
         });
 
-        // Lógica para atualizar o canvas com os gráficos usando Chart.js
-        // Aqui você pode integrar o código do Chart.js para gerar os gráficos de progresso e curva S
-        // e atualizá-los com dados do CSV conforme necessário.
-        // Exemplo básico de integração com Chart.js:
-        // - Criar e atualizar os gráficos conforme os dados do CSV.
+        // Ajustar o layout com base no tamanho da janela
+        function adjustLayout() {
+            if (window.innerWidth <= 768) {
+                iframe1.style.width = '100%';
+                iframe1.style.height = '50%';
+                iframe2.style.width = '100%';
+                iframe2.style.height = '50%';
+            } else {
+                iframe1.style.height = '100%';
+                if (iframe2.style.display === 'block') {
+                    iframe1.style.width = '50%';
+                    iframe2.style.width = '50%';
+                } else {
+                    iframe1.style.width = '100%';
+                }
+            }
+        }
+
+        window.addEventListener('resize', adjustLayout);
+        adjustLayout();
     </script>
 </body>
 </html>

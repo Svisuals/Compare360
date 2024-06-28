@@ -43,6 +43,26 @@
             cursor: pointer;
             z-index: 1000; /* Colocar acima do iframe */
         }
+
+        @media (max-width: 768px) {
+            #container {
+                flex-direction: column;
+            }
+
+            iframe {
+                width: 100%;
+                height: 50%;
+            }
+
+            #iframe2 {
+                display: block;
+            }
+
+            #toggleButton {
+                top: auto;
+                bottom: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -67,6 +87,27 @@
                 iframe1.style.width = '100%';
             }
         });
+
+        // Ajustar o layout com base no tamanho da janela
+        function adjustLayout() {
+            if (window.innerWidth <= 768) {
+                iframe1.style.width = '100%';
+                iframe1.style.height = '50%';
+                iframe2.style.width = '100%';
+                iframe2.style.height = '50%';
+            } else {
+                iframe1.style.height = '100%';
+                if (iframe2.style.display === 'block') {
+                    iframe1.style.width = '50%';
+                    iframe2.style.width = '50%';
+                } else {
+                    iframe1.style.width = '100%';
+                }
+            }
+        }
+
+        window.addEventListener('resize', adjustLayout);
+        adjustLayout();
     </script>
 </body>
 </html>

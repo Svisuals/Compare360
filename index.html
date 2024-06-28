@@ -17,7 +17,7 @@
         #container {
             display: flex;
             width: 100%;
-            height: calc(100% - 150px); /* Deixar espaço para o botão e as ferramentas de markup */
+            height: calc(100% - 50px); /* Deixar espaço para os botões de markup */
         }
 
         iframe {
@@ -32,7 +32,7 @@
 
         #toggleButton {
             position: fixed;
-            top: 0;
+            top: 10px;
             left: 50%;
             transform: translateX(-50%);
             padding: 10px 20px;
@@ -40,6 +40,7 @@
             color: white;
             border: none;
             cursor: pointer;
+            z-index: 1000; /* Colocar acima do iframe */
         }
 
         #markupTools {
@@ -47,9 +48,11 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            height: 100px;
+            height: 50px;
             background-color: white;
             border-top: 1px solid #ddd;
+            position: fixed;
+            bottom: 0;
         }
 
         .tool-button {
@@ -62,6 +65,15 @@
 
         #colorPicker {
             margin-left: 10px;
+        }
+
+        #markupCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Permitir cliques passarem pelo canvas */
         }
     </style>
 </head>
@@ -84,6 +96,7 @@
         const iframe1 = document.getElementById('iframe1');
         const iframe2 = document.getElementById('iframe2');
         const toggleButton = document.getElementById('toggleButton');
+        const markupCanvas = document.getElementById('markupCanvas');
 
         function setupIframe(iframe) {
             iframe.contentWindow.addEventListener('scroll', function(event) {
@@ -132,6 +145,7 @@
 
         document.getElementById('draw').addEventListener('click', () => {
             canvas.isDrawingMode = true;
+            canvas.off('mouse:down');
         });
 
         document.getElementById('erase').addEventListener('click', () => {
@@ -153,7 +167,18 @@
             canvas.freeDrawingBrush.color = event.target.value;
         });
 
+        // Set initial drawing brush width
         canvas.freeDrawingBrush.width = 5;
+
+        // Resize canvas to fit the window
+        function resizeCanvas() {
+            canvas.setWidth(window.innerWidth);
+            canvas.setHeight(window.innerHeight - document.getElementById('markupTools').offsetHeight);
+            canvas.renderAll();
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
     </script>
 </body>
 </html>

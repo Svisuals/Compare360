@@ -42,40 +42,52 @@
 </head>
 <body>
     <div id="container">
-        <iframe id="iframe1" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/"></iframe>
-        <iframe id="iframe2" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/"></iframe>
+        <iframe id="iframe1" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/" onload="setupIframe(this)"></iframe>
+        <iframe id="iframe2" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/" onload="setupIframe(this)"></iframe>
     </div>
     <button id="syncToggle"><img id="lockIcon" src="locked.png" alt="Lock Icon"></button>
     <script>
         let syncScroll = true;
-        const iframe1 = document.getElementById('iframe1');
-        const iframe2 = document.getElementById('iframe2');
+        const iframes = document.querySelectorAll('iframe');
         const syncToggle = document.getElementById('syncToggle');
         const lockIcon = document.getElementById('lockIcon');
 
-        function syncScrolling(event) {
-            if (!syncScroll) return;
+        function setupIframe(iframe) {
+            iframe.contentWindow.addEventListener('scroll', function(event) {
+                if (syncScroll) {
+                    const scrollTop = event.target.scrollY;
+                    const scrollHeight = event.target.document.body.scrollHeight - event.target.innerHeight;
+                    const scrollPercentage = scrollTop / scrollHeight;
+                    
+                    for (let otherIframe of iframes) {
+                        if (otherIframe !== iframe) {
+                            const otherDoc = otherIframe.contentWindow.document;
+                            const scrollTo = scrollPercentage * (otherDoc.body.scrollHeight - otherIframe.clientHeight);
+                            otherIframe.contentWindow.scrollTo(0, scrollTo);
+                        }
+                    }
+                }
+            });
 
-            const otherIframe = event.target === iframe1 ? iframe2 : iframe1;
-            const scrollPercentage = event.target.scrollTop / (event.target.scrollHeight - event.target.clientHeight);
-
-            otherIframe.scrollTop = scrollPercentage * (otherIframe.scrollHeight - otherIframe.clientHeight);
+            // Comunicación bidireccional para sincronizar scroll entre iframes
+            window.addEventListener('message', function(event) {
+                if (event.data && event.data.type === 'scroll') {
+                    syncScroll = false; // Desactiva la sincronización temporalmente para evitar bucles
+                    iframe.contentWindow.scrollTo(0, event.data.scrollTop);
+                    syncScroll = true;
+                }
+            });
         }
-
-        iframe1.addEventListener('load', () => {
-            iframe1.contentWindow.addEventListener('scroll', syncScrolling);
-        });
-
-        iframe2.addEventListener('load', () => {
-            iframe2.contentWindow.addEventListener('scroll', syncScrolling);
-        });
 
         syncToggle.addEventListener('click', () => {
             syncScroll = !syncScroll;
             lockIcon.src = syncScroll ? 'locked.png' : 'unlocked.png';
+
+            // Envía mensaje a las iframes para sincronizar estado
+            for (let iframe of iframes) {
+                iframe.contentWindow.postMessage({ type: 'syncToggle', syncScroll }, '*');
+            }
         });
     </script>
 </body>
 </html>
-
-

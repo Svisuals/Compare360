@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iframe Toggle</title>
+    <title>Iframe Toggle with Canvas</title>
     <style>
         body, html {
             margin: 0;
@@ -44,6 +44,31 @@
             z-index: 1000; /* Colocar acima do iframe */
         }
 
+        #showCanvasButton {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 10px 20px;
+            background-color: #28A745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            z-index: 1000; /* Colocar acima do iframe */
+        }
+
+        #myCanvas {
+            display: none;
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            width: 80%;
+            height: 80%;
+            background-color: white;
+            border: 1px solid #ccc;
+            z-index: 999; /* Colocar acima dos iframes */
+        }
+
         @media (max-width: 768px) {
             #container {
                 flex-direction: column;
@@ -64,17 +89,26 @@
             }
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <button id="toggleButton">Toggle Second Iframe</button>
     <div id="container">
-        <iframe id="iframe1" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/"></iframe>
+        <iframe id="iframe1" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/" onload="setupIframe(this)">
+            <button id="showCanvasButton">Show Canvas</button>
+        </iframe>
         <iframe id="iframe2" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/"></iframe>
     </div>
+    <canvas id="myCanvas"></canvas>
     <script>
         const toggleButton = document.getElementById('toggleButton');
+        const showCanvasButton = document.getElementById('showCanvasButton');
         const iframe1 = document.getElementById('iframe1');
         const iframe2 = document.getElementById('iframe2');
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+
+        let chart;
 
         // Alternar visibilidade do segundo iframe
         toggleButton.addEventListener('click', () => {
@@ -88,26 +122,64 @@
             }
         });
 
-        // Ajustar o layout com base no tamanho da janela
-        function adjustLayout() {
-            if (window.innerWidth <= 768) {
-                iframe1.style.width = '100%';
-                iframe1.style.height = '50%';
-                iframe2.style.width = '100%';
-                iframe2.style.height = '50%';
+        // Mostrar ou esconder o canvas
+        showCanvasButton.addEventListener('click', () => {
+            if (canvas.style.display === 'none') {
+                canvas.style.display = 'block';
+                drawCharts();
             } else {
-                iframe1.style.height = '100%';
-                if (iframe2.style.display === 'block') {
-                    iframe1.style.width = '50%';
-                    iframe2.style.width = '50%';
-                } else {
-                    iframe1.style.width = '100%';
-                }
+                canvas.style.display = 'none';
             }
-        }
+        });
 
-        window.addEventListener('resize', adjustLayout);
-        adjustLayout();
+        function drawCharts() {
+            if (chart) {
+                chart.destroy();
+            }
+
+            // Dados de exemplo para os gráficos
+            const progressData = {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                datasets: [{
+                    label: 'Progresso',
+                    data: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    fill: false
+                }]
+            };
+
+            const sCurveData = {
+                labels: ['Start', 'Phase 1', 'Phase 2', 'Phase 3', 'Complete'],
+                datasets: [{
+                    label: 'Curva S',
+                    data: [0, 20, 50, 80, 100],
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 2,
+                    fill: false
+                }]
+            };
+
+            // Configuração do gráfico
+            const config = {
+                type: 'line',
+                data: {},
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            };
+
+            // Desenhar gráfico de progresso
+            const progressCtx = ctx;
+            config.data = progressData;
+            chart = new Chart(progressCtx, config);
+
+            // Desenhar gráfico de curva S
+            const sCurveCtx = ctx;
+            config.data = sCurveData;
+            chart = new Chart(sCurveCtx, config);
+        }
     </script>
 </body>
 </html>

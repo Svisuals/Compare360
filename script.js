@@ -8,8 +8,11 @@ const lockIcon = document.getElementById('lockIcon');
 function syncScrolling(event) {
     if (!syncScroll) return;
 
-    const otherIframe = event.target === iframe1.contentWindow ? iframe2.contentWindow : iframe1.contentWindow;
-    otherIframe.scrollTo(event.target.scrollX, event.target.scrollY);
+    const sourceIframe = event.target;
+    const otherIframe = sourceIframe === iframe1.contentWindow ? iframe2 : iframe1;
+
+    const { scrollX, scrollY } = sourceIframe;
+    otherIframe.contentWindow.scrollTo(scrollX, scrollY);
 }
 
 function addScrollSync(iframe) {

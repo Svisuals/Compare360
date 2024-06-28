@@ -1,4 +1,4 @@
-bolet syncScroll = true;
+let syncScroll = true;
 
 const iframe1 = document.getElementById('iframe1');
 const iframe2 = document.getElementById('iframe2');
@@ -11,8 +11,12 @@ function syncScrolling(event) {
     otherIframe.contentWindow.scrollTo(event.target.contentWindow.scrollX, event.target.contentWindow.scrollY);
 }
 
-iframe1.addEventListener('scroll', syncScrolling);
-iframe2.addEventListener('scroll', syncScrolling);
+iframe1.addEventListener('load', () => {
+    iframe1.contentWindow.addEventListener('scroll', syncScrolling);
+});
+iframe2.addEventListener('load', () => {
+    iframe2.contentWindow.addEventListener('scroll', syncScrolling);
+});
 
 syncToggle.addEventListener('click', () => {
     syncScroll = !syncScroll;

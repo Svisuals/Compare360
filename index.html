@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iframe Toggle</title>
+    <title>Iframe Toggle with Markup</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         #container {
             display: flex;
             width: 100%;
-            height: calc(100% - 50px); /* Deixar espaço para o botão */
+            height: calc(100% - 150px); /* Deixar espaço para o botão e as ferramentas de markup */
         }
 
         iframe {
@@ -39,6 +41,28 @@
             border: none;
             cursor: pointer;
         }
+
+        #markupTools {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100px;
+            background-color: white;
+            border-top: 1px solid #ddd;
+        }
+
+        .tool-button {
+            margin: 0 10px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        #colorPicker {
+            margin-left: 10px;
+        }
     </style>
 </head>
 <body>
@@ -47,6 +71,14 @@
         <iframe id="iframe1" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/" onload="setupIframe(this)"></iframe>
         <iframe id="iframe2" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/" onload="setupIframe(this)"></iframe>
     </div>
+    <div id="markupTools">
+        <button class="tool-button" id="draw">Draw</button>
+        <input type="color" id="colorPicker">
+        <button class="tool-button" id="erase">Erase</button>
+        <button class="tool-button" id="clear">Clear All</button>
+    </div>
+    <canvas id="markupCanvas"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
     <script>
         let syncScroll = true;
         const iframe1 = document.getElementById('iframe1');
@@ -59,7 +91,7 @@
                     const scrollTop = event.target.scrollY;
                     const scrollHeight = event.target.document.body.scrollHeight - event.target.innerHeight;
                     const scrollPercentage = scrollTop / scrollHeight;
-                    
+
                     if (iframe === iframe1 && iframe2.style.display !== 'none') {
                         const otherDoc = iframe2.contentWindow.document;
                         const scrollTo = scrollPercentage * (otherDoc.body.scrollHeight - iframe2.clientHeight);
@@ -91,6 +123,37 @@
                 iframe1.style.width = '100%';
             }
         });
+
+        // Setup fabric.js for markup
+        const canvas = new fabric.Canvas('markupCanvas', {
+            isDrawingMode: true,
+            backgroundColor: 'rgba(0,0,0,0)',
+        });
+
+        document.getElementById('draw').addEventListener('click', () => {
+            canvas.isDrawingMode = true;
+        });
+
+        document.getElementById('erase').addEventListener('click', () => {
+            canvas.isDrawingMode = false;
+            canvas.on('mouse:down', function (opt) {
+                const target = opt.target;
+                if (target) {
+                    canvas.remove(target);
+                }
+            });
+        });
+
+        document.getElementById('clear').addEventListener('click', () => {
+            canvas.clear();
+            canvas.setBackgroundColor('rgba(0,0,0,0)', canvas.renderAll.bind(canvas));
+        });
+
+        document.getElementById('colorPicker').addEventListener('input', (event) => {
+            canvas.freeDrawingBrush.color = event.target.value;
+        });
+
+        canvas.freeDrawingBrush.width = 5;
     </script>
 </body>
 </html>

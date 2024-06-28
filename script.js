@@ -12,16 +12,31 @@ function syncScrolling(event) {
     otherIframe.scrollTo(event.target.scrollX, event.target.scrollY);
 }
 
-iframe1.addEventListener('load', () => {
-    iframe1.contentWindow.addEventListener('scroll', syncScrolling);
-});
+function addScrollSync(iframe) {
+    iframe.contentWindow.addEventListener('scroll', syncScrolling);
+}
 
-iframe2.addEventListener('load', () => {
-    iframe2.contentWindow.addEventListener('scroll', syncScrolling);
-});
+iframe1.addEventListener('load', () => addScrollSync(iframe1));
+iframe2.addEventListener('load', () => addScrollSync(iframe2));
 
 syncToggle.addEventListener('click', () => {
     syncScroll = !syncScroll;
     lockIcon.src = syncScroll ? 'locked.png' : 'unlocked.png';
     lockIcon.alt = syncScroll ? 'Cadeado Fechado' : 'Cadeado Aberto';
 });
+
+function initSync() {
+    if (iframe1.contentDocument.readyState === 'complete') {
+        addScrollSync(iframe1);
+    } else {
+        iframe1.addEventListener('load', () => addScrollSync(iframe1));
+    }
+
+    if (iframe2.contentDocument.readyState === 'complete') {
+        addScrollSync(iframe2);
+    } else {
+        iframe2.addEventListener('load', () => addScrollSync(iframe2));
+    }
+}
+
+initSync();

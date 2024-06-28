@@ -3,22 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iframe Toggle with Markup</title>
+    <title>Iframe Toggle</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
         }
 
         #container {
             display: flex;
             width: 100%;
-            height: calc(100% - 50px); /* Deixar espaço para os botões de markup */
-            position: relative;
+            height: calc(100% - 50px); /* Deixar espaço para o botão */
         }
 
         iframe {
@@ -33,7 +30,7 @@
 
         #toggleButton {
             position: fixed;
-            top: 10px;
+            top: 0;
             left: 50%;
             transform: translateX(-50%);
             padding: 10px 20px;
@@ -41,135 +38,58 @@
             color: white;
             border: none;
             cursor: pointer;
-            z-index: 1000; /* Colocar acima do iframe */
-        }
-
-        #markupTools {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 50px;
-            background-color: white;
-            border-top: 1px solid #ddd;
-            position: fixed;
-            bottom: 0;
-        }
-
-        .tool-button {
-            margin: 0 10px;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            cursor: pointer;
-        }
-
-        #colorPicker {
-            margin-left: 10px;
-        }
-
-        .markupCanvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none; /* Permitir cliques passarem pelo canvas */
-            z-index: 500; /* Colocar acima do iframe */
         }
     </style>
 </head>
 <body>
     <button id="toggleButton">Toggle Second Iframe</button>
     <div id="container">
-        <iframe id="iframe1" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/"></iframe>
-        <canvas id="markupCanvas1" class="markupCanvas"></canvas>
-        <iframe id="iframe2" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/"></iframe>
-        <canvas id="markupCanvas2" class="markupCanvas"></canvas>
+        <iframe id="iframe1" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/" onload="setupIframe(this)"></iframe>
+        <iframe id="iframe2" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/" onload="setupIframe(this)"></iframe>
     </div>
-    <div id="markupTools">
-        <button class="tool-button" id="draw">Draw</button>
-        <input type="color" id="colorPicker">
-        <button class="tool-button" id="erase">Erase</button>
-        <button class="tool-button" id="clear">Clear All</button>
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
     <script>
-        const iframes = [document.getElementById('iframe1'), document.getElementById('iframe2')];
-        const canvases = [new fabric.Canvas('markupCanvas1'), new fabric.Canvas('markupCanvas2')];
+        let syncScroll = true;
+        const iframe1 = document.getElementById('iframe1');
+        const iframe2 = document.getElementById('iframe2');
         const toggleButton = document.getElementById('toggleButton');
-        const markupTools = document.getElementById('markupTools');
-        const colorPicker = document.getElementById('colorPicker');
 
-        // Configuração inicial dos canvases
-        canvases.forEach((canvas, index) => {
-            canvas.isDrawingMode = true;
-            canvas.freeDrawingBrush.color = colorPicker.value;
-            canvas.freeDrawingBrush.width = 5;
-            canvas.backgroundColor = 'rgba(0,0,0,0)';
-            canvas.renderAll();
+        function setupIframe(iframe) {
+            iframe.contentWindow.addEventListener('scroll', function(event) {
+                if (syncScroll) {
+                    const scrollTop = event.target.scrollY;
+                    const scrollHeight = event.target.document.body.scrollHeight - event.target.innerHeight;
+                    const scrollPercentage = scrollTop / scrollHeight;
+                    
+                    if (iframe === iframe1 && iframe2.style.display !== 'none') {
+                        const otherDoc = iframe2.contentWindow.document;
+                        const scrollTo = scrollPercentage * (otherDoc.body.scrollHeight - iframe2.clientHeight);
+                        iframe2.contentWindow.scrollTo(0, scrollTo);
+                    } else if (iframe === iframe2) {
+                        const otherDoc = iframe1.contentWindow.document;
+                        const scrollTo = scrollPercentage * (otherDoc.body.scrollHeight - iframe1.clientHeight);
+                        iframe1.contentWindow.scrollTo(0, scrollTo);
+                    }
+                }
+            });
 
-            // Redimensionar canvas para cobrir o iframe
-            function resizeCanvas() {
-                const iframe = iframes[index];
-                canvas.setWidth(iframe.clientWidth);
-                canvas.setHeight(iframe.clientHeight);
-                canvas.renderAll();
-            }
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas();
-        });
+            window.addEventListener('message', function(event) {
+                if (event.data && event.data.type === 'scroll') {
+                    syncScroll = false;
+                    iframe.contentWindow.scrollTo(0, event.data.scrollTop);
+                    syncScroll = true;
+                }
+            });
+        }
 
-        // Alternar visibilidade do segundo iframe
         toggleButton.addEventListener('click', () => {
-            const iframe2 = document.getElementById('iframe2');
-            const canvas2 = document.getElementById('markupCanvas2');
             if (iframe2.style.display === 'none') {
                 iframe2.style.display = 'block';
-                canvas2.style.display = 'block';
-                iframes[0].style.width = '50%';
-                iframes[1].style.width = '50%';
-                canvases[0].setWidth(iframes[0].clientWidth);
-                canvases[1].setWidth(iframes[1].clientWidth);
+                iframe1.style.width = '50%';
+                iframe2.style.width = '50%';
             } else {
                 iframe2.style.display = 'none';
-                canvas2.style.display = 'none';
-                iframes[0].style.width = '100%';
-                canvases[0].setWidth(iframes[0].clientWidth);
+                iframe1.style.width = '100%';
             }
-        });
-
-        // Ferramentas de markup
-        document.getElementById('draw').addEventListener('click', () => {
-            canvases.forEach((canvas) => {
-                canvas.isDrawingMode = true;
-                canvas.off('mouse:down');
-            });
-        });
-
-        document.getElementById('erase').addEventListener('click', () => {
-            canvases.forEach((canvas) => {
-                canvas.isDrawingMode = false;
-                canvas.on('mouse:down', function (opt) {
-                    const target = opt.target;
-                    if (target) {
-                        canvas.remove(target);
-                    }
-                });
-            });
-        });
-
-        document.getElementById('clear').addEventListener('click', () => {
-            canvases.forEach((canvas) => {
-                canvas.clear();
-                canvas.setBackgroundColor('rgba(0,0,0,0)', canvas.renderAll.bind(canvas));
-            });
-        });
-
-        colorPicker.addEventListener('input', (event) => {
-            canvases.forEach((canvas) => {
-                canvas.freeDrawingBrush.color = event.target.value;
-            });
         });
     </script>
 </body>

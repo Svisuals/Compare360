@@ -9,14 +9,25 @@ function syncScrolling(event) {
     if (!syncScroll) return;
 
     const sourceIframe = event.target;
-    const otherIframe = sourceIframe === iframe1.contentWindow ? iframe2 : iframe1;
+    const otherIframe = sourceIframe === iframe1.contentWindow ? iframe2.contentWindow : iframe1.contentWindow;
 
-    const { scrollX, scrollY } = sourceIframe;
-    otherIframe.contentWindow.scrollTo(scrollX, scrollY);
+    otherIframe.scrollTo(sourceIframe.scrollX, sourceIframe.scrollY);
 }
 
 function addScrollSync(iframe) {
-    iframe.contentWindow.addEventListener('scroll', syncScrolling);
+    $(iframe.contentWindow).on('scroll', function() {
+        if (syncScroll) {
+            const scrollTop = $(this).scrollTop();
+            const scrollLeft = $(this).scrollLeft();
+            if (iframe === iframe1) {
+                $(iframe2.contentWindow).scrollTop(scrollTop);
+                $(iframe2.contentWindow).scrollLeft(scrollLeft);
+            } else {
+                $(iframe1.contentWindow).scrollTop(scrollTop);
+                $(iframe1.contentWindow).scrollLeft(scrollLeft);
+            }
+        }
+    });
 }
 
 iframe1.addEventListener('load', () => addScrollSync(iframe1));
@@ -27,19 +38,3 @@ syncToggle.addEventListener('click', () => {
     lockIcon.src = syncScroll ? 'locked.png' : 'unlocked.png';
     lockIcon.alt = syncScroll ? 'Cadeado Fechado' : 'Cadeado Aberto';
 });
-
-function initSync() {
-    if (iframe1.contentDocument.readyState === 'complete') {
-        addScrollSync(iframe1);
-    } else {
-        iframe1.addEventListener('load', () => addScrollSync(iframe1));
-    }
-
-    if (iframe2.contentDocument.readyState === 'complete') {
-        addScrollSync(iframe2);
-    } else {
-        iframe2.addEventListener('load', () => addScrollSync(iframe2));
-    }
-}
-
-initSync();

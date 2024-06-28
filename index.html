@@ -4,7 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iframe Sync</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        iframe {
+            width: 50%;
+            height: 100%;
+            border: none;
+        }
+
+        #syncToggle {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        #syncToggle img {
+            width: 32px;
+            height: 32px;
+        }
+    </style>
 </head>
 <body>
     <div id="container">
@@ -13,6 +47,37 @@
     </div>
     <button id="syncToggle"><img id="lockIcon" src="locked.png" alt="Lock Icon"></button>
     <script src="https://cdn.jsdelivr.net/npm/iframe-resizer/js/iframeResizer.min.js"></script>
-    <script src="script.js"></script>
+    <script>
+        // Inicializando a biblioteca iframe-resizer
+        iFrameResize({ log: true }, '#iframe1', '#iframe2');
+
+        let syncScroll = true;
+        const iframe1 = document.getElementById('iframe1');
+        const iframe2 = document.getElementById('iframe2');
+        const syncToggle = document.getElementById('syncToggle');
+        const lockIcon = document.getElementById('lockIcon');
+
+        function syncScrolling(event) {
+            if (!syncScroll) return;
+
+            const otherIframe = event.target === iframe1 ? iframe2 : iframe1;
+            const targetIframe = event.target.contentWindow;
+
+            otherIframe.contentWindow.scrollTo(targetIframe.scrollX, targetIframe.scrollY);
+        }
+
+        iframe1.addEventListener('load', () => {
+            iframe1.contentWindow.addEventListener('scroll', syncScrolling);
+        });
+
+        iframe2.addEventListener('load', () => {
+            iframe2.contentWindow.addEventListener('scroll', syncScrolling);
+        });
+
+        syncToggle.addEventListener('click', () => {
+            syncScroll = !syncScroll;
+            lockIcon.src = syncScroll ? 'locked.png' : 'unlocked.png';
+        });
+    </script>
 </body>
 </html>

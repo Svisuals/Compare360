@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iframe Sync with Vanilla JavaScript</title>
+    <title>Iframe Sync with Capture</title>
     <style>
         body, html {
             margin: 0;
@@ -38,6 +38,19 @@
             width: 32px;
             height: 32px;
         }
+
+        #captureButton {
+            position: fixed;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
@@ -46,11 +59,13 @@
         <iframe id="iframe2" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/" onload="setupIframe(this)"></iframe>
     </div>
     <button id="syncToggle"><img id="lockIcon" src="locked.png" alt="Lock Icon"></button>
+    <button id="captureButton">Capture and Download</button>
     <script>
         let syncScroll = true;
         const iframes = document.querySelectorAll('iframe');
         const syncToggle = document.getElementById('syncToggle');
         const lockIcon = document.getElementById('lockIcon');
+        const captureButton = document.getElementById('captureButton');
 
         function setupIframe(iframe) {
             iframe.contentWindow.addEventListener('scroll', function(event) {
@@ -79,6 +94,24 @@
             });
         }
 
+        captureButton.addEventListener('click', () => {
+            const container = document.getElementById('container');
+            const width = container.offsetWidth * 2; // Ancho combinado de los iframes
+            const height = container.offsetHeight;
+
+            html2canvas(container, {
+                width: width,
+                height: height,
+                scale: 2, // Escala para mejorar la calidad (4k)
+            }).then(canvas => {
+                // Crear un enlace para descargar la imagen
+                const link = document.createElement('a');
+                link.download = 'captured-image.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        });
+
         syncToggle.addEventListener('click', () => {
             syncScroll = !syncScroll;
             lockIcon.src = syncScroll ? 'locked.png' : 'unlocked.png';
@@ -89,5 +122,6 @@
             }
         });
     </script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </body>
 </html>

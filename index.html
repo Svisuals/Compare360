@@ -10,12 +10,15 @@
             padding: 0;
             height: 100%;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         #container {
             display: flex;
             width: 100%;
-            height: calc(100% - 50px); /* Deixar espaço para o botão */
+            height: 100%; /* Ajuste para ocupar toda a página */
+            position: relative;
         }
 
         iframe {
@@ -30,7 +33,7 @@
 
         #toggleButton {
             position: fixed;
-            top: 0;
+            top: 10px;
             left: 50%;
             transform: translateX(-50%);
             padding: 10px 20px;
@@ -38,49 +41,22 @@
             color: white;
             border: none;
             cursor: pointer;
+            z-index: 1000; /* Colocar acima do iframe */
         }
     </style>
 </head>
 <body>
     <button id="toggleButton">Toggle Second Iframe</button>
     <div id="container">
-        <iframe id="iframe1" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/" onload="setupIframe(this)"></iframe>
-        <iframe id="iframe2" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/" onload="setupIframe(this)"></iframe>
+        <iframe id="iframe1" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/"></iframe>
+        <iframe id="iframe2" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/"></iframe>
     </div>
     <script>
-        let syncScroll = true;
+        const toggleButton = document.getElementById('toggleButton');
         const iframe1 = document.getElementById('iframe1');
         const iframe2 = document.getElementById('iframe2');
-        const toggleButton = document.getElementById('toggleButton');
 
-        function setupIframe(iframe) {
-            iframe.contentWindow.addEventListener('scroll', function(event) {
-                if (syncScroll) {
-                    const scrollTop = event.target.scrollY;
-                    const scrollHeight = event.target.document.body.scrollHeight - event.target.innerHeight;
-                    const scrollPercentage = scrollTop / scrollHeight;
-                    
-                    if (iframe === iframe1 && iframe2.style.display !== 'none') {
-                        const otherDoc = iframe2.contentWindow.document;
-                        const scrollTo = scrollPercentage * (otherDoc.body.scrollHeight - iframe2.clientHeight);
-                        iframe2.contentWindow.scrollTo(0, scrollTo);
-                    } else if (iframe === iframe2) {
-                        const otherDoc = iframe1.contentWindow.document;
-                        const scrollTo = scrollPercentage * (otherDoc.body.scrollHeight - iframe1.clientHeight);
-                        iframe1.contentWindow.scrollTo(0, scrollTo);
-                    }
-                }
-            });
-
-            window.addEventListener('message', function(event) {
-                if (event.data && event.data.type === 'scroll') {
-                    syncScroll = false;
-                    iframe.contentWindow.scrollTo(0, event.data.scrollTop);
-                    syncScroll = true;
-                }
-            });
-        }
-
+        // Alternar visibilidade do segundo iframe
         toggleButton.addEventListener('click', () => {
             if (iframe2.style.display === 'none') {
                 iframe2.style.display = 'block';

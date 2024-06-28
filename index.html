@@ -46,11 +46,7 @@
         <iframe id="iframe2" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/"></iframe>
     </div>
     <button id="syncToggle"><img id="lockIcon" src="locked.png" alt="Lock Icon"></button>
-    <script src="https://cdn.jsdelivr.net/npm/iframe-resizer/js/iframeResizer.min.js"></script>
     <script>
-        // Inicializando a biblioteca iframe-resizer
-        iFrameResize({ log: true }, '#iframe1', '#iframe2');
-
         let syncScroll = true;
         const iframe1 = document.getElementById('iframe1');
         const iframe2 = document.getElementById('iframe2');
@@ -61,9 +57,9 @@
             if (!syncScroll) return;
 
             const otherIframe = event.target === iframe1 ? iframe2 : iframe1;
-            const targetIframe = event.target.contentWindow;
+            const scrollPercentage = event.target.scrollTop / (event.target.scrollHeight - event.target.clientHeight);
 
-            otherIframe.contentWindow.scrollTo(targetIframe.scrollX, targetIframe.scrollY);
+            otherIframe.scrollTop = scrollPercentage * (otherIframe.scrollHeight - otherIframe.clientHeight);
         }
 
         iframe1.addEventListener('load', () => {
@@ -81,3 +77,5 @@
     </script>
 </body>
 </html>
+
+

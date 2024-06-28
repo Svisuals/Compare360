@@ -18,6 +18,7 @@
             display: flex;
             width: 100%;
             height: calc(100% - 50px); /* Deixar espaço para os botões de markup */
+            position: relative;
         }
 
         iframe {
@@ -67,21 +68,24 @@
             margin-left: 10px;
         }
 
-        #markupCanvas {
+        .markupCanvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none; /* Permitir cliques passarem pelo canvas */
+            z-index: 500; /* Colocar acima do iframe */
         }
     </style>
 </head>
 <body>
     <button id="toggleButton">Toggle Second Iframe</button>
     <div id="container">
-        <iframe id="iframe1" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/" onload="setupIframe(this)"></iframe>
-        <iframe id="iframe2" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/" onload="setupIframe(this)"></iframe>
+        <iframe id="iframe1" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/"></iframe>
+        <canvas id="markupCanvas1" class="markupCanvas"></canvas>
+        <iframe id="iframe2" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/"></iframe>
+        <canvas id="markupCanvas2" class="markupCanvas"></canvas>
     </div>
     <div id="markupTools">
         <button class="tool-button" id="draw">Draw</button>
@@ -89,96 +93,84 @@
         <button class="tool-button" id="erase">Erase</button>
         <button class="tool-button" id="clear">Clear All</button>
     </div>
-    <canvas id="markupCanvas"></canvas>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
     <script>
-        let syncScroll = true;
-        const iframe1 = document.getElementById('iframe1');
-        const iframe2 = document.getElementById('iframe2');
+        const iframes = [document.getElementById('iframe1'), document.getElementById('iframe2')];
+        const canvases = [new fabric.Canvas('markupCanvas1'), new fabric.Canvas('markupCanvas2')];
         const toggleButton = document.getElementById('toggleButton');
-        const markupCanvas = document.getElementById('markupCanvas');
+        const markupTools = document.getElementById('markupTools');
+        const colorPicker = document.getElementById('colorPicker');
 
-        function setupIframe(iframe) {
-            iframe.contentWindow.addEventListener('scroll', function(event) {
-                if (syncScroll) {
-                    const scrollTop = event.target.scrollY;
-                    const scrollHeight = event.target.document.body.scrollHeight - event.target.innerHeight;
-                    const scrollPercentage = scrollTop / scrollHeight;
+        // Configuração inicial dos canvases
+        canvases.forEach((canvas, index) => {
+            canvas.isDrawingMode = true;
+            canvas.freeDrawingBrush.color = colorPicker.value;
+            canvas.freeDrawingBrush.width = 5;
+            canvas.backgroundColor = 'rgba(0,0,0,0)';
+            canvas.renderAll();
 
-                    if (iframe === iframe1 && iframe2.style.display !== 'none') {
-                        const otherDoc = iframe2.contentWindow.document;
-                        const scrollTo = scrollPercentage * (otherDoc.body.scrollHeight - iframe2.clientHeight);
-                        iframe2.contentWindow.scrollTo(0, scrollTo);
-                    } else if (iframe === iframe2) {
-                        const otherDoc = iframe1.contentWindow.document;
-                        const scrollTo = scrollPercentage * (otherDoc.body.scrollHeight - iframe1.clientHeight);
-                        iframe1.contentWindow.scrollTo(0, scrollTo);
-                    }
-                }
-            });
+            // Redimensionar canvas para cobrir o iframe
+            function resizeCanvas() {
+                const iframe = iframes[index];
+                canvas.setWidth(iframe.clientWidth);
+                canvas.setHeight(iframe.clientHeight);
+                canvas.renderAll();
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+        });
 
-            window.addEventListener('message', function(event) {
-                if (event.data && event.data.type === 'scroll') {
-                    syncScroll = false;
-                    iframe.contentWindow.scrollTo(0, event.data.scrollTop);
-                    syncScroll = true;
-                }
-            });
-        }
-
+        // Alternar visibilidade do segundo iframe
         toggleButton.addEventListener('click', () => {
+            const iframe2 = document.getElementById('iframe2');
+            const canvas2 = document.getElementById('markupCanvas2');
             if (iframe2.style.display === 'none') {
                 iframe2.style.display = 'block';
-                iframe1.style.width = '50%';
-                iframe2.style.width = '50%';
+                canvas2.style.display = 'block';
+                iframes[0].style.width = '50%';
+                iframes[1].style.width = '50%';
+                canvases[0].setWidth(iframes[0].clientWidth);
+                canvases[1].setWidth(iframes[1].clientWidth);
             } else {
                 iframe2.style.display = 'none';
-                iframe1.style.width = '100%';
+                canvas2.style.display = 'none';
+                iframes[0].style.width = '100%';
+                canvases[0].setWidth(iframes[0].clientWidth);
             }
         });
 
-        // Setup fabric.js for markup
-        const canvas = new fabric.Canvas('markupCanvas', {
-            isDrawingMode: true,
-            backgroundColor: 'rgba(0,0,0,0)',
-        });
-
+        // Ferramentas de markup
         document.getElementById('draw').addEventListener('click', () => {
-            canvas.isDrawingMode = true;
-            canvas.off('mouse:down');
+            canvases.forEach((canvas) => {
+                canvas.isDrawingMode = true;
+                canvas.off('mouse:down');
+            });
         });
 
         document.getElementById('erase').addEventListener('click', () => {
-            canvas.isDrawingMode = false;
-            canvas.on('mouse:down', function (opt) {
-                const target = opt.target;
-                if (target) {
-                    canvas.remove(target);
-                }
+            canvases.forEach((canvas) => {
+                canvas.isDrawingMode = false;
+                canvas.on('mouse:down', function (opt) {
+                    const target = opt.target;
+                    if (target) {
+                        canvas.remove(target);
+                    }
+                });
             });
         });
 
         document.getElementById('clear').addEventListener('click', () => {
-            canvas.clear();
-            canvas.setBackgroundColor('rgba(0,0,0,0)', canvas.renderAll.bind(canvas));
+            canvases.forEach((canvas) => {
+                canvas.clear();
+                canvas.setBackgroundColor('rgba(0,0,0,0)', canvas.renderAll.bind(canvas));
+            });
         });
 
-        document.getElementById('colorPicker').addEventListener('input', (event) => {
-            canvas.freeDrawingBrush.color = event.target.value;
+        colorPicker.addEventListener('input', (event) => {
+            canvases.forEach((canvas) => {
+                canvas.freeDrawingBrush.color = event.target.value;
+            });
         });
-
-        // Set initial drawing brush width
-        canvas.freeDrawingBrush.width = 5;
-
-        // Resize canvas to fit the window
-        function resizeCanvas() {
-            canvas.setWidth(window.innerWidth);
-            canvas.setHeight(window.innerHeight - document.getElementById('markupTools').offsetHeight);
-            canvas.renderAll();
-        }
-
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
     </script>
 </body>
 </html>

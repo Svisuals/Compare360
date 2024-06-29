@@ -99,17 +99,13 @@
                 flex-direction: row;
             }
 
-            #iframe1,
-            #pdfViewer {
-                width: 50%; /* Ambos ocupam 50% da largura quando divididos horizontalmente */
-            }
-
             #iframe1 {
-                height: 100%; /* Altura de 100% para iframe1 */
+                width: 100%; /* Ocupa toda a largura por padrão */
             }
 
             #pdfViewer {
                 display: block;
+                width: 50%; /* Visor de PDF ocupa metade da largura */
                 height: 100%; /* Altura de 100% para o visor de PDF */
             }
         }
@@ -140,9 +136,11 @@
             if (pdfViewer.style.display === 'none') {
                 pdfViewer.style.display = 'block';
                 document.getElementById('container').classList.add('horizontal-split');
+                iframe1.style.width = '50%'; // Reduzir o iframe1 para metade da largura
             } else {
                 pdfViewer.style.display = 'none';
                 document.getElementById('container').classList.remove('horizontal-split');
+                iframe1.style.width = '100%'; // Restaurar o iframe1 para ocupar toda a largura
             }
         });
 
@@ -197,6 +195,11 @@
                     pdfViewer.style.display = 'none';
                     togglePdfButton.style.display = 'none';
                     document.getElementById('container').classList.remove('horizontal-split');
+                } else if (pdfViewer.style.display === 'block') {
+                    iframe1.style.width = '50%';
+                    pdfViewer.style.width = '50%';
+                    togglePdfButton.style.display = 'block';
+                    document.getElementById('container').classList.add('horizontal-split');
                 } else {
                     iframe1.style.width = '100%';
                     //pdfViewer.style.display = 'block'; // Comentado para evitar que o PDF se abra automaticamente

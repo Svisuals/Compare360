@@ -56,6 +56,19 @@
             z-index: 999;
         }
 
+        #togglePdfButton {
+            position: absolute;
+            top: 5cm; /* Ajuste conforme necessário */
+            left: 5%; /* Ajuste conforme necessário */
+            width: 3cm;
+            height: 3cm;
+            background-color: red;
+            border: none;
+            cursor: pointer;
+            z-index: 1000;
+            display: none; /* Por padrão, o visor de PDF está escondido */
+        }
+
         @media (max-width: 768px) {
             #container {
                 flex-direction: column;
@@ -89,12 +102,14 @@
         <object id="pdfViewer" type="application/pdf" data="Facultad de Filosofia y letras - Anexo Bonifacio_1.pdf">
             <p>Seu navegador não suporta visualização de PDF. Por favor, <a href="Facultad de Filosofia y letras - Anexo Bonifacio_1.pdf">baixe o PDF</a> para visualizá-lo.</p>
         </object>
+        <button id="togglePdfButton"></button>
     </div>
     <script>
         const toggleButton = document.getElementById('toggleButton');
         const iframe1 = document.getElementById('iframe1');
         const iframe2 = document.getElementById('iframe2');
         const pdfViewer = document.getElementById('pdfViewer');
+        const togglePdfButton = document.getElementById('togglePdfButton');
 
         // Alternar visibilidade do segundo iframe
         toggleButton.addEventListener('click', () => {
@@ -103,12 +118,23 @@
                 iframe1.style.width = '50%';
                 iframe2.style.width = '50%';
                 pdfViewer.style.display = 'none';
+                togglePdfButton.style.display = 'none'; // Esconder o botão do PDF quando mostra o iframe2
                 setupScrollSync();
             } else {
                 iframe2.style.display = 'none';
                 iframe1.style.width = '100%';
                 pdfViewer.style.display = 'block';
+                togglePdfButton.style.display = 'block'; // Mostrar o botão do PDF quando mostra o visualizador de PDF
                 removeScrollSync();
+            }
+        });
+
+        // Alternar visibilidade do visor de PDF
+        togglePdfButton.addEventListener('click', () => {
+            if (pdfViewer.style.display === 'none') {
+                pdfViewer.style.display = 'block';
+            } else {
+                pdfViewer.style.display = 'none';
             }
         });
 
@@ -120,6 +146,7 @@
                 iframe2.style.width = '100%';
                 iframe2.style.height = '50%';
                 pdfViewer.style.display = 'none';
+                togglePdfButton.style.display = 'none';
                 removeScrollSync();
             } else {
                 iframe1.style.height = '100%';
@@ -127,10 +154,12 @@
                     iframe1.style.width = '50%';
                     iframe2.style.width = '50%';
                     pdfViewer.style.display = 'none';
+                    togglePdfButton.style.display = 'none';
                     setupScrollSync();
                 } else {
                     iframe1.style.width = '100%';
                     pdfViewer.style.display = 'block';
+                    togglePdfButton.style.display = 'block';
                 }
             }
         }

@@ -59,8 +59,8 @@
         #togglePdfButton {
             position: absolute;
             top: 2cm; /* Ajustado conforme solicitado */
-            left: 5%; /* Ajustado conforme solicitado */
-            width: 24px ;
+            left:2cm; /* Ajustado conforme solicitado */
+            width: 24px;
             height: 24px;
             background-color: red;
             border: none;
@@ -110,6 +110,9 @@
         const iframe2 = document.getElementById('iframe2');
         const pdfViewer = document.getElementById('pdfViewer');
         const togglePdfButton = document.getElementById('togglePdfButton');
+
+        // Esconder o visualizador de PDF por padrão
+        pdfViewer.style.display = 'none';
 
         // Alternar visibilidade do segundo iframe
         toggleButton.addEventListener('click', () => {

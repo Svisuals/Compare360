@@ -58,15 +58,15 @@
 
         #togglePdfButton {
             position: absolute;
-            top: 20px; /* Ajustado conforme solicitado */
-            left: 20px; /* Ajustado conforme solicitado */
+            top: 2cm; /* Ajustado conforme solicitado */
+            left: 2cm; /* Ajustado conforme solicitado */
             width: 24px;
             height: 24px;
             background-color: red;
             border: none;
             cursor: pointer;
             z-index: 1000;
-            visibility: hidden; /* Por padrão, o botão do PDF está escondido */
+            display: none; /* Por padrão, o botão do PDF está escondido */
         }
 
         @media (max-width: 768px) {
@@ -111,6 +111,9 @@
         const pdfViewer = document.getElementById('pdfViewer');
         const togglePdfButton = document.getElementById('togglePdfButton');
 
+        // Esconder o visualizador de PDF por padrão
+        pdfViewer.style.display = 'none';
+
         // Configurar evento de alternância para os iframes e o visualizador de PDF
         toggleButton.addEventListener('click', toggleIframes);
         togglePdfButton.addEventListener('click', togglePdfViewer);
@@ -123,14 +126,14 @@
                 iframe1.style.width = '50%';
                 iframe2.style.width = '50%';
                 pdfViewer.style.display = 'none';
-                togglePdfButton.style.visibility = 'hidden'; // Esconder o botão do PDF quando mostra o iframe2
+                togglePdfButton.style.display = 'none';
                 setupScrollSync();
             } else {
                 // Mostrar visualizador de PDF
                 iframe2.style.display = 'none';
                 iframe1.style.width = '100%';
                 pdfViewer.style.display = 'block';
-                togglePdfButton.style.visibility = 'visible'; // Mostrar o botão do PDF quando mostra o visualizador de PDF
+                togglePdfButton.style.display = 'block';
                 removeScrollSync();
             }
         }
@@ -153,7 +156,7 @@
                 iframe2.style.width = '100%';
                 iframe2.style.height = '50%';
                 pdfViewer.style.display = 'none';
-                togglePdfButton.style.visibility = 'hidden';
+                togglePdfButton.style.display = 'none';
                 removeScrollSync();
             } else {
                 // Modo desktop
@@ -162,12 +165,12 @@
                     iframe1.style.width = '50%';
                     iframe2.style.width = '50%';
                     pdfViewer.style.display = 'none';
-                    togglePdfButton.style.visibility = 'hidden';
+                    togglePdfButton.style.display = 'none';
                     setupScrollSync();
                 } else {
                     iframe1.style.width = '100%';
                     pdfViewer.style.display = 'block';
-                    togglePdfButton.style.visibility = 'visible';
+                    togglePdfButton.style.display = 'block';
                 }
             }
         }

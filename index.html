@@ -41,7 +41,7 @@
             background-color: #007BFF;
             border: none;
             cursor: pointer;
-            z-index: 1000; /* Colocar acima do iframe */
+            z-index: 1000;
         }
 
         #pdfViewer {
@@ -53,7 +53,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             border: 1px solid #ccc;
-            z-index: 999; /* Colocar acima do iframe */
+            z-index: 999;
         }
 
         @media (max-width: 768px) {
@@ -140,24 +140,29 @@
         window.addEventListener('resize', adjustLayout);
         adjustLayout();
 
-        // Sincronizar scroll entre iframes
+        // Função para sincronizar o scroll entre iframes
         function syncScroll(source, target) {
-            source.contentWindow.addEventListener('scroll', syncHandler);
+            source.contentWindow.addEventListener('scroll', function() {
+                const sourceScrollTop = source.contentWindow.scrollY;
+                target.contentWindow.scrollTo(0, sourceScrollTop);
+            });
 
-            function syncHandler() {
-                if (!source.syncing) {
-                    source.syncing = true;
-                    const sourceScrollTop = source.contentWindow.scrollY;
-                    target.contentWindow.scrollTo(0, sourceScrollTop);
-                    source.syncing = false;
+            source.contentWindow.addEventListener('message', function(event) {
+                if (event.data.type === 'scroll') {
+                    source.contentWindow.scrollTo(0, event.data.scrollTop);
                 }
-            }
+            });
 
-            source.contentWindow.syncHandler = syncHandler;
+            target.contentWindow.addEventListener('message', function(event) {
+                if (event.data.type === 'scroll') {
+                    target.contentWindow.scrollTo(0, event.data.scrollTop);
+                }
+            });
         }
 
         function removeScrollSync(source, target) {
-            source.contentWindow.removeEventListener('scroll', source.contentWindow.syncHandler);
+            source.contentWindow.removeEventListener('scroll', syncHandler);
+            target.contentWindow.removeEventListener('scroll', syncHandler);
         }
     </script>
 </body>

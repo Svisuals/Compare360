@@ -45,7 +45,7 @@
         }
 
         #pdfViewer {
-            display: hidden; 
+            display: none; 
             width: 80%;
             height: 80%;
             position: absolute;
@@ -94,119 +94,4 @@
         }
     </style>
 </head>
-<body>
-
-    <button id="toggleButton"></button>
-    <div id="container">
-        <iframe id="iframe1" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/"></iframe>
-        <iframe id="iframe2" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/"></iframe>
-        <object id="pdfViewer" type="application/pdf" data="Facultad de Filosofia y letras - Anexo Bonifacio_1.pdf">
-            <p>Seu navegador não suporta visualização de PDF. Por favor, <a href="Facultad de Filosofia y letras - Anexo Bonifacio_1.pdf">baixe o PDF</a> para visualizá-lo.</p>
-        </object>
-        <button id="togglePdfButton"></button>
-    </div>
-    <script>
-        const toggleButton = document.getElementById('toggleButton');
-        const iframe1 = document.getElementById('iframe1');
-        const iframe2 = document.getElementById('iframe2');
-        const pdfViewer = document.getElementById('pdfViewer');
-        const togglePdfButton = document.getElementById('togglePdfButton');
-
-        // Esconder o visualizador de PDF por padrão
-              pdfViewer.style.display = 'none';
-
-        // Configurar evento de alternância para os iframes e o visualizador de PDF
-        toggleButton.addEventListener('click', toggleIframes);
-
-        // Função para alternar visibilidade dos iframes e do visualizador de PDF
-        function toggleIframes() {
-            if (iframe2.style.display === 'none') {
-                // Mostrar iframe2
-                iframe2.style.display = 'block';
-                iframe1.style.width = '50%';
-                iframe2.style.width = '50%';
-                pdfViewer.style.display = 'none';
-                togglePdfButton.style.display = 'none';
-                setupScrollSync();
-            } else {
-                // Mostrar visualizador de PDF
-                iframe2.style.display = 'none';
-                iframe1.style.width = '100%';
-                pdfViewer.style.display = 'block';
-                togglePdfButton.style.display = 'block';
-                removeScrollSync();
-            }
-        }
-
-        // Event listener para alternar visibilidade do visualizador de PDF ao clicar no botão vermelho
-        togglePdfButton.addEventListener('click', () => {
-            if (pdfViewer.style.display === 'none') {
-                pdfViewer.style.display = 'block';
-            } else {
-                pdfViewer.style.display = 'none';
-            }
-        });
-
-        // Ajustar o layout com base no tamanho da janela
-        function adjustLayout() {
-            if (window.innerWidth <= 768) {
-                // Modo celular/tablet
-                iframe1.style.width = '100%';
-                iframe1.style.height = '50%';
-                iframe2.style.width = '100%';
-                iframe2.style.height = '50%';
-                pdfViewer.style.display = 'none';
-                togglePdfButton.style.display = 'none';
-                removeScrollSync();
-            } else {
-                // Modo desktop
-                iframe1.style.height = '100%';
-                if (iframe2.style.display === 'block') {
-                    iframe1.style.width = '50%';
-                    iframe2.style.width = '50%';
-                    pdfViewer.style.display = 'none';
-                    togglePdfButton.style.display = 'none';
-                    setupScrollSync();
-                } else {
-                    iframe1.style.width = '100%';
-                    pdfViewer.style.display = 'block';
-                    togglePdfButton.style.display = 'block';
-                }
-            }
-        }
-
-        // Configurar sincronização de scroll entre iframes
-        function setupScrollSync() {
-            iframe1.contentWindow.postMessage({ action: 'syncScroll' }, '*');
-            iframe2.contentWindow.postMessage({ action: 'syncScroll' }, '*');
-
-            iframe1.contentWindow.addEventListener('scroll', () => {
-                const scrollTop = iframe1.contentWindow.scrollY;
-                iframe2.contentWindow.postMessage({ action: 'scrollTo', scrollTop }, '*');
-            });
-
-            iframe2.contentWindow.addEventListener('scroll', () => {
-                const scrollTop = iframe2.contentWindow.scrollY;
-                iframe1.contentWindow.postMessage({ action: 'scrollTo', scrollTop }, '*');
-            });
-
-            window.addEventListener('message', (event) => {
-                if (event.data.action === 'scrollTo') {
-                    iframe1.contentWindow.scrollTo(0, event.data.scrollTop);
-                    iframe2.contentWindow.scrollTo(0, event.data.scrollTop);
-                }
-            });
-        }
-
-        // Remover sincronização de scroll entre iframes
-        function removeScrollSync() {
-            iframe1.contentWindow.onscroll = null;
-            iframe2.contentWindow.onscroll = null;
-        }
-
-        // Event listener para ajustar o layout quando a janela é redimensionada
-        window.addEventListener('resize', adjustLayout);
-        adjustLayout();
-    </script>
-</body>
 </html>

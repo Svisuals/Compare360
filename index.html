@@ -103,9 +103,13 @@
                 iframe1.style.width = '50%';
                 iframe2.style.width = '50%';
                 pdfViewer.style.display = 'none';
+                syncScroll(iframe1, iframe2);
+                syncScroll(iframe2, iframe1);
             } else {
                 iframe2.style.display = 'none';
                 iframe1.style.width = '100%';
+                removeScrollSync(iframe1, iframe2);
+                removeScrollSync(iframe2, iframe1);
                 if (window.innerWidth > 768) {
                     pdfViewer.style.display = 'block';
                 }
@@ -135,6 +139,26 @@
 
         window.addEventListener('resize', adjustLayout);
         adjustLayout();
+
+        // Sincronizar scroll entre iframes
+        function syncScroll(source, target) {
+            source.contentWindow.addEventListener('scroll', syncHandler);
+
+            function syncHandler() {
+                if (!source.syncing) {
+                    source.syncing = true;
+                    const sourceScrollTop = source.contentWindow.scrollY;
+                    target.contentWindow.scrollTo(0, sourceScrollTop);
+                    source.syncing = false;
+                }
+            }
+
+            source.contentWindow.syncHandler = syncHandler;
+        }
+
+        function removeScrollSync(source, target) {
+            source.contentWindow.removeEventListener('scroll', source.contentWindow.syncHandler);
+        }
     </script>
 </body>
 </html>

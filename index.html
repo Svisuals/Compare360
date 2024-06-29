@@ -116,7 +116,6 @@
 
         // Configurar evento de alternância para os iframes e o visualizador de PDF
         toggleButton.addEventListener('click', toggleIframes);
-        togglePdfButton.addEventListener('click', togglePdfViewer);
 
         // Função para alternar visibilidade dos iframes e do visualizador de PDF
         function toggleIframes() {
@@ -138,14 +137,14 @@
             }
         }
 
-        // Função para alternar visibilidade do visualizador de PDF
-        function togglePdfViewer() {
+        // Event listener para alternar visibilidade do visualizador de PDF ao clicar no botão vermelho
+        togglePdfButton.addEventListener('click', () => {
             if (pdfViewer.style.display === 'none') {
                 pdfViewer.style.display = 'block';
             } else {
                 pdfViewer.style.display = 'none';
             }
-        }
+        });
 
         // Ajustar o layout com base no tamanho da janela
         function adjustLayout() {

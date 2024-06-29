@@ -17,7 +17,7 @@
         #container {
             display: flex;
             width: 100%;
-            height: 100%; /* Ajuste para ocupar toda a página */
+            height: 100%;
             position: relative;
         }
 
@@ -31,17 +31,17 @@
             display: none;
         }
 
-        #toggleButton {
-            position: fixed;
-            top: 10px;
+        #pdfViewer {
+            display: none;
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            cursor: pointer;
-            z-index: 1000; /* Colocar acima do iframe */
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            border: 1px solid #000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
         @media (max-width: 768px) {
@@ -58,50 +58,53 @@
                 display: block;
             }
 
-            #toggleButton {
-                top: auto;
-                bottom: 10px;
+            #pdfViewer {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <button id="toggleButton">Toggle Second Iframe</button>
     <div id="container">
         <iframe id="iframe1" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/"></iframe>
         <iframe id="iframe2" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/"></iframe>
+        <iframe id="pdfViewer" src="Facultad de Filosofia y letras - Anexo Bonifacio_1.pdf"></iframe>
     </div>
     <script>
-        const toggleButton = document.getElementById('toggleButton');
         const iframe1 = document.getElementById('iframe1');
         const iframe2 = document.getElementById('iframe2');
+        const pdfViewer = document.getElementById('pdfViewer');
 
-        // Alternar visibilidade do segundo iframe
-        toggleButton.addEventListener('click', () => {
+        function toggleIframe2() {
             if (iframe2.style.display === 'none') {
                 iframe2.style.display = 'block';
                 iframe1.style.width = '50%';
                 iframe2.style.width = '50%';
+                pdfViewer.style.display = 'none';
             } else {
                 iframe2.style.display = 'none';
                 iframe1.style.width = '100%';
+                pdfViewer.style.display = 'block';
             }
-        });
+        }
 
-        // Ajustar o layout com base no tamanho da janela
         function adjustLayout() {
             if (window.innerWidth <= 768) {
                 iframe1.style.width = '100%';
                 iframe1.style.height = '50%';
                 iframe2.style.width = '100%';
                 iframe2.style.height = '50%';
+                iframe2.style.display = 'block';
+                pdfViewer.style.display = 'none';
             } else {
                 iframe1.style.height = '100%';
                 if (iframe2.style.display === 'block') {
                     iframe1.style.width = '50%';
                     iframe2.style.width = '50%';
+                    pdfViewer.style.display = 'none';
                 } else {
                     iframe1.style.width = '100%';
+                    pdfViewer.style.display = 'block';
                 }
             }
         }

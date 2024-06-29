@@ -66,7 +66,7 @@
             border: none;
             cursor: pointer;
             z-index: 1000;
-            display: none; /* Por padrão, o visor de PDF está escondido */
+            visibility: hidden; /* Por padrão, o botão do PDF está escondido */
         }
 
         @media (max-width: 768px) {
@@ -111,9 +111,6 @@
         const pdfViewer = document.getElementById('pdfViewer');
         const togglePdfButton = document.getElementById('togglePdfButton');
 
-        // Inicialmente ocultar o visualizador de PDF
-        pdfViewer.style.visibility = 'hidden';
-
         // Configurar evento de alternância para os iframes e o visualizador de PDF
         toggleButton.addEventListener('click', toggleIframes);
         togglePdfButton.addEventListener('click', togglePdfViewer);
@@ -125,25 +122,25 @@
                 iframe2.style.display = 'block';
                 iframe1.style.width = '50%';
                 iframe2.style.width = '50%';
-                pdfViewer.style.visibility = 'hidden';
-                togglePdfButton.style.display = 'none'; // Esconder o botão do PDF quando mostra o iframe2
+                pdfViewer.style.display = 'none';
+                togglePdfButton.style.visibility = 'hidden'; // Esconder o botão do PDF quando mostra o iframe2
                 setupScrollSync();
             } else {
                 // Mostrar visualizador de PDF
                 iframe2.style.display = 'none';
                 iframe1.style.width = '100%';
-                pdfViewer.style.visibility = 'visible';
-                togglePdfButton.style.display = 'block'; // Mostrar o botão do PDF quando mostra o visualizador de PDF
+                pdfViewer.style.display = 'block';
+                togglePdfButton.style.visibility = 'visible'; // Mostrar o botão do PDF quando mostra o visualizador de PDF
                 removeScrollSync();
             }
         }
 
         // Função para alternar visibilidade do visualizador de PDF
         function togglePdfViewer() {
-            if (pdfViewer.style.visibility === 'hidden') {
-                pdfViewer.style.visibility = 'visible';
+            if (pdfViewer.style.display === 'none') {
+                pdfViewer.style.display = 'block';
             } else {
-                pdfViewer.style.visibility = 'hidden';
+                pdfViewer.style.display = 'none';
             }
         }
 
@@ -155,8 +152,8 @@
                 iframe1.style.height = '50%';
                 iframe2.style.width = '100%';
                 iframe2.style.height = '50%';
-                pdfViewer.style.visibility = 'hidden';
-                togglePdfButton.style.display = 'none';
+                pdfViewer.style.display = 'none';
+                togglePdfButton.style.visibility = 'hidden';
                 removeScrollSync();
             } else {
                 // Modo desktop
@@ -164,13 +161,13 @@
                 if (iframe2.style.display === 'block') {
                     iframe1.style.width = '50%';
                     iframe2.style.width = '50%';
-                    pdfViewer.style.visibility = 'hidden';
-                    togglePdfButton.style.display = 'none';
+                    pdfViewer.style.display = 'none';
+                    togglePdfButton.style.visibility = 'hidden';
                     setupScrollSync();
                 } else {
                     iframe1.style.width = '100%';
-                    pdfViewer.style.visibility = 'visible';
-                    togglePdfButton.style.display = 'block';
+                    pdfViewer.style.display = 'block';
+                    togglePdfButton.style.visibility = 'visible';
                 }
             }
         }

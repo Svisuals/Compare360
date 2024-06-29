@@ -96,8 +96,6 @@
         const iframe2 = document.getElementById('iframe2');
         const pdfViewer = document.getElementById('pdfViewer');
 
-        let syncScroll = true;
-
         // Alternar visibilidade do segundo iframe
         toggleButton.addEventListener('click', () => {
             if (iframe2.style.display === 'none') {
@@ -140,29 +138,33 @@
         window.addEventListener('resize', adjustLayout);
         adjustLayout();
 
+        // Configurar sincronização de scroll entre iframes
         function setupScrollSync() {
-            syncScrollHandler(iframe1, iframe2);
-            syncScrollHandler(iframe2, iframe1);
+            iframe1.contentWindow.postMessage({ action: 'syncScroll' }, '*');
+            iframe2.contentWindow.postMessage({ action: 'syncScroll' }, '*');
+
+            iframe1.contentWindow.addEventListener('scroll', () => {
+                const scrollTop = iframe1.contentWindow.scrollY;
+                iframe2.contentWindow.postMessage({ action: 'scrollTo', scrollTop }, '*');
+            });
+
+            iframe2.contentWindow.addEventListener('scroll', () => {
+                const scrollTop = iframe2.contentWindow.scrollY;
+                iframe1.contentWindow.postMessage({ action: 'scrollTo', scrollTop }, '*');
+            });
+
+            window.addEventListener('message', (event) => {
+                if (event.data.action === 'scrollTo') {
+                    iframe1.contentWindow.scrollTo(0, event.data.scrollTop);
+                    iframe2.contentWindow.scrollTo(0, event.data.scrollTop);
+                }
+            });
         }
 
+        // Remover sincronização de scroll entre iframes
         function removeScrollSync() {
             iframe1.contentWindow.onscroll = null;
             iframe2.contentWindow.onscroll = null;
-        }
-
-        function syncScrollHandler(source, target) {
-            source.contentWindow.onscroll = function() {
-                if (syncScroll) {
-                    const scrollTop = source.contentWindow.scrollY;
-                    const scrollHeight = source.contentWindow.document.body.scrollHeight - source.contentWindow.innerHeight;
-                    const scrollPercentage = scrollTop / scrollHeight;
-                    const targetScrollHeight = target.contentWindow.document.body.scrollHeight - target.contentWindow.innerHeight;
-                    const targetScrollTop = scrollPercentage * targetScrollHeight;
-                    syncScroll = false;
-                    target.contentWindow.scrollTo(0, targetScrollTop);
-                    syncScroll = true;
-                }
-            };
         }
     </script>
 </body>

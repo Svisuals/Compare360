@@ -45,6 +45,7 @@
         }
 
         #pdfViewer {
+            display: hidden; 
             width: 80%;
             height: 80%;
             position: absolute;
@@ -95,9 +96,6 @@
 </head>
 <body>
 
-        // Esconder o visualizador de PDF por padrão
-             pdfViewer.style.display = 'none';
-
     <button id="toggleButton"></button>
     <div id="container">
         <iframe id="iframe1" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/"></iframe>
@@ -113,7 +111,9 @@
         const iframe2 = document.getElementById('iframe2');
         const pdfViewer = document.getElementById('pdfViewer');
         const togglePdfButton = document.getElementById('togglePdfButton');
-     
+
+        // Esconder o visualizador de PDF por padrão
+              pdfViewer.style.display = 'none';
 
         // Configurar evento de alternância para os iframes e o visualizador de PDF
         toggleButton.addEventListener('click', toggleIframes);

@@ -44,6 +44,19 @@
             z-index: 1000;
         }
 
+        #splitButton {
+            position: fixed;
+            top: 0;
+            left: calc(50% + 24px); /* Calcula a posição ao lado direito do toggleButton */
+            width: 24px;
+            height: 24px;
+            background-color: green;
+            border: none;
+            cursor: pointer;
+            z-index: 1000;
+            display: none; /* Inicialmente oculto até que o visor PDF esteja visível */
+        }
+
         #pdfViewer {
             display: none;
             width: 80%;
@@ -54,19 +67,6 @@
             transform: translate(-50%, -50%);
             border: 1px solid #ccc;
             z-index: 999;
-        }
-
-        #togglePdfButton {
-            position: absolute;
-            top: 2cm; /* Ajustado conforme solicitado */
-            left: 2cm; /* Ajustado conforme solicitado */
-            width: 24px;
-            height: 24px;
-            background-color: red;
-            border: none;
-            cursor: pointer;
-            z-index: 1000;
-            display: none; /* Por padrão, o visor de PDF está escondido */
         }
 
         @media (max-width: 768px) {
@@ -88,6 +88,13 @@
                 bottom: 10px;
             }
 
+            #splitButton {
+                top: 0;
+                left: 50%; /* Posição padrão no centro */
+                transform: translateX(-50%);
+                display: none;
+            }
+
             #pdfViewer {
                 display: none;
             }
@@ -96,16 +103,17 @@
 </head>
 <body>
     <button id="toggleButton"></button>
+    <button id="splitButton"></button>
     <div id="container">
         <iframe id="iframe1" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/"></iframe>
         <iframe id="iframe2" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/"></iframe>
         <object id="pdfViewer" type="application/pdf" data="Facultad de Filosofia y letras - Anexo Bonifacio_1.pdf">
             <p>Seu navegador não suporta visualização de PDF. Por favor, <a href="Facultad de Filosofia y letras - Anexo Bonifacio_1.pdf">baixe o PDF</a> para visualizá-lo.</p>
         </object>
-        <button id="togglePdfButton"></button>
     </div>
     <script>
         const toggleButton = document.getElementById('toggleButton');
+        const splitButton = document.getElementById('splitButton');
         const iframe1 = document.getElementById('iframe1');
         const iframe2 = document.getElementById('iframe2');
         const pdfViewer = document.getElementById('pdfViewer');
@@ -118,8 +126,10 @@
         togglePdfButton.addEventListener('click', () => {
             if (pdfViewer.style.display === 'none') {
                 pdfViewer.style.display = 'block';
+                splitButton.style.display = 'block'; // Mostrar o botão de dividir tela
             } else {
                 pdfViewer.style.display = 'none';
+                splitButton.style.display = 'none'; // Ocultar o botão de dividir tela
             }
         });
 
@@ -132,14 +142,15 @@
                 iframe2.style.width = '50%';
                 pdfViewer.style.display = 'none'; // Garantir que o visor de PDF esteja oculto ao mostrar iframe2
                 togglePdfButton.style.display = 'none';
+                splitButton.style.display = 'none'; // Ocultar o botão de dividir tela ao mostrar iframe2
             } else {
                 // Verificar se o visor de PDF está visível e o iframe2 está visível
                 if (pdfViewer.style.display === 'none' && iframe2.style.display === 'block') {
                     // Mostrar visualizador de PDF apenas se iframe2 estiver oculto
                     iframe2.style.display = 'none';
                     iframe1.style.width = '100%';
-                    //pdfViewer.style.display = 'block'; // Comentado para evitar que o PDF se abra automaticamente
-                    togglePdfButton.style.display = 'block';
+                    togglePdfButton.style.display = 'block'; // Mostrar botão de PDF
+                    splitButton.style.display = 'none'; // Ocultar o botão de dividir tela
                 } else {
                     // Mostrar iframe2
                     iframe2.style.display = 'block';
@@ -147,8 +158,19 @@
                     iframe2.style.width = '50%';
                     pdfViewer.style.display = 'none';
                     togglePdfButton.style.display = 'none';
+                    splitButton.style.display = 'none'; // Ocultar o botão de dividir tela ao mostrar iframe2
                 }
             }
+        });
+
+        // Event listener para dividir a tela verticalmente quando o visor de PDF está visível
+        splitButton.addEventListener('click', () => {
+            const containerWidth = window.innerWidth;
+            iframe1.style.width = '50%';
+            iframe2.style.width = '50%';
+            pdfViewer.style.display = 'block';
+            pdfViewer.style.width = '50%';
+            pdfViewer.style.height = '100%';
         });
 
         // Ajustar o layout com base no tamanho da janela
@@ -161,6 +183,7 @@
                 iframe2.style.height = '50%';
                 pdfViewer.style.display = 'none';
                 togglePdfButton.style.display = 'none';
+                splitButton.style.display = 'none';
             } else {
                 // Modo desktop
                 iframe1.style.height = '100%';
@@ -169,10 +192,17 @@
                     iframe2.style.width = '50%';
                     pdfViewer.style.display = 'none';
                     togglePdfButton.style.display = 'none';
+                    splitButton.style.display = 'none';
+                } else if (pdfViewer.style.display === 'block') {
+                    iframe1.style.width = '50%';
+                    pdfViewer.style.width = '50%';
+                    pdfViewer.style.height = '100%';
+                    togglePdfButton.style.display = 'block';
+                    splitButton.style.display = 'block'; // Mostrar o botão de dividir tela
                 } else {
                     iframe1.style.width = '100%';
-                    //pdfViewer.style.display = 'block'; // Comentado para evitar que o PDF se abra automaticamente
-                    togglePdfButton.style.display = 'block';
+                    togglePdfButton.style.display = 'block'; // Mostrar botão de PDF
+                    splitButton.style.display = 'none'; // Ocultar o botão de dividir tela
                 }
             }
         }

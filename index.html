@@ -132,7 +132,6 @@
                 iframe2.style.width = '50%';
                 pdfViewer.style.display = 'none';
                 togglePdfButton.style.display = 'none';
-                setupScrollSync();
             } else {
                 // Verificar se o visor de PDF está visível
                 if (pdfViewer.style.display === 'none') {
@@ -141,7 +140,6 @@
                     iframe1.style.width = '100%';
                     pdfViewer.style.display = 'block';
                     togglePdfButton.style.display = 'block';
-                    removeScrollSync();
                 } else {
                     // Mostrar iframe2
                     iframe2.style.display = 'block';
@@ -149,7 +147,6 @@
                     iframe2.style.width = '50%';
                     pdfViewer.style.display = 'none';
                     togglePdfButton.style.display = 'none';
-                    setupScrollSync();
                 }
             }
         });
@@ -164,7 +161,6 @@
                 iframe2.style.height = '50%';
                 pdfViewer.style.display = 'none';
                 togglePdfButton.style.display = 'none';
-                removeScrollSync();
             } else {
                 // Modo desktop
                 iframe1.style.height = '100%';
@@ -173,42 +169,12 @@
                     iframe2.style.width = '50%';
                     pdfViewer.style.display = 'none';
                     togglePdfButton.style.display = 'none';
-                    setupScrollSync();
                 } else {
                     iframe1.style.width = '100%';
                     pdfViewer.style.display = 'block';
                     togglePdfButton.style.display = 'block';
                 }
             }
-        }
-
-        // Configurar sincronização de scroll entre iframes
-        function setupScrollSync() {
-            iframe1.contentWindow.postMessage({ action: 'syncScroll' }, '*');
-            iframe2.contentWindow.postMessage({ action: 'syncScroll' }, '*');
-
-            iframe1.contentWindow.addEventListener('scroll', () => {
-                const scrollTop = iframe1.contentWindow.scrollY;
-                iframe2.contentWindow.postMessage({ action: 'scrollTo', scrollTop }, '*');
-            });
-
-            iframe2.contentWindow.addEventListener('scroll', () => {
-                const scrollTop = iframe2.contentWindow.scrollY;
-                iframe1.contentWindow.postMessage({ action: 'scrollTo', scrollTop }, '*');
-            });
-
-            window.addEventListener('message', (event) => {
-                if (event.data.action === 'scrollTo') {
-                    iframe1.contentWindow.scrollTo(0, event.data.scrollTop);
-                    iframe2.contentWindow.scrollTo(0, event.data.scrollTop);
-                }
-            });
-        }
-
-        // Remover sincronização de scroll entre iframes
-        function removeScrollSync() {
-            iframe1.contentWindow.onscroll = null;
-            iframe2.contentWindow.onscroll = null;
         }
 
         // Event listener para ajustar o layout quando a janela é redimensionada

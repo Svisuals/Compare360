@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iframe Toggle</title>
+    <title>Iframe Toggle with PDF Viewer</title>
     <style>
         body, html {
             margin: 0;
@@ -31,17 +31,29 @@
             display: none;
         }
 
+        #toggleButton {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 24px;
+            background-color: #007BFF;
+            border: none;
+            cursor: pointer;
+            z-index: 1000; /* Colocar acima do iframe */
+        }
+
         #pdfViewer {
             display: none;
-            position: absolute;
             width: 80%;
             height: 80%;
+            position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 1000;
-            border: 1px solid #000;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border: 1px solid #ccc;
+            z-index: 999; /* Colocar acima do iframe */
         }
 
         @media (max-width: 768px) {
@@ -58,6 +70,11 @@
                 display: block;
             }
 
+            #toggleButton {
+                top: auto;
+                bottom: 10px;
+            }
+
             #pdfViewer {
                 display: none;
             }
@@ -65,17 +82,22 @@
     </style>
 </head>
 <body>
+    <button id="toggleButton"></button>
     <div id="container">
         <iframe id="iframe1" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/"></iframe>
         <iframe id="iframe2" src="https://svisuals.github.io/LOCH-LOMOND-GROUP/"></iframe>
-        <iframe id="pdfViewer" src="Facultad de Filosofia y letras - Anexo Bonifacio_1.pdf"></iframe>
+        <object id="pdfViewer" type="application/pdf" data="Facultad de Filosofia y letras - Anexo Bonifacio_1.pdf">
+            <p>Seu navegador não suporta visualização de PDF. Por favor, <a href="Facultad de Filosofia y letras - Anexo Bonifacio_1.pdf">baixe o PDF</a> para visualizá-lo.</p>
+        </object>
     </div>
     <script>
+        const toggleButton = document.getElementById('toggleButton');
         const iframe1 = document.getElementById('iframe1');
         const iframe2 = document.getElementById('iframe2');
         const pdfViewer = document.getElementById('pdfViewer');
 
-        function toggleIframe2() {
+        // Alternar visibilidade do segundo iframe
+        toggleButton.addEventListener('click', () => {
             if (iframe2.style.display === 'none') {
                 iframe2.style.display = 'block';
                 iframe1.style.width = '50%';
@@ -84,17 +106,19 @@
             } else {
                 iframe2.style.display = 'none';
                 iframe1.style.width = '100%';
-                pdfViewer.style.display = 'block';
+                if (window.innerWidth > 768) {
+                    pdfViewer.style.display = 'block';
+                }
             }
-        }
+        });
 
+        // Ajustar o layout com base no tamanho da janela
         function adjustLayout() {
             if (window.innerWidth <= 768) {
                 iframe1.style.width = '100%';
                 iframe1.style.height = '50%';
                 iframe2.style.width = '100%';
                 iframe2.style.height = '50%';
-                iframe2.style.display = 'block';
                 pdfViewer.style.display = 'none';
             } else {
                 iframe1.style.height = '100%';

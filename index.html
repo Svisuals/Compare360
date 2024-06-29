@@ -69,19 +69,6 @@
             display: none; /* Por padrão, o visor de PDF está escondido */
         }
 
-        #togglePdfModeButton {
-            position: absolute;
-            top: 0;
-            left: calc(2cm + 24px + 5px); /* Posicionado ao lado direito do togglePdfButton */
-            width: 24px;
-            height: 24px;
-            background-color: #28A745; /* Verde */
-            border: none;
-            cursor: pointer;
-            z-index: 1000;
-            display: none; /* Por padrão, o modo de PDF dividido está desativado */
-        }
-
         @media (max-width: 768px) {
             #container {
                 flex-direction: column;
@@ -116,7 +103,6 @@
             <p>Seu navegador não suporta visualização de PDF. Por favor, <a href="Facultad de Filosofia y letras - Anexo Bonifacio_1.pdf">baixe o PDF</a> para visualizá-lo.</p>
         </object>
         <button id="togglePdfButton"></button>
-        <button id="togglePdfModeButton"></button>
     </div>
     <script>
         const toggleButton = document.getElementById('toggleButton');
@@ -124,7 +110,6 @@
         const iframe2 = document.getElementById('iframe2');
         const pdfViewer = document.getElementById('pdfViewer');
         const togglePdfButton = document.getElementById('togglePdfButton');
-        const togglePdfModeButton = document.getElementById('togglePdfModeButton');
 
         // Esconder o visualizador de PDF por padrão
         pdfViewer.style.display = 'none';
@@ -132,25 +117,15 @@
         // Event listener para alternar visibilidade do visualizador de PDF ao clicar no botão vermelho
         togglePdfButton.addEventListener('click', () => {
             if (pdfViewer.style.display === 'none') {
+                // Mostrar visualizador de PDF
                 pdfViewer.style.display = 'block';
+                pdfViewer.style.top = iframe2.offsetTop + 'px';
+                pdfViewer.style.left = iframe2.offsetLeft + 'px';
+                pdfViewer.style.width = iframe2.offsetWidth + 'px';
+                pdfViewer.style.height = iframe2.offsetHeight + 'px';
             } else {
+                // Esconder visualizador de PDF
                 pdfViewer.style.display = 'none';
-            }
-        });
-
-        // Event listener para alternar modo de visualização do visor de PDF ao clicar no botão verde
-        togglePdfModeButton.addEventListener('click', () => {
-            if (pdfViewer.style.display === 'block' && iframe2.style.display === 'none') {
-                // Modo dividido: iframe1 à esquerda, pdfViewer à direita
-                iframe2.style.display = 'block';
-                iframe1.style.width = '50%';
-                iframe2.style.width = '50%';
-                pdfViewer.style.display = 'block';
-            } else {
-                // Modo padrão: Mostrar somente pdfViewer
-                iframe2.style.display = 'none';
-                iframe1.style.width = '100%';
-                pdfViewer.style.display = 'block';
             }
         });
 
@@ -163,16 +138,18 @@
                 iframe2.style.width = '50%';
                 pdfViewer.style.display = 'none'; // Garantir que o visor de PDF esteja oculto ao mostrar iframe2
                 togglePdfButton.style.display = 'none';
-                togglePdfModeButton.style.display = 'block'; // Mostrar botão de alternar modo PDF
             } else {
                 // Verificar se o visor de PDF está visível e o iframe2 está visível
                 if (pdfViewer.style.display === 'none' && iframe2.style.display === 'block') {
                     // Mostrar visualizador de PDF apenas se iframe2 estiver oculto
                     iframe2.style.display = 'none';
                     iframe1.style.width = '100%';
-                    //pdfViewer.style.display = 'block'; // Comentado para evitar que o PDF se abra automaticamente
+                    pdfViewer.style.display = 'block';
+                    pdfViewer.style.top = iframe1.offsetTop + 'px';
+                    pdfViewer.style.left = iframe1.offsetLeft + 'px';
+                    pdfViewer.style.width = iframe1.offsetWidth + 'px';
+                    pdfViewer.style.height = iframe1.offsetHeight + 'px';
                     togglePdfButton.style.display = 'block';
-                    togglePdfModeButton.style.display = 'none'; // Ocultar botão de alternar modo PDF
                 } else {
                     // Mostrar iframe2
                     iframe2.style.display = 'block';
@@ -180,7 +157,6 @@
                     iframe2.style.width = '50%';
                     pdfViewer.style.display = 'none';
                     togglePdfButton.style.display = 'none';
-                    togglePdfModeButton.style.display = 'block'; // Mostrar botão de alternar modo PDF
                 }
             }
         });
@@ -195,7 +171,6 @@
                 iframe2.style.height = '50%';
                 pdfViewer.style.display = 'none';
                 togglePdfButton.style.display = 'none';
-                togglePdfModeButton.style.display = 'none'; // Ocultar botão de alternar modo PDF
             } else {
                 // Modo desktop
                 iframe1.style.height = '100%';
@@ -204,12 +179,14 @@
                     iframe2.style.width = '50%';
                     pdfViewer.style.display = 'none';
                     togglePdfButton.style.display = 'none';
-                    togglePdfModeButton.style.display = 'none'; // Ocultar botão de alternar modo PDF
                 } else {
                     iframe1.style.width = '100%';
-                    //pdfViewer.style.display = 'block'; // Comentado para evitar que o PDF se abra automaticamente
+                    pdfViewer.style.display = 'block';
+                    pdfViewer.style.top = iframe1.offsetTop + 'px';
+                    pdfViewer.style.left = iframe1.offsetLeft + 'px';
+                    pdfViewer.style.width = iframe1.offsetWidth + 'px';
+                    pdfViewer.style.height = iframe1.offsetHeight + 'px';
                     togglePdfButton.style.display = 'block';
-                    togglePdfModeButton.style.display = 'none'; // Ocultar botão de alternar modo PDF
                 }
             }
         }

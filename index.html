@@ -130,12 +130,12 @@
                 iframe2.style.display = 'block';
                 iframe1.style.width = '50%';
                 iframe2.style.width = '50%';
-                pdfViewer.style.display = 'none';
+                pdfViewer.style.display = 'none'; // Garantir que o visor de PDF esteja oculto ao mostrar iframe2
                 togglePdfButton.style.display = 'none';
             } else {
-                // Verificar se o visor de PDF está visível
-                if (pdfViewer.style.display === 'none') {
-                    // Mostrar visualizador de PDF
+                // Verificar se o visor de PDF está visível e o iframe2 está visível
+                if (pdfViewer.style.display === 'none' && iframe2.style.display === 'block') {
+                    // Mostrar visualizador de PDF apenas se iframe2 estiver oculto
                     iframe2.style.display = 'none';
                     iframe1.style.width = '100%';
                     pdfViewer.style.display = 'block';

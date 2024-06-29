@@ -96,6 +96,8 @@
         const iframe2 = document.getElementById('iframe2');
         const pdfViewer = document.getElementById('pdfViewer');
 
+        let syncScroll = true;
+
         // Alternar visibilidade do segundo iframe
         toggleButton.addEventListener('click', () => {
             if (iframe2.style.display === 'none') {
@@ -103,16 +105,12 @@
                 iframe1.style.width = '50%';
                 iframe2.style.width = '50%';
                 pdfViewer.style.display = 'none';
-                syncScroll(iframe1, iframe2);
-                syncScroll(iframe2, iframe1);
+                setupScrollSync();
             } else {
                 iframe2.style.display = 'none';
                 iframe1.style.width = '100%';
-                removeScrollSync(iframe1, iframe2);
-                removeScrollSync(iframe2, iframe1);
-                if (window.innerWidth > 768) {
-                    pdfViewer.style.display = 'block';
-                }
+                pdfViewer.style.display = 'block';
+                removeScrollSync();
             }
         });
 
@@ -124,12 +122,14 @@
                 iframe2.style.width = '100%';
                 iframe2.style.height = '50%';
                 pdfViewer.style.display = 'none';
+                removeScrollSync();
             } else {
                 iframe1.style.height = '100%';
                 if (iframe2.style.display === 'block') {
                     iframe1.style.width = '50%';
                     iframe2.style.width = '50%';
                     pdfViewer.style.display = 'none';
+                    setupScrollSync();
                 } else {
                     iframe1.style.width = '100%';
                     pdfViewer.style.display = 'block';
@@ -140,29 +140,29 @@
         window.addEventListener('resize', adjustLayout);
         adjustLayout();
 
-        // Função para sincronizar o scroll entre iframes
-        function syncScroll(source, target) {
-            source.contentWindow.addEventListener('scroll', function() {
-                const sourceScrollTop = source.contentWindow.scrollY;
-                target.contentWindow.scrollTo(0, sourceScrollTop);
-            });
-
-            source.contentWindow.addEventListener('message', function(event) {
-                if (event.data.type === 'scroll') {
-                    source.contentWindow.scrollTo(0, event.data.scrollTop);
-                }
-            });
-
-            target.contentWindow.addEventListener('message', function(event) {
-                if (event.data.type === 'scroll') {
-                    target.contentWindow.scrollTo(0, event.data.scrollTop);
-                }
-            });
+        function setupScrollSync() {
+            syncScrollHandler(iframe1, iframe2);
+            syncScrollHandler(iframe2, iframe1);
         }
 
-        function removeScrollSync(source, target) {
-            source.contentWindow.removeEventListener('scroll', syncHandler);
-            target.contentWindow.removeEventListener('scroll', syncHandler);
+        function removeScrollSync() {
+            iframe1.contentWindow.onscroll = null;
+            iframe2.contentWindow.onscroll = null;
+        }
+
+        function syncScrollHandler(source, target) {
+            source.contentWindow.onscroll = function() {
+                if (syncScroll) {
+                    const scrollTop = source.contentWindow.scrollY;
+                    const scrollHeight = source.contentWindow.document.body.scrollHeight - source.contentWindow.innerHeight;
+                    const scrollPercentage = scrollTop / scrollHeight;
+                    const targetScrollHeight = target.contentWindow.document.body.scrollHeight - target.contentWindow.innerHeight;
+                    const targetScrollTop = scrollPercentage * targetScrollHeight;
+                    syncScroll = false;
+                    target.contentWindow.scrollTo(0, targetScrollTop);
+                    syncScroll = true;
+                }
+            };
         }
     </script>
 </body>

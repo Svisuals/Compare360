@@ -93,24 +93,24 @@
             }
         }
 
-        /* Nova regra para dividir verticalmente quando o visor de PDF está visível */
+        /* Nova regra para dividir horizontalmente quando o visor de PDF está visível */
         @media (min-width: 769px) {
-            #container.vertical-split {
-                flex-direction: column;
+            #container.horizontal-split {
+                flex-direction: row;
             }
 
             #iframe1,
             #pdfViewer {
-                width: 100%; /* Ambos ocupam 100% da largura quando divididos verticalmente */
+                width: 50%; /* Ambos ocupam 50% da largura quando divididos horizontalmente */
             }
 
             #iframe1 {
-                height: 50%; /* Altura de 50% para iframe1 */
+                height: 100%; /* Altura de 100% para iframe1 */
             }
 
             #pdfViewer {
                 display: block;
-                height: 50%; /* Altura de 50% para o visor de PDF */
+                height: 100%; /* Altura de 100% para o visor de PDF */
             }
         }
     </style>
@@ -139,10 +139,10 @@
         togglePdfButton.addEventListener('click', () => {
             if (pdfViewer.style.display === 'none') {
                 pdfViewer.style.display = 'block';
-                document.getElementById('container').classList.add('vertical-split');
+                document.getElementById('container').classList.add('horizontal-split');
             } else {
                 pdfViewer.style.display = 'none';
-                document.getElementById('container').classList.remove('vertical-split');
+                document.getElementById('container').classList.remove('horizontal-split');
             }
         });
 
@@ -155,7 +155,7 @@
                 iframe2.style.width = '50%';
                 pdfViewer.style.display = 'none'; // Garantir que o visor de PDF esteja oculto ao mostrar iframe2
                 togglePdfButton.style.display = 'none';
-                document.getElementById('container').classList.remove('vertical-split');
+                document.getElementById('container').classList.remove('horizontal-split');
             } else {
                 // Verificar se o visor de PDF está visível e o iframe2 está visível
                 if (pdfViewer.style.display === 'none' && iframe2.style.display === 'block') {
@@ -164,7 +164,7 @@
                     iframe1.style.width = '100%';
                     //pdfViewer.style.display = 'block'; // Comentado para evitar que o PDF se abra automaticamente
                     togglePdfButton.style.display = 'block';
-                    document.getElementById('container').classList.remove('vertical-split');
+                    document.getElementById('container').classList.remove('horizontal-split');
                 } else {
                     // Mostrar iframe2
                     iframe2.style.display = 'block';
@@ -172,7 +172,7 @@
                     iframe2.style.width = '50%';
                     pdfViewer.style.display = 'none';
                     togglePdfButton.style.display = 'none';
-                    document.getElementById('container').classList.remove('vertical-split');
+                    document.getElementById('container').classList.remove('horizontal-split');
                 }
             }
         });
@@ -187,7 +187,7 @@
                 iframe2.style.height = '50%';
                 pdfViewer.style.display = 'none';
                 togglePdfButton.style.display = 'none';
-                document.getElementById('container').classList.remove('vertical-split');
+                document.getElementById('container').classList.remove('horizontal-split');
             } else {
                 // Modo desktop
                 iframe1.style.height = '100%';
@@ -196,12 +196,12 @@
                     iframe2.style.width = '50%';
                     pdfViewer.style.display = 'none';
                     togglePdfButton.style.display = 'none';
-                    document.getElementById('container').classList.remove('vertical-split');
+                    document.getElementById('container').classList.remove('horizontal-split');
                 } else {
                     iframe1.style.width = '100%';
                     //pdfViewer.style.display = 'block'; // Comentado para evitar que o PDF se abra automaticamente
                     togglePdfButton.style.display = 'block';
-                    document.getElementById('container').classList.remove('vertical-split');
+                    document.getElementById('container').classList.remove('horizontal-split');
                 }
             }
         }

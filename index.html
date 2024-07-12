@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iframe Toggle with PDF Viewer</title>
+    <title>Iframe Toggle with Third Iframe Viewer</title>
     <style>
         body, html {
             margin: 0;
@@ -32,6 +32,17 @@
             display: none;
         }
 
+        #iframe3 {
+            display: none;
+            width: 50%; /* Tamanho inicial do terceiro iframe */
+            height: 100%;
+            position: absolute;
+            top: 0;
+            right: 0;
+            border: 1px solid #ccc;
+            z-index: 999;
+        }
+
         #toggleButton {
             position: fixed;
             top: 0;
@@ -45,18 +56,7 @@
             z-index: 1000;
         }
 
-        #pdfViewer {
-            display: none;
-            width: 50%; /* Tamanho inicial do visor de PDF */
-            height: 100%;
-            position: absolute;
-            top: 0;
-            right: 0;
-            border: 1px solid #ccc;
-            z-index: 999;
-        }
-
-        #togglePdfButton {
+        #toggleIframe3Button {
             position: absolute;
             top: 2cm; /* Ajustado conforme solicitado */
             left: 2cm; /* Ajustado conforme solicitado */
@@ -66,7 +66,7 @@
             border: none;
             cursor: pointer;
             z-index: 1000;
-            display: none; /* Por padrão, o visor de PDF está escondido */
+            display: none; /* Por padrão, o terceiro iframe está escondido */
         }
 
         @media (max-width: 768px) {
@@ -88,12 +88,12 @@
                 bottom: 10px;
             }
 
-            #pdfViewer {
+            #iframe3 {
                 display: none;
             }
         }
 
-        /* Nova regra para dividir horizontalmente quando o visor de PDF está visível */
+        /* Nova regra para dividir horizontalmente quando o terceiro iframe está visível */
         @media (min-width: 769px) {
             #container.horizontal-split {
                 flex-direction: row;
@@ -103,10 +103,10 @@
                 width: 100%; /* Ocupa toda a largura por padrão */
             }
 
-            #pdfViewer {
+            #iframe3 {
                 display: block;
-                width: 50%; /* Visor de PDF ocupa metade da largura */
-                height: 100%; /* Altura de 100% para o visor de PDF */
+                width: 50%; /* Terceiro iframe ocupa metade da largura */
+                height: 100%; /* Altura de 100% para o terceiro iframe */
             }
         }
     </style>
@@ -116,29 +116,27 @@
     <div id="container">
         <iframe id="iframe1" src="https://svisuals.github.io/O360/"></iframe>
         <iframe id="iframe2" src="https://svisuals.github.io/O360/"></iframe>
-        <object id="pdfViewer" type="application/pdf" data="Facultad de Filosofia y letras - Anexo Bonifacio_1.pdf">
-            <p>Seu navegador não suporta visualização de PDF. Por favor, <a href="Facultad de Filosofia y letras - Anexo Bonifacio_1.pdf">baixe o PDF</a> para visualizá-lo.</p>
-        </object>
-        <button id="togglePdfButton"></button>
+        <iframe id="iframe3" src="https://docs.google.com/spreadsheets/d/1Wsr5ZBAqlC9-ZLlBYJ4hjL-p7HgoCgff/edit?usp=sharing&rm=minimal#gid=832209329"></iframe>
+        <button id="toggleIframe3Button"></button>
     </div>
     <script>
         const toggleButton = document.getElementById('toggleButton');
         const iframe1 = document.getElementById('iframe1');
         const iframe2 = document.getElementById('iframe2');
-        const pdfViewer = document.getElementById('pdfViewer');
-        const togglePdfButton = document.getElementById('togglePdfButton');
+        const iframe3 = document.getElementById('iframe3');
+        const toggleIframe3Button = document.getElementById('toggleIframe3Button');
 
-        // Esconder o visualizador de PDF por padrão
-        pdfViewer.style.display = 'none';
+        // Esconder o terceiro iframe por padrão
+        iframe3.style.display = 'none';
 
-        // Event listener para alternar visibilidade do visualizador de PDF ao clicar no botão vermelho
-        togglePdfButton.addEventListener('click', () => {
-            if (pdfViewer.style.display === 'none') {
-                pdfViewer.style.display = 'block';
+        // Event listener para alternar visibilidade do terceiro iframe ao clicar no botão vermelho
+        toggleIframe3Button.addEventListener('click', () => {
+            if (iframe3.style.display === 'none') {
+                iframe3.style.display = 'block';
                 document.getElementById('container').classList.add('horizontal-split');
                 iframe1.style.width = '50%'; // Reduzir o iframe1 para metade da largura
             } else {
-                pdfViewer.style.display = 'none';
+                iframe3.style.display = 'none';
                 document.getElementById('container').classList.remove('horizontal-split');
                 iframe1.style.width = '100%'; // Restaurar o iframe1 para ocupar toda a largura
             }
@@ -151,25 +149,24 @@
                 iframe2.style.display = 'block';
                 iframe1.style.width = '50%';
                 iframe2.style.width = '50%';
-                pdfViewer.style.display = 'none'; // Garantir que o visor de PDF esteja oculto ao mostrar iframe2
-                togglePdfButton.style.display = 'none';
+                iframe3.style.display = 'none'; // Garantir que o terceiro iframe esteja oculto ao mostrar iframe2
+                toggleIframe3Button.style.display = 'none';
                 document.getElementById('container').classList.remove('horizontal-split');
             } else {
-                // Verificar se o visor de PDF está visível e o iframe2 está visível
-                if (pdfViewer.style.display === 'none' && iframe2.style.display === 'block') {
-                    // Mostrar visualizador de PDF apenas se iframe2 estiver oculto
+                // Verificar se o terceiro iframe está visível e o iframe2 está visível
+                if (iframe3.style.display === 'none' && iframe2.style.display === 'block') {
+                    // Mostrar terceiro iframe apenas se iframe2 estiver oculto
                     iframe2.style.display = 'none';
                     iframe1.style.width = '100%';
-                    //pdfViewer.style.display = 'block'; // Comentado para evitar que o PDF se abra automaticamente
-                    togglePdfButton.style.display = 'block';
+                    toggleIframe3Button.style.display = 'block';
                     document.getElementById('container').classList.remove('horizontal-split');
                 } else {
                     // Mostrar iframe2
                     iframe2.style.display = 'block';
                     iframe1.style.width = '50%';
                     iframe2.style.width = '50%';
-                    pdfViewer.style.display = 'none';
-                    togglePdfButton.style.display = 'none';
+                    iframe3.style.display = 'none';
+                    toggleIframe3Button.style.display = 'none';
                     document.getElementById('container').classList.remove('horizontal-split');
                 }
             }
@@ -183,8 +180,8 @@
                 iframe1.style.height = '50%';
                 iframe2.style.width = '100%';
                 iframe2.style.height = '50%';
-                pdfViewer.style.display = 'none';
-                togglePdfButton.style.display = 'none';
+                iframe3.style.display = 'none';
+                toggleIframe3Button.style.display = 'none';
                 document.getElementById('container').classList.remove('horizontal-split');
             } else {
                 // Modo desktop
@@ -192,18 +189,17 @@
                 if (iframe2.style.display === 'block') {
                     iframe1.style.width = '50%';
                     iframe2.style.width = '50%';
-                    pdfViewer.style.display = 'none';
-                    togglePdfButton.style.display = 'none';
+                    iframe3.style.display = 'none';
+                    toggleIframe3Button.style.display = 'none';
                     document.getElementById('container').classList.remove('horizontal-split');
-                } else if (pdfViewer.style.display === 'block') {
+                } else if (iframe3.style.display === 'block') {
                     iframe1.style.width = '50%';
-                    pdfViewer.style.width = '50%';
-                    togglePdfButton.style.display = 'block';
+                    iframe3.style.width = '50%';
+                    toggleIframe3Button.style.display = 'block';
                     document.getElementById('container').classList.add('horizontal-split');
                 } else {
                     iframe1.style.width = '100%';
-                    //pdfViewer.style.display = 'block'; // Comentado para evitar que o PDF se abra automaticamente
-                    togglePdfButton.style.display = 'block';
+                    toggleIframe3Button.style.display = 'block';
                     document.getElementById('container').classList.remove('horizontal-split');
                 }
             }

@@ -123,6 +123,8 @@
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 1000;
+            background-color: #000; /* Fondo negro */
+            color: #fff; /* Texto blanco */
         }
 
         .login-form img {
@@ -133,6 +135,7 @@
 
         .login-form h2 {
             text-align: center;
+            color: #fff; /* Texto blanco */
         }
 
         .login-form input[type="text"], .login-form input[type="password"] {
@@ -165,10 +168,10 @@
     <div id="container">
         <iframe id="iframe1" src="https://svisuals.github.io/O360/"></iframe>
         <iframe id="iframe2" src="https://svisuals.github.io/O360/"></iframe>
-        <iframe id="iframe3" src="https://docs.google.com/spreadsheets/d/1Wsr5ZBAqlC9-ZLlBYJ4hjL-p7HgoCgff/edit?usp=sharing&rm=minimal#gid=832209329"></iframe>
+        <iframe id="iframe3" src=""></iframe>
         <button id="toggleIframe3Button"></button>
     </div>
-    <div class="login-form" id="loginForm">
+    <div class="login-form hidden" id="loginForm">
         <img src="SV AECO Logo.png" alt="Logo"> <!-- Asegúrate de que la imagen esté en la misma carpeta que este archivo -->
         <h2>Acesso ao Tour 360</h2>
         <input type="text" id="username" placeholder="Usuario">
@@ -188,15 +191,7 @@
 
         // Event listener para alternar visibilidade do terceiro iframe ao clicar no botão vermelho
         toggleIframe3Button.addEventListener('click', () => {
-            if (iframe3.style.display === 'none') {
-                iframe3.style.display = 'block';
-                document.getElementById('container').classList.add('horizontal-split');
-                iframe1.style.width = '50%'; // Reduzir o iframe1 para metade da largura
-            } else {
-                iframe3.style.display = 'none';
-                document.getElementById('container').classList.remove('horizontal-split');
-                iframe1.style.width = '100%'; // Restaurar o iframe1 para ocupar toda a largura
-            }
+            loginForm.classList.remove('hidden'); // Mostrar formulário de login
         });
 
         // Event listener para alternar visibilidade dos iframes ao clicar no botão azul
@@ -273,6 +268,7 @@
             if (username === 'ADM' && password === '1234') {
                 loginForm.classList.add('hidden');
                 iframe3.style.display = 'block';
+                iframe3.src = "https://svisuals.github.io/O360/"; // URL do terceiro iframe
                 document.getElementById('container').classList.add('horizontal-split');
                 iframe1.style.width = '50%'; // Ajusta o iframe1 para ocupar metade da largura
             } else {

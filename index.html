@@ -178,6 +178,11 @@
                     toggleButton.style.left = '50%'; // Manter a posição central do toggleButton
                 }
             }
+            
+            // Verificar as condições para mover o toggleButton 4 centímetros para a direita
+            if (iframe1.style.width === '100%' && iframe2.style.display === 'none' && iframe3.style.display === 'none') {
+                toggleButton.style.left = 'calc(50% + 4cm)';
+            }
         });
 
         // Ajustar o layout com base no tamanho da janela

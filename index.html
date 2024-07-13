@@ -44,16 +44,7 @@
         }
 
         #toggleButton {
-            position: fixed;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 24px;
-            height: 24px;
-            background-color: #007BFF;
-            border: none;
-            cursor: pointer;
-            z-index: 1000;
+            display: none; /* Ocultar o botão azul */
         }
 
         #toggleIframe3Button {
@@ -70,7 +61,8 @@
         #logoDUP {
             position: fixed;
             top: 0;
-            left: 10px;
+            left: 50%;
+            transform: translateX(-50%);
             width: 24px;
             height: 24px;
             background-image: url('DUP.jpg');
@@ -94,9 +86,11 @@
                 display: block;
             }
 
-            #toggleButton {
+            #toggleIframe3Button {
                 top: auto;
                 bottom: 10px;
+                left: 50%;
+                transform: translateX(-50%);
             }
 
             #iframe3 {
@@ -129,10 +123,8 @@
         <iframe id="iframe1" src="https://svisuals.github.io/O360/"></iframe>
         <iframe id="iframe2" src="https://svisuals.github.io/O360/"></iframe>
         <iframe id="iframe3" src="https://svisuals.github.io/ExcelViwer/"></iframe>
-        <button id="toggleButton"></button>
     </div>
     <script>
-        const toggleButton = document.getElementById('toggleButton');
         const iframe1 = document.getElementById('iframe1');
         const iframe2 = document.getElementById('iframe2');
         const iframe3 = document.getElementById('iframe3');
@@ -154,36 +146,6 @@
             }
         });
 
-        // Event listener para alternar visibilidade dos iframes ao clicar no botão azul
-        toggleButton.addEventListener('click', () => {
-            if (iframe2.style.display === 'none') {
-                // Mostrar iframe2
-                iframe2.style.display = 'block';
-                iframe1.style.width = '50%';
-                iframe2.style.width = '50%';
-                iframe3.style.display = 'none'; // Garantir que o terceiro iframe esteja oculto ao mostrar iframe2
-                toggleIframe3Button.style.display = 'none';
-                document.getElementById('container').classList.remove('horizontal-split');
-            } else {
-                // Verificar se o terceiro iframe está visível e o iframe2 está visível
-                if (iframe3.style.display === 'none' && iframe2.style.display === 'block') {
-                    // Mostrar terceiro iframe apenas se iframe2 estiver oculto
-                    iframe2.style.display = 'none';
-                    iframe1.style.width = '100%';
-                    toggleIframe3Button.style.display = 'block';
-                    document.getElementById('container').classList.remove('horizontal-split');
-                } else {
-                    // Mostrar iframe2
-                    iframe2.style.display = 'block';
-                    iframe1.style.width = '50%';
-                    iframe2.style.width = '50%';
-                    iframe3.style.display = 'none';
-                    toggleIframe3Button.style.display = 'none';
-                    document.getElementById('container').classList.remove('horizontal-split');
-                }
-            }
-        });
-
         // Ajustar o layout com base no tamanho da janela
         function adjustLayout() {
             if (window.innerWidth <= 768) {
@@ -193,25 +155,19 @@
                 iframe2.style.width = '100%';
                 iframe2.style.height = '50%';
                 iframe3.style.display = 'none';
-                toggleIframe3Button.style.display = 'none';
+                document.getElementById('toggleIframe3Button').style.display = 'block'; // Mostrar o logo CRO
                 document.getElementById('container').classList.remove('horizontal-split');
             } else {
                 // Modo desktop
                 iframe1.style.height = '100%';
-                if (iframe2.style.display === 'block') {
-                    iframe1.style.width = '50%';
-                    iframe2.style.width = '50%';
-                    iframe3.style.display = 'none';
-                    toggleIframe3Button.style.display = 'none';
-                    document.getElementById('container').classList.remove('horizontal-split');
-                } else if (iframe3.style.display === 'block') {
+                if (iframe3.style.display === 'block') {
                     iframe1.style.width = '50%';
                     iframe3.style.width = '50%';
-                    toggleIframe3Button.style.display = 'block';
+                    document.getElementById('toggleIframe3Button').style.display = 'block'; // Mostrar o logo CRO
                     document.getElementById('container').classList.add('horizontal-split');
                 } else {
                     iframe1.style.width = '100%';
-                    toggleIframe3Button.style.display = 'block';
+                    document.getElementById('toggleIframe3Button').style.display = 'none'; // Ocultar o logo CRO
                     document.getElementById('container').classList.remove('horizontal-split');
                 }
             }

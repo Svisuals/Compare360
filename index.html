@@ -46,7 +46,7 @@
         #toggleButton {
             position: fixed;
             top: 0;
-            left: 50%;
+            left: calc(50% + 4cm); /* Posição padrão ajustada 4cm para a direita */
             transform: translateX(-50%);
             width: 32px; /* Largura do logo DUP */
             height: 32px; /* Altura do logo DUP */
@@ -131,67 +131,22 @@
         // Esconder o terceiro iframe por padrão
         iframe3.style.display = 'none';
 
-        // Posicionar toggleButton 4 centímetros à direita por padrão quando iframe1 está visível e iframes 2 e 3 estão ocultos
-        function positionToggleButton() {
-            if (iframe1.style.display === 'block' && iframe2.style.display === 'none' && iframe3.style.display === 'none') {
+        // Função para ajustar a posição do toggleButton com base na visibilidade dos iframes
+        function adjustToggleButtonPosition() {
+            if (iframe1.style.display !== 'none' && iframe2.style.display === 'none' && iframe3.style.display === 'none') {
                 toggleButton.style.left = 'calc(50% + 4cm)';
             } else {
-                toggleButton.style.left = '50%';
+                toggleButton.style.left = 'calc(50% - 4cm)'; // Posição padrão
             }
         }
 
-        // Event listener para alternar visibilidade do terceiro iframe ao clicar no botão vermelho
-        toggleIframe3Button.addEventListener('click', () => {
-            if (iframe3.style.display === 'none') {
-                iframe3.style.display = 'block';
-                document.getElementById('container').classList.add('horizontal-split');
-                iframe1.style.width = '50%'; // Reduzir o iframe1 para metade da largura
-                positionToggleButton(); // Atualizar posição do toggleButton
-            } else {
-                iframe3.style.display = 'none';
-                document.getElementById('container').classList.remove('horizontal-split');
-                iframe1.style.width = '100%'; // Restaurar o iframe1 para ocupar toda a largura
-                positionToggleButton(); // Atualizar posição do toggleButton
-            }
-        });
+        // Chamar a função inicialmente para ajustar a posição ao carregar a página
+        adjustToggleButtonPosition();
 
-        // Ajustar o layout com base no tamanho da janela
-        function adjustLayout() {
-            if (window.innerWidth <= 768) {
-                // Modo celular/tablet
-                iframe1.style.width = '100%';
-                iframe1.style.height = '50%';
-                iframe2.style.width = '100%';
-                iframe2.style.height = '50%';
-                iframe3.style.display = 'none';
-                toggleIframe3Button.style.display = 'none';
-                document.getElementById('container').classList.remove('horizontal-split');
-            } else {
-                // Modo desktop
-                iframe1.style.height = '100%';
-                if (iframe2.style.display === 'block') {
-                    iframe1.style.width = '50%';
-                    iframe2.style.width = '50%';
-                    iframe3.style.display = 'none';
-                    toggleIframe3Button.style.display = 'none';
-                    document.getElementById('container').classList.remove('horizontal-split');
-                } else if (iframe3.style.display === 'block') {
-                    iframe1.style.width = '50%';
-                    iframe3.style.width = '50%';
-                    toggleIframe3Button.style.display = 'block';
-                    document.getElementById('container').classList.add('horizontal-split');
-                } else {
-                    iframe1.style.width = '100%';
-                    toggleIframe3Button.style.display = 'block';
-                    document.getElementById('container').classList.remove('horizontal-split');
-                }
-            }
-            positionToggleButton(); // Atualizar posição do toggleButton ao ajustar layout
-        }
-
-        // Event listener para ajustar o layout quando a janela é redimensionada
-        window.addEventListener('resize', adjustLayout);
-        adjustLayout(); // Chamar ajuste inicial do layout ao carregar a página
+        // Event listeners para ajustar a posição ao alternar a visibilidade dos iframes
+        iframe1.addEventListener('click', adjustToggleButtonPosition);
+        iframe2.addEventListener('click', adjustToggleButtonPosition);
+        iframe3.addEventListener('click', adjustToggleButtonPosition);
     </script>
 </body>
 </html>

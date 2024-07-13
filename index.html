@@ -62,8 +62,6 @@
             left: 2cm; /* Ajustado conforme solicitado */
             width: 24px;
             height: 24px;
-            background-color: red;
-            border: none;
             cursor: pointer;
             z-index: 1000;
             display: none; /* Por padrão, o terceiro iframe está escondido */
@@ -112,12 +110,12 @@
     </style>
 </head>
 <body>
-    <button id="toggleButton"></button>
+    <img id="toggleIframe3Button" src="CRO.jpg" alt="Logo CRO" width="24" height="24">
     <div id="container">
         <iframe id="iframe1" src="https://svisuals.github.io/O360/"></iframe>
         <iframe id="iframe2" src="https://svisuals.github.io/O360/"></iframe>
         <iframe id="iframe3" src="https://svisuals.github.io/ExcelViwer/"></iframe>
-        <button id="toggleIframe3Button"></button>
+        <button id="toggleButton"></button>
     </div>
     <script>
         const toggleButton = document.getElementById('toggleButton');
@@ -129,7 +127,7 @@
         // Esconder o terceiro iframe por padrão
         iframe3.style.display = 'none';
 
-        // Event listener para alternar visibilidade do terceiro iframe ao clicar no botão vermelho
+        // Event listener para alternar visibilidade do terceiro iframe ao clicar no logo
         toggleIframe3Button.addEventListener('click', () => {
             if (iframe3.style.display === 'none') {
                 iframe3.style.display = 'block';

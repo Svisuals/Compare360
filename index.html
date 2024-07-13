@@ -46,7 +46,7 @@
         #toggleButton {
             position: fixed;
             top: 0;
-            left: calc(50% + 4cm); /* Posição inicial 4 centímetros à direita */
+            left: 50%;
             transform: translateX(-50%);
             width: 32px; /* Largura do logo DUP */
             height: 32px; /* Altura do logo DUP */
@@ -131,16 +131,27 @@
         // Esconder o terceiro iframe por padrão
         iframe3.style.display = 'none';
 
+        // Posicionar toggleButton 4 centímetros à direita por padrão quando iframe1 está visível e iframes 2 e 3 estão ocultos
+        function positionToggleButton() {
+            if (iframe1.style.display === 'block' && iframe2.style.display === 'none' && iframe3.style.display === 'none') {
+                toggleButton.style.left = 'calc(50% + 4cm)';
+            } else {
+                toggleButton.style.left = '50%';
+            }
+        }
+
         // Event listener para alternar visibilidade do terceiro iframe ao clicar no botão vermelho
         toggleIframe3Button.addEventListener('click', () => {
             if (iframe3.style.display === 'none') {
                 iframe3.style.display = 'block';
                 document.getElementById('container').classList.add('horizontal-split');
                 iframe1.style.width = '50%'; // Reduzir o iframe1 para metade da largura
+                positionToggleButton(); // Atualizar posição do toggleButton
             } else {
                 iframe3.style.display = 'none';
                 document.getElementById('container').classList.remove('horizontal-split');
                 iframe1.style.width = '100%'; // Restaurar o iframe1 para ocupar toda a largura
+                positionToggleButton(); // Atualizar posição do toggleButton
             }
         });
 
@@ -175,11 +186,12 @@
                     document.getElementById('container').classList.remove('horizontal-split');
                 }
             }
+            positionToggleButton(); // Atualizar posição do toggleButton ao ajustar layout
         }
 
         // Event listener para ajustar o layout quando a janela é redimensionada
         window.addEventListener('resize', adjustLayout);
-        adjustLayout();
+        adjustLayout(); // Chamar ajuste inicial do layout ao carregar a página
     </script>
 </body>
 </html>

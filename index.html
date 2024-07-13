@@ -140,7 +140,7 @@
                 iframe3.style.display = 'block';
                 document.getElementById('container').classList.add('horizontal-split');
                 iframe1.style.width = '50%'; // Reduzir o iframe1 para metade da largura
-                toggleButton.style.left = '50%'; // Manter a posição central do toggleButton
+                toggleButton.style.left = 'calc(50% + 4cm)'; // Mover 4cm para a direita
             } else {
                 iframe3.style.display = 'none';
                 document.getElementById('container').classList.remove('horizontal-split');
@@ -214,19 +214,14 @@
                     } else {
                         toggleButton.style.left = '50%'; // Manter a posição central do toggleButton
                     }
-                } else {
-                    iframe1.style.width = '100%';
-                    toggleIframe3Button.style.display = 'block';
-                    document.getElementById('container').classList.remove('horizontal-split');
-                    toggleButton.style.left = '50%'; // Manter a posição central do toggleButton
                 }
             }
         }
 
-        // Event listener para ajustar o layout quando a janela é redimensionada
+        // Listener para ajustar o layout quando a janela é redimensionada
         window.addEventListener('resize', adjustLayout);
 
-        // Chamar a função de ajuste de layout ao carregar a página
+        // Inicializar o layout ao carregar a página
         adjustLayout();
     </script>
 </body>

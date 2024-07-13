@@ -46,7 +46,8 @@
         #toggleButton {
             position: fixed;
             top: 0;
-            left: calc(50% + 4cm); /* Começa 4 cm à direita */
+            left: 50%; /* Posição inicial no centro horizontal */
+            transform: translateX(-50%); /* Centraliza horizontalmente */
             width: 32px; /* Largura do logo DUP */
             height: 32px; /* Altura do logo DUP */
             background: url('DUP.jpg') no-repeat center center;
@@ -54,6 +55,11 @@
             border: none;
             cursor: pointer;
             z-index: 1000;
+        }
+
+        /* Ajusta a posição padrão para 4 cm à direita */
+        #toggleButton.default-position {
+            left: calc(50% + 4cm); /* Calcula 4 cm à direita do centro */
         }
 
         #toggleIframe3Button {
@@ -125,98 +131,53 @@
     </div>
     <script>
         const toggleButton = document.getElementById('toggleButton');
-        const iframe1 = document.getElementById('iframe1');
         const iframe2 = document.getElementById('iframe2');
         const iframe3 = document.getElementById('iframe3');
         const toggleIframe3Button = document.getElementById('toggleIframe3Button');
 
-        // Esconder o terceiro iframe por padrão
-        iframe3.style.display = 'none';
-
-        // Event listener para alternar visibilidade do terceiro iframe ao clicar no botão vermelho
-        toggleIframe3Button.addEventListener('click', () => {
-            if (iframe3.style.display === 'none') {
-                iframe3.style.display = 'block';
-                document.getElementById('container').classList.add('horizontal-split');
-                iframe1.style.width = '50%'; // Reduzir o iframe1 para metade da largura
-                toggleButton.style.left = '50%'; // Centralizar o botão quando o iframe3 está visível
+        // Função para verificar a visibilidade dos iframes e ajustar o botão
+        function adjustButtonPosition() {
+            if (iframe2.style.display === 'none' && iframe3.style.display === 'none') {
+                toggleButton.classList.add('default-position'); // Aplica a classe para posicionar à direita
             } else {
-                iframe3.style.display = 'none';
-                document.getElementById('container').classList.remove('horizontal-split');
-                iframe1.style.width = '100%'; // Restaurar o iframe1 para ocupar toda a largura
-                toggleButton.style.left = 'calc(50% + 4cm)'; // Voltar o botão para 4 cm à direita
-            }
-        });
-
-        // Event listener para alternar visibilidade dos iframes ao clicar no botão azul
-        toggleButton.addEventListener('click', () => {
-            if (iframe2.style.display === 'none') {
-                // Mostrar iframe2
-                iframe2.style.display = 'block';
-                iframe1.style.width = '50%';
-                iframe2.style.width = '50%';
-                iframe3.style.display = 'none'; // Garantir que o terceiro iframe esteja oculto ao mostrar iframe2
-                toggleIframe3Button.style.display = 'none';
-                toggleButton.style.left = '50%'; // Centralizar o botão quando o iframe2 está visível
-                document.getElementById('container').classList.remove('horizontal-split');
-            } else {
-                // Verificar se o terceiro iframe está visível e o iframe2 está visível
-                if (iframe3.style.display === 'none' && iframe2.style.display === 'block') {
-                    // Mostrar terceiro iframe apenas se iframe2 estiver oculto
-                    iframe2.style.display = 'none';
-                    iframe1.style.width = '100%';
-                    toggleIframe3Button.style.display = 'block';
-                    toggleButton.style.left = 'calc(50% + 4cm)'; // Voltar o botão para 4 cm à direita
-                    document.getElementById('container').classList.remove('horizontal-split');
-                } else {
-                    // Mostrar iframe2
-                    iframe2.style.display = 'block';
-                    iframe1.style.width = '50%';
-                    iframe2.style.width = '50%';
-                    iframe3.style.display = 'none';
-                    toggleIframe3Button.style.display = 'none';
-                    toggleButton.style.left = '50%'; // Centralizar o botão quando o iframe2 está visível
-                    document.getElementById('container').classList.remove('horizontal-split');
-                }
-            }
-        });
-
-        // Ajustar o layout com base no tamanho da janela
-        function adjustLayout() {
-            if (window.innerWidth <= 768) {
-                // Modo celular/tablet
-                iframe1.style.width = '100%';
-                iframe1.style.height = '50%';
-                iframe2.style.width = '100%';
-                iframe2.style.height = '50%';
-                iframe3.style.display = 'none';
-                toggleIframe3Button.style.display = 'none';
-                document.getElementById('container').classList.remove('horizontal-split');
-            } else {
-                // Modo desktop
-                iframe1.style.height = '100%';
-                if (iframe2.style.display === 'block') {
-                    iframe1.style.width = '50%';
-                    iframe2.style.width = '50%';
-                    iframe3.style.display = 'none';
-                    toggleIframe3Button.style.display = 'none';
-                    document.getElementById('container').classList.remove('horizontal-split');
-                } else if (iframe3.style.display === 'block') {
-                    iframe1.style.width = '50%';
-                    iframe3.style.width = '50%';
-                    toggleIframe3Button.style.display = 'block';
-                    document.getElementById('container').classList.add('horizontal-split');
-                } else {
-                    iframe1.style.width = '100%';
-                    toggleIframe3Button.style.display = 'block';
-                    document.getElementById('container').classList.remove('horizontal-split');
-                }
+                toggleButton.classList.remove('default-position'); // Remove a classe para centralizar
             }
         }
 
-        // Event listener para ajustar o layout quando a janela é redimensionada
-        window.addEventListener('resize', adjustLayout);
-        adjustLayout();
+        // Adicionar event listeners para os botões de toggle
+        toggleButton.addEventListener('click', () => {
+            // Lógica para alternar visibilidade do iframe2
+            if (iframe2.style.display === 'none') {
+                iframe2.style.display = 'block';
+                iframe3.style.display = 'none';
+                toggleIframe3Button.style.display = 'none';
+            } else {
+                iframe2.style.display = 'none';
+            }
+            adjustButtonPosition();
+        });
+
+        toggleIframe3Button.addEventListener('click', () => {
+            // Lógica para alternar visibilidade do iframe3
+            if (iframe3.style.display === 'none') {
+                iframe3.style.display = 'block';
+                iframe2.style.display = 'none';
+            } else {
+                iframe3.style.display = 'none';
+            }
+            adjustButtonPosition();
+        });
+
+        // Ajustar o layout inicial
+        function adjustInitialLayout() {
+            if (iframe2.style.display === 'none' && iframe3.style.display === 'none') {
+                toggleButton.classList.add('default-position');
+            }
+        }
+
+        // Ajustar o layout quando a janela é redimensionada
+        window.addEventListener('resize', adjustButtonPosition);
+        adjustInitialLayout(); // Chamar a função inicialmente
     </script>
 </body>
 </html>

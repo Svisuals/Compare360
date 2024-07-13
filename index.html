@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acompannhamento de Obra 360</title>
+    <title>Acompanhamento de Obra 360</title>
     <style>
         body, html {
             margin: 0;
@@ -128,8 +128,23 @@
         const iframe3 = document.getElementById('iframe3');
         const toggleIframe3Button = document.getElementById('toggleIframe3Button');
 
-        // Esconder o terceiro iframe por padrão
-        iframe3.style.display = 'none';
+        // Função para ajustar a posição do botão toggleButton
+        function adjustToggleButtonPosition() {
+            // Verificar se iframe1 está visível
+            const iframe1Visible = iframe1.style.display !== 'none';
+
+            // Verificar se iframe2 ou iframe3 estão visíveis
+            const iframe2or3Visible = iframe2.style.display !== 'none' || iframe3.style.display !== 'none';
+
+            // Se iframe1 está visível e pelo menos um entre iframe2 e iframe3 está visível
+            if (iframe1Visible && iframe2or3Visible) {
+                // Mover o toggleButton 5cm para a direita
+                toggleButton.style.left = 'calc(50% + 5cm)';
+            } else {
+                // Caso contrário, manter a posição central original
+                toggleButton.style.left = '50%';
+            }
+        }
 
         // Event listener para alternar visibilidade do terceiro iframe ao clicar no botão vermelho
         toggleIframe3Button.addEventListener('click', () => {
@@ -142,6 +157,9 @@
                 document.getElementById('container').classList.remove('horizontal-split');
                 iframe1.style.width = '100%'; // Restaurar o iframe1 para ocupar toda a largura
             }
+
+            // Após alterar a visibilidade, ajustar a posição do botão toggleButton
+            adjustToggleButtonPosition();
         });
 
         // Event listener para alternar visibilidade dos iframes ao clicar no botão azul
@@ -172,19 +190,10 @@
                     document.getElementById('container').classList.remove('horizontal-split');
                 }
             }
-            adjustToggleButtonPosition(); // Chamar a função para ajustar a posição do toggleButton
-        });
 
-        // Ajustar a posição do toggleButton com base na visibilidade do iframe1
-        function adjustToggleButtonPosition() {
-            const computedStyle = window.getComputedStyle(iframe1);
-            const displayValue = computedStyle.getPropertyValue('display');
-            if (displayValue === 'block') {
-                toggleButton.style.left = 'calc(50% + 5cm)';
-            } else {
-                toggleButton.style.left = '50%';
-            }
-        }
+            // Após alterar a visibilidade, ajustar a posição do botão toggleButton
+            adjustToggleButtonPosition();
+        });
 
         // Ajustar o layout com base no tamanho da janela
         function adjustLayout() {
@@ -217,12 +226,14 @@
                     document.getElementById('container').classList.remove('horizontal-split');
                 }
             }
-            adjustToggleButtonPosition(); // Chamar a função para ajustar a posição do toggleButton
+
+            // Após ajustar o layout, ajustar a posição do botão toggleButton
+            adjustToggleButtonPosition();
         }
 
         // Event listener para ajustar o layout quando a janela é redimensionada
         window.addEventListener('resize', adjustLayout);
-        adjustLayout(); // Chamar a função para ajustar o layout inicialmente
+        adjustLayout();
     </script>
 </body>
 </html>

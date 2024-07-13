@@ -46,7 +46,7 @@
         #toggleButton {
             position: fixed;
             top: 0;
-            left: calc(50% + 10cm); /* Movido 10 cm a direita */
+            left: 50%;
             transform: translateX(-50%);
             width: 32px;
             height: 32px;
@@ -54,7 +54,6 @@
             border: none;
             cursor: pointer;
             z-index: 1000;
-            display: none; /* Inicialmente oculto */
         }
 
         #toggleIframe3Button {
@@ -85,7 +84,6 @@
             #toggleButton {
                 top: auto;
                 bottom: 10px;
-                left: calc(50% + 10cm); /* Movido 10 cm a direita */
             }
 
             #iframe3 {
@@ -183,7 +181,6 @@
                 iframe3.style.display = 'none';
                 toggleIframe3Button.style.display = 'none';
                 document.getElementById('container').classList.remove('horizontal-split');
-                toggleButton.style.display = 'none'; // Ocultar o botão em telas menores que 768px
             } else {
                 // Modo desktop
                 iframe1.style.height = '100%';
@@ -193,18 +190,15 @@
                     iframe3.style.display = 'none';
                     toggleIframe3Button.style.display = 'none';
                     document.getElementById('container').classList.remove('horizontal-split');
-                    toggleButton.style.display = 'block'; // Mostrar o botão em telas maiores que 768px
                 } else if (iframe3.style.display === 'block') {
                     iframe1.style.width = '50%';
                     iframe3.style.width = '50%';
                     toggleIframe3Button.style.display = 'block';
                     document.getElementById('container').classList.add('horizontal-split');
-                    toggleButton.style.display = 'none'; // Ocultar o botão em telas maiores que 768px enquanto o iframe3 está visível
                 } else {
                     iframe1.style.width = '100%';
                     toggleIframe3Button.style.display = 'block';
                     document.getElementById('container').classList.remove('horizontal-split');
-                    toggleButton.style.display = 'none'; // Ocultar o botão em telas maiores que 768px enquanto o iframe2 está oculto
                 }
             }
         }

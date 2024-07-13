@@ -140,12 +140,10 @@
                 iframe3.style.display = 'block';
                 document.getElementById('container').classList.add('horizontal-split');
                 iframe1.style.width = '50%'; // Reduzir o iframe1 para metade da largura
-                toggleButton.style.left = 'calc(50% + 4cm)'; // Mover 4cm para a direita
             } else {
                 iframe3.style.display = 'none';
                 document.getElementById('container').classList.remove('horizontal-split');
                 iframe1.style.width = '100%'; // Restaurar o iframe1 para ocupar toda a largura
-                toggleButton.style.left = '50%'; // Manter a posição central do toggleButton
             }
         });
 
@@ -159,7 +157,6 @@
                 iframe3.style.display = 'none'; // Garantir que o terceiro iframe esteja oculto ao mostrar iframe2
                 toggleIframe3Button.style.display = 'none';
                 document.getElementById('container').classList.remove('horizontal-split');
-                toggleButton.style.left = '50%'; // Manter a posição central do toggleButton
             } else {
                 // Verificar se o terceiro iframe está visível e o iframe2 está visível
                 if (iframe3.style.display === 'none' && iframe2.style.display === 'block') {
@@ -168,7 +165,6 @@
                     iframe1.style.width = '100%';
                     toggleIframe3Button.style.display = 'block';
                     document.getElementById('container').classList.remove('horizontal-split');
-                    toggleButton.style.left = '50%'; // Manter a posição central do toggleButton
                 } else {
                     // Mostrar iframe2
                     iframe2.style.display = 'block';
@@ -177,7 +173,6 @@
                     iframe3.style.display = 'none';
                     toggleIframe3Button.style.display = 'none';
                     document.getElementById('container').classList.remove('horizontal-split');
-                    toggleButton.style.left = '50%'; // Manter a posição central do toggleButton
                 }
             }
         });
@@ -193,7 +188,6 @@
                 iframe3.style.display = 'none';
                 toggleIframe3Button.style.display = 'none';
                 document.getElementById('container').classList.remove('horizontal-split');
-                toggleButton.style.left = '50%'; // Manter a posição central do toggleButton
             } else {
                 // Modo desktop
                 iframe1.style.height = '100%';
@@ -203,25 +197,21 @@
                     iframe3.style.display = 'none';
                     toggleIframe3Button.style.display = 'none';
                     document.getElementById('container').classList.remove('horizontal-split');
-                    toggleButton.style.left = '50%'; // Manter a posição central do toggleButton
                 } else if (iframe3.style.display === 'block') {
                     iframe1.style.width = '50%';
                     iframe3.style.width = '50%';
                     toggleIframe3Button.style.display = 'block';
                     document.getElementById('container').classList.add('horizontal-split');
-                    if (iframe2.style.display === 'none') {
-                        toggleButton.style.left = 'calc(50% + 4cm)'; // Mover 4cm para a direita quando iframe2 está oculto
-                    } else {
-                        toggleButton.style.left = '50%'; // Manter a posição central do toggleButton
-                    }
+                } else {
+                    iframe1.style.width = '100%';
+                    toggleIframe3Button.style.display = 'block';
+                    document.getElementById('container').classList.remove('horizontal-split');
                 }
             }
         }
 
-        // Listener para ajustar o layout quando a janela é redimensionada
+        // Event listener para ajustar o layout quando a janela é redimensionada
         window.addEventListener('resize', adjustLayout);
-
-        // Inicializar o layout ao carregar a página
         adjustLayout();
     </script>
 </body>

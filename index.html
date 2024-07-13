@@ -59,12 +59,23 @@
         #toggleIframe3Button {
             position: absolute;
             top: 2cm; /* Ajustado conforme solicitado */
-            left: 1cm; /* Ajustado conforme solicitado */
+            left: 2cm; /* Ajustado conforme solicitado */
             width: 24px;
             height: 24px;
             cursor: pointer;
             z-index: 1000;
             display: none; /* Por padrão, o terceiro iframe está escondido */
+        }
+
+        #toggleIframe2Button {
+            position: absolute;
+            top: 2cm; /* Ajustado conforme solicitado */
+            left: 2cm; /* Ajustado conforme solicitado */
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            z-index: 1000;
+            display: none; /* Por padrão, o terceiro iframe está oculto */
         }
 
         @media (max-width: 768px) {
@@ -110,7 +121,7 @@
     </style>
 </head>
 <body>
-    <img id="toggleIframe3Button" src="CRO.jpg" alt="Logo CRO" width="24" height="24">
+    <img id="toggleIframe2Button" src="DUP.jpg" alt="Logo DUP" width="24" height="24">
     <div id="container">
         <iframe id="iframe1" src="https://svisuals.github.io/O360/"></iframe>
         <iframe id="iframe2" src="https://svisuals.github.io/O360/"></iframe>
@@ -122,19 +133,19 @@
         const iframe1 = document.getElementById('iframe1');
         const iframe2 = document.getElementById('iframe2');
         const iframe3 = document.getElementById('iframe3');
-        const toggleIframe3Button = document.getElementById('toggleIframe3Button');
+        const toggleIframe2Button = document.getElementById('toggleIframe2Button');
 
-        // Esconder o terceiro iframe por padrão
-        iframe3.style.display = 'none';
+        // Esconder o segundo iframe por padrão
+        iframe2.style.display = 'none';
 
-        // Event listener para alternar visibilidade do terceiro iframe ao clicar no logo
-        toggleIframe3Button.addEventListener('click', () => {
-            if (iframe3.style.display === 'none') {
-                iframe3.style.display = 'block';
+        // Event listener para alternar visibilidade do segundo iframe ao clicar no logo
+        toggleIframe2Button.addEventListener('click', () => {
+            if (iframe2.style.display === 'none') {
+                iframe2.style.display = 'block';
                 document.getElementById('container').classList.add('horizontal-split');
                 iframe1.style.width = '50%'; // Reduzir o iframe1 para metade da largura
             } else {
-                iframe3.style.display = 'none';
+                iframe2.style.display = 'none';
                 document.getElementById('container').classList.remove('horizontal-split');
                 iframe1.style.width = '100%'; // Restaurar o iframe1 para ocupar toda a largura
             }
@@ -148,7 +159,7 @@
                 iframe1.style.width = '50%';
                 iframe2.style.width = '50%';
                 iframe3.style.display = 'none'; // Garantir que o terceiro iframe esteja oculto ao mostrar iframe2
-                toggleIframe3Button.style.display = 'none';
+                toggleIframe2Button.style.display = 'none';
                 document.getElementById('container').classList.remove('horizontal-split');
             } else {
                 // Verificar se o terceiro iframe está visível e o iframe2 está visível
@@ -156,7 +167,7 @@
                     // Mostrar terceiro iframe apenas se iframe2 estiver oculto
                     iframe2.style.display = 'none';
                     iframe1.style.width = '100%';
-                    toggleIframe3Button.style.display = 'block';
+                    toggleIframe2Button.style.display = 'block';
                     document.getElementById('container').classList.remove('horizontal-split');
                 } else {
                     // Mostrar iframe2
@@ -164,7 +175,7 @@
                     iframe1.style.width = '50%';
                     iframe2.style.width = '50%';
                     iframe3.style.display = 'none';
-                    toggleIframe3Button.style.display = 'none';
+                    toggleIframe2Button.style.display = 'none';
                     document.getElementById('container').classList.remove('horizontal-split');
                 }
             }
@@ -179,7 +190,7 @@
                 iframe2.style.width = '100%';
                 iframe2.style.height = '50%';
                 iframe3.style.display = 'none';
-                toggleIframe3Button.style.display = 'none';
+                toggleIframe2Button.style.display = 'none';
                 document.getElementById('container').classList.remove('horizontal-split');
             } else {
                 // Modo desktop
@@ -188,16 +199,16 @@
                     iframe1.style.width = '50%';
                     iframe2.style.width = '50%';
                     iframe3.style.display = 'none';
-                    toggleIframe3Button.style.display = 'none';
+                    toggleIframe2Button.style.display = 'none';
                     document.getElementById('container').classList.remove('horizontal-split');
                 } else if (iframe3.style.display === 'block') {
                     iframe1.style.width = '50%';
                     iframe3.style.width = '50%';
-                    toggleIframe3Button.style.display = 'block';
+                    toggleIframe2Button.style.display = 'block';
                     document.getElementById('container').classList.add('horizontal-split');
                 } else {
                     iframe1.style.width = '100%';
-                    toggleIframe3Button.style.display = 'block';
+                    toggleIframe2Button.style.display = 'block';
                     document.getElementById('container').classList.remove('horizontal-split');
                 }
             }

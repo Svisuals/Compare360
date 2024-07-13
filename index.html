@@ -157,6 +157,7 @@
                 iframe3.style.display = 'none'; // Garantir que o terceiro iframe esteja oculto ao mostrar iframe2
                 toggleIframe3Button.style.display = 'none';
                 document.getElementById('container').classList.remove('horizontal-split');
+                toggleButton.style.left = '50%'; // Manter a posição central do toggleButton
             } else {
                 // Verificar se o terceiro iframe está visível e o iframe2 está visível
                 if (iframe3.style.display === 'none' && iframe2.style.display === 'block') {
@@ -165,6 +166,7 @@
                     iframe1.style.width = '100%';
                     toggleIframe3Button.style.display = 'block';
                     document.getElementById('container').classList.remove('horizontal-split');
+                    toggleButton.style.left = '50%'; // Manter a posição central do toggleButton
                 } else {
                     // Mostrar iframe2
                     iframe2.style.display = 'block';
@@ -173,6 +175,7 @@
                     iframe3.style.display = 'none';
                     toggleIframe3Button.style.display = 'none';
                     document.getElementById('container').classList.remove('horizontal-split');
+                    toggleButton.style.left = '50%'; // Manter a posição central do toggleButton
                 }
             }
         });
@@ -188,6 +191,7 @@
                 iframe3.style.display = 'none';
                 toggleIframe3Button.style.display = 'none';
                 document.getElementById('container').classList.remove('horizontal-split');
+                toggleButton.style.left = '50%'; // Manter a posição central do toggleButton
             } else {
                 // Modo desktop
                 iframe1.style.height = '100%';
@@ -197,21 +201,30 @@
                     iframe3.style.display = 'none';
                     toggleIframe3Button.style.display = 'none';
                     document.getElementById('container').classList.remove('horizontal-split');
+                    toggleButton.style.left = '50%'; // Manter a posição central do toggleButton
                 } else if (iframe3.style.display === 'block') {
                     iframe1.style.width = '50%';
                     iframe3.style.width = '50%';
                     toggleIframe3Button.style.display = 'block';
                     document.getElementById('container').classList.add('horizontal-split');
+                    if (iframe2.style.display === 'none') {
+                        toggleButton.style.left = 'calc(50% + 4cm)'; // Mover 4cm para a direita quando iframe2 está oculto
+                    } else {
+                        toggleButton.style.left = '50%'; // Manter a posição central do toggleButton
+                    }
                 } else {
                     iframe1.style.width = '100%';
                     toggleIframe3Button.style.display = 'block';
                     document.getElementById('container').classList.remove('horizontal-split');
+                    toggleButton.style.left = '50%'; // Manter a posição central do toggleButton
                 }
             }
         }
 
         // Event listener para ajustar o layout quando a janela é redimensionada
         window.addEventListener('resize', adjustLayout);
+
+        // Chamada inicial para ajustar o layout na carga da página
         adjustLayout();
     </script>
 </body>

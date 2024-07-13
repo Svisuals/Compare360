@@ -48,9 +48,10 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 32px;
-            height: 32px;
-            background-color: #007BFF;
+            width: 32px; /* Largura do logo DUP */
+            height: 32px; /* Altura do logo DUP */
+            background: url('DUP.jpg') no-repeat center center;
+            background-size: cover;
             border: none;
             cursor: pointer;
             z-index: 1000;
@@ -59,9 +60,12 @@
         #toggleIframe3Button {
             position: absolute;
             top: 2cm; /* Ajustado conforme solicitado */
-            left: 1cm; /* Ajustado conforme solicitado */
-            width: 32px;
-            height: 32px;
+            left: 2cm; /* Ajustado conforme solicitado */
+            width: 24px;
+            height: 24px;
+            background: url('CRO.jpg') no-repeat center center;
+            background-size: cover;
+            border: none;
             cursor: pointer;
             z-index: 1000;
             display: none; /* Por padrão, o terceiro iframe está escondido */
@@ -110,12 +114,12 @@
     </style>
 </head>
 <body>
-    <img id="toggleIframe3Button" src="CRO.jpg" alt="Logo CRO" width="32" height="32">
+    <div id="toggleButton"></div>
     <div id="container">
         <iframe id="iframe1" src="https://svisuals.github.io/O360/"></iframe>
         <iframe id="iframe2" src="https://svisuals.github.io/O360/"></iframe>
         <iframe id="iframe3" src="https://svisuals.github.io/ExcelViwer/"></iframe>
-        <button id="toggleButton"></button>
+        <div id="toggleIframe3Button"></div>
     </div>
     <script>
         const toggleButton = document.getElementById('toggleButton');
@@ -127,7 +131,7 @@
         // Esconder o terceiro iframe por padrão
         iframe3.style.display = 'none';
 
-        // Event listener para alternar visibilidade do terceiro iframe ao clicar no logo
+        // Event listener para alternar visibilidade do terceiro iframe ao clicar no botão vermelho
         toggleIframe3Button.addEventListener('click', () => {
             if (iframe3.style.display === 'none') {
                 iframe3.style.display = 'block';

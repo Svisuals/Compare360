@@ -172,7 +172,19 @@
                     document.getElementById('container').classList.remove('horizontal-split');
                 }
             }
+            adjustToggleButtonPosition(); // Chamar a função para ajustar a posição do toggleButton
         });
+
+        // Ajustar a posição do toggleButton com base na visibilidade do iframe1
+        function adjustToggleButtonPosition() {
+            const computedStyle = window.getComputedStyle(iframe1);
+            const displayValue = computedStyle.getPropertyValue('display');
+            if (displayValue === 'block') {
+                toggleButton.style.left = 'calc(50% + 5cm)';
+            } else {
+                toggleButton.style.left = '50%';
+            }
+        }
 
         // Ajustar o layout com base no tamanho da janela
         function adjustLayout() {
@@ -205,11 +217,12 @@
                     document.getElementById('container').classList.remove('horizontal-split');
                 }
             }
+            adjustToggleButtonPosition(); // Chamar a função para ajustar a posição do toggleButton
         }
 
         // Event listener para ajustar o layout quando a janela é redimensionada
         window.addEventListener('resize', adjustLayout);
-        adjustLayout();
+        adjustLayout(); // Chamar a função para ajustar o layout inicialmente
     </script>
 </body>
 </html>

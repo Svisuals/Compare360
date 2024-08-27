@@ -65,7 +65,7 @@ iframe {
     border: none;
     cursor: pointer;
     z-index: 1000;
-     display: block; /* O botão agora está visível por padrão */
+    display: block; /* O botão agora está visível por padrão */
 }
 
 @media (max-width: 768px) {
@@ -83,7 +83,7 @@ iframe {
 
     iframe {
         width: 100%;
-        height: 100%;
+        height: 50%;
     }
 
     #iframe2 {

@@ -1,3 +1,5 @@
+// Código de control de iframes y botones
+
 const toggleButton = document.getElementById('toggleButton');
 const iframe1 = document.getElementById('iframe1');
 const iframe2 = document.getElementById('iframe2');
@@ -111,3 +113,17 @@ function adjustLayout() {
 // Event listener para ajustar o layout quando a janela é redimensionada
 window.addEventListener('resize', adjustLayout);
 adjustLayout();
+
+// Código de inicio de sesión
+
+function login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    if (username === 'ADM' && password === '1234') {
+        alert('Inicio de sesión exitoso');
+        // Aquí puedes redirigir a otra página o mostrar contenido adicional
+    } else {
+        alert('Usuario o contraseña incorrectos.');
+    }
+}

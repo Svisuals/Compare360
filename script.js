@@ -5,8 +5,6 @@ const iframe3 = document.getElementById('iframe3');
 const toggleIframe3Button = document.getElementById('toggleIframe3Button');
 const iframe1Menu = document.getElementById('iframe1Menu');
 const iframe2Menu = document.getElementById('iframe2Menu');
-const loginContainer = document.getElementById('login-container');
-const loginForm = document.getElementById('login-form');
 
 // Inicialmente mostrar apenas o iframe1
 iframe1.style.display = 'block';
@@ -77,7 +75,7 @@ iframe2Menu.addEventListener('change', (event) => {
     iframe2.src = event.target.value;
 });
 
-// Função para ajustar o layout baseado no tamanho da janela
+// Ajustar o layout com base no tamanho da janela
 function adjustLayout() {
     if (window.innerWidth <= 768) {
         // Modo celular/tablet
@@ -113,17 +111,3 @@ function adjustLayout() {
 // Event listener para ajustar o layout quando a janela é redimensionada
 window.addEventListener('resize', adjustLayout);
 adjustLayout();
-
-// Event listener para verificar o login
-loginForm.addEventListener('submit', (event) => {
-    event.preventDefault(); // Impede o envio do formulário
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    if (username === 'adm' && password === '1234') {
-        loginContainer.style.display = 'none'; // Esconde o container de login
-        document.getElementById('container').style.display = 'block'; // Mostra o conteúdo principal
-    } else {
-        alert('Usuário ou senha inválidos.');
-    }
-});

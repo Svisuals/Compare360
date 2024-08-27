@@ -1,12 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acompanhamento de Obra 360</title>
+    <title>Login de Cronograma de Obra</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0; /* Fondo gris claro */
+        }
+
+        .login-form {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            z-index: 10;
+        }
+
+        .login-form img {
+            display: block;
+            margin: 0 auto 10px auto;
+            max-width: 100px; /* Ajusta el tamaño del logo según sea necesario */
+        }
+
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .login-form input[type="text"],
+        .login-form input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+
+        .login-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .login-form button:hover {
+            background-color: #45a049;
+        }
+
+        /* Ocultar o conteúdo da obra inicialmente */
+        #content {
+            display: none;
+        }
+    </style>
 </head>
 <body>
+
+<div class="login-form" id="loginForm">
+    <img src="DELOITTE.png" alt="Logo"> <!-- Asegúrate de que la imagen esté en la misma carpeta que este archivo -->
+    <h2>Cronograma de Obra</h2>
+    <input type="text" id="username" placeholder="Usuario">
+    <input type="password" id="password" placeholder="Contraseña">
+    <button onclick="login()">Ingresar</button>
+</div>
+
+<div id="content">
+    <!-- Contenido de la página de seguimiento de obra -->
     <div id="toggleButton"></div>
     <div id="container">
         <iframe id="iframe1" src="https://momento360.com/e/uc/e39b5e2ef7864507b34ca0ee97cebca3?utm_campaign=embed&utm_source=other&size=large&display-plan=true"></iframe>
@@ -14,7 +84,7 @@
         <iframe id="iframe3" src="https://svisuals.github.io/Cronograma/"></iframe>
         <div id="toggleIframe3Button"></div>
     </div>
-    <!-- Menus suspensos para selecionar URL -->
+    <!-- Menus suspensos para seleccionar URL -->
     <select id="iframe1Menu" class="dropdown">
         <option value="https://momento360.com/e/uc/e39b5e2ef7864507b34ca0ee97cebca3?utm_campaign=embed&utm_source=other&size=large&display-plan=true" selected>Modelo 3D Silicato</option>
         <option value="https://momento360.com/e/uc/e0e6b60410484a949026c3aec52ef112?utm_campaign=embed&utm_source=other&size=large&display-plan=true">Real Capture Silicato</option>
@@ -25,6 +95,21 @@
         <option value="https://momento360.com/e/uc/e0e6b60410484a949026c3aec52ef112?utm_campaign=embed&utm_source=other&size=large&display-plan=true">Real Capture Silicato</option>
         <option value="https://momento360.com/e/uc/51c95022f269476289cc23adc2a69b03?utm_campaign=embed&utm_source=other&size=large&display-plan=true">Modelo 3D Virador Vagões</option>
     </select>
-    <script src="script.js"></script>
+</div>
+
+<script>
+    function login() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        if (username === 'ADM' && password === '1234') {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+        } else {
+            alert('Usuario o contraseña incorrectos.');
+        }
+    }
+</script>
+
 </body>
 </html>

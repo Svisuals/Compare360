@@ -100,7 +100,7 @@ iframe {
     }
 
     #iframe1 {
-        width: 50%; /* Ocupa metade da largura */
+        width: 50%; /* Ocupa metade da largura quando o terceiro iframe está visível */
     }
 
     #iframe3 {

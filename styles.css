@@ -3,19 +3,11 @@ body, html {
     padding: 0;
     height: 100%;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
     font-family: Arial, sans-serif;
-    background-color: #000; /* Fundo negro */
-    color: #fff; /* Texto branco para contraste */
-}
-
-#overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
-    z-index: 999; /* Acima de tudo */
+    background-color: #000; /* Fondo negro */
+    color: #fff; /* Texto blanco para contraste */
 }
 
 #container {
@@ -23,28 +15,27 @@ body, html {
     width: 100%;
     height: 100%;
     position: relative;
-    flex-direction: row; /* Por padrão, divide horizontalmente */
-    display: none; /* Inicialmente oculto */
+    flex-direction: row; /* Por defecto, dividir horizontalmente */
 }
 
 iframe {
     width: 100%;
     height: 100%;
     border: none;
-    display: none; /* Inicialmente oculta todos os iframes */
+    display: none; /* Inicialmente oculta todos los iframes */
 }
 
 #iframe1 {
-    display: block; /* Torna o iframe1 visível inicialmente */
+    display: block; /* Torna el iframe1 visible inicialmente */
 }
 
 #iframe2 {
-    display: none; /* Torna o iframe2 invisível inicialmente */
+    display: none; /* Torna el iframe2 invisible inicialmente */
 }
 
 #iframe3 {
-    display: none; /* Torna o iframe3 invisível inicialmente */
-    width: 50%; /* Tamanho inicial do terceiro iframe */
+    display: none; /* Torna el iframe3 invisible inicialmente */
+    width: 50%; /* Tamaño inicial del tercer iframe */
     height: 100%;
     position: absolute;
     top: 0;
@@ -56,9 +47,9 @@ iframe {
 #toggleButton {
     position: fixed;
     top: 0;
-    left: calc(50% + 4cm); /* Começa 4 cm à direita */
-    width: 32px; /* Largura do logo DUP */
-    height: 32px; /* Altura do logo DUP */
+    left: calc(50% + 4cm); /* Comienza 4 cm a la derecha */
+    width: 32px; /* Ancho del logo DUP */
+    height: 32px; /* Alto del logo DUP */
     background: url('DUP.jpg') no-repeat center center;
     background-size: cover;
     border: none;
@@ -68,8 +59,8 @@ iframe {
 
 #toggleIframe3Button {
     position: absolute;
-    top: 2cm; /* Ajustado conforme solicitado */
-    left: 1cm; /* Ajustado conforme solicitado */
+    top: 2cm; /* Ajustado según lo solicitado */
+    left: 1cm; /* Ajustado según lo solicitado */
     width: 32px;
     height: 32px;
     background: url('CRO.jpg') no-repeat center center;
@@ -77,20 +68,20 @@ iframe {
     border: none;
     cursor: pointer;
     z-index: 1000;
-    display: block; /* O botão agora está visível por padrão */
+    display: block; /* El botón ahora está visible por defecto */
 }
 
 @media (max-width: 768px) {
     #toggleButton {
-        display: none; /* Oculta o toggleButton em dispositivos móveis */
+        display: none; /* Oculta el toggleButton en dispositivos móviles */
     }
 
     #toggleIframe3Button {
-        display: none; /* Oculta o toggleIframe3Button em dispositivos móveis */
+        display: none; /* Oculta el toggleIframe3Button en dispositivos móviles */
     }
 
     #container {
-        flex-direction: column; /* Altera para coluna em dispositivos móveis */
+        flex-direction: column; /* Cambia a columna en dispositivos móviles */
     }
 
     iframe {
@@ -107,20 +98,20 @@ iframe {
     }
 }
 
-/* Nova regra para dividir horizontalmente quando o terceiro iframe está visível */
+/* Nueva regla para dividir horizontalmente cuando el tercer iframe está visible */
 @media (min-width: 769px) {
     #container.horizontal-split {
         flex-direction: row;
     }
 
     #iframe1 {
-        width: 50%; /* Ocupa metade da largura */
+        width: 50%; /* Ocupa la mitad del ancho */
     }
 
     #iframe3 {
         display: block;
-        width: 50%; /* O terceiro iframe ocupa metade da largura */
-        height: 100%; /* Altura de 100% para o terceiro iframe */
+        width: 50%; /* El tercer iframe ocupa la mitad del ancho */
+        height: 100%; /* Altura del 100% para el tercer iframe */
     }
 }
 
@@ -132,7 +123,7 @@ iframe {
     z-index: 1001;
 }
 
-/* Ocultar o menu suspenso do iframe2 quando o iframe2 não está visível */
+/* Ocultar el menú desplegable del iframe2 cuando el iframe2 no está visible */
 #iframe2Menu {
     display: none;
 }
@@ -142,11 +133,43 @@ iframe {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1000; /* Coloca o formulário acima de qualquer outro conteúdo */
+    z-index: 1000; /* Coloca el formulario encima de cualquier otro contenido */
     max-width: 300px;
     padding: 20px;
     background-color: #fff;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     text-align: center;
-    color: #000; /* Altera o texto do formulário para preto para contraste 
+    color: #000; /* Cambia el texto del formulario a negro para contraste */
+}
+
+.login-form img {
+    display: block;
+    margin: 0 auto 10px auto;
+    max-width: 100px; /* Ajusta el tamaño del logo según sea necesario */
+}
+
+.login-form h2 {
+    text-align: center;
+    color: #000; /* Asegura que el título del formulario sea visible */
+}
+
+.login-form input[type="text"], .login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.login-form button:hover {
+    background-color: #45a049;
+}

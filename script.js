@@ -3,11 +3,11 @@ function login() {
     var password = document.getElementById('password').value;
 
     // Verificar credenciais (exemplo simples)
-    if (username === 'admin' && password === 'admin') {
+    if (username === 'adm' && password === '1234') {
         // Ocultar o formulário de login e mostrar o conteúdo
         document.querySelector('.login-form').style.display = 'none';
         document.getElementById('overlay').style.display = 'none';
-        document.getElementById('container').classList.remove('hidden');
+        document.getElementById('container').style.display = 'flex'; // Mostrar o container
     } else {
         alert('Credenciais inválidas!');
     }

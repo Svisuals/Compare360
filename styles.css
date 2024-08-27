@@ -24,13 +24,7 @@ iframe {
 
 #iframe1 {
     display: block; /* Torna o iframe1 visível inicialmente */
-    width: 100%; /* Tamanho inicial do  iframe */
-    height: 100%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    border: 1px solid #ccc;
-    z-index: 999;
+
 }
 
 #iframe2 {

@@ -12,6 +12,7 @@ iframe1.style.width = '100%';  // Ocupar 100% da largura
 iframe1.style.height = '100%'; // Ocupar 100% da altura
 iframe2.style.display = 'none';
 iframe3.style.display = 'none';
+toggleIframe3Button.style.display = 'block'; // Mostrar o botão CRO.jpg ao iniciar
 
 // Event listener para alternar visibilidade do terceiro iframe ao clicar no botão vermelho
 toggleIframe3Button.addEventListener('click', () => {
@@ -73,3 +74,40 @@ iframe1Menu.addEventListener('change', (event) => {
 iframe2Menu.addEventListener('change', (event) => {
     iframe2.src = event.target.value;
 });
+
+// Ajustar o layout com base no tamanho da janela
+function adjustLayout() {
+    if (window.innerWidth <= 768) {
+        // Modo celular/tablet
+        iframe1.style.width = '100%';
+        iframe1.style.height = '50%';
+        iframe2.style.width = '100%';
+        iframe2.style.height = '50%';
+        iframe3.style.display = 'none';
+        toggleIframe3Button.style.display = 'none';
+        document.getElementById('container').classList.remove('horizontal-split');
+    } else {
+        // Modo desktop
+        iframe1.style.height = '100%';
+        if (iframe2.style.display === 'block') {
+            iframe1.style.width = '50%';
+            iframe2.style.width = '50%';
+            iframe3.style.display = 'none';
+            toggleIframe3Button.style.display = 'none';
+            document.getElementById('container').classList.remove('horizontal-split');
+        } else if (iframe3.style.display === 'block') {
+            iframe1.style.width = '50%';
+            iframe3.style.width = '50%';
+            toggleIframe3Button.style.display = 'block';
+            document.getElementById('container').classList.add('horizontal-split');
+        } else {
+            iframe1.style.width = '100%';
+            toggleIframe3Button.style.display = 'block';
+            document.getElementById('container').classList.remove('horizontal-split');
+        }
+    }
+}
+
+// Event listener para ajustar o layout quando a janela é redimensionada
+window.addEventListener('resize', adjustLayout);
+adjustLayout();

@@ -3,9 +3,8 @@ body, html {
     padding: 0;
     height: 100%;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    background-color: black; /* Fundo negro */
+    background-color: black; /* Fundo negro inicial */
+    transition: background-color 0.3s ease; /* Transição suave */
 }
 
 #login-container {
@@ -13,9 +12,11 @@ body, html {
     justify-content: center;
     align-items: center;
     height: 100%;
-    position: fixed;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
+    position: fixed;
+    top: 0;
+    left: 0;
     z-index: 9999; /* Garante que o login esteja acima de outros elementos */
 }
 
@@ -55,4 +56,9 @@ body, html {
     background-color: #0056b3;
 }
 
-/* Adicione aqui outros estilos conforme necessário */
+#main-content {
+    display: none;
+    height: 100%;
+}
+
+/* Outros estilos conforme necessário */

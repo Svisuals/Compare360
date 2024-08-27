@@ -124,6 +124,7 @@ loginForm.addEventListener('submit', (event) => {
     if (username === 'adm' && password === '1234') {
         loginContainer.style.display = 'none'; // Esconde o container de login
         mainContent.style.display = 'block'; // Mostra o conteúdo principal
+        document.body.style.backgroundColor = 'white'; // Remove o fundo negro após o login
     } else {
         alert('Usuário ou senha inválidos.');
     }

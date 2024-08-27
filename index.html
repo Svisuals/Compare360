@@ -7,24 +7,40 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="toggleButton"></div>
-    <div id="container">
-        <iframe id="iframe1" src="https://momento360.com/e/uc/e39b5e2ef7864507b34ca0ee97cebca3?utm_campaign=embed&utm_source=other&size=large&display-plan=true"></iframe>
-        <iframe id="iframe2" src="https://momento360.com/e/uc/e39b5e2ef7864507b34ca0ee97cebca3?utm_campaign=embed&utm_source=other&size=large&display-plan=true"></iframe>
-        <iframe id="iframe3" src="https://svisuals.github.io/Cronograma/"></iframe>
-        <div id="toggleIframe3Button"></div>
+    <!-- Formulário de início de sessão -->
+    <div id="loginContainer">
+        <form id="loginForm">
+            <h2>Iniciar Sessão</h2>
+            <label for="username">Nome de Usuário:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Entrar</button>
+            <div id="loginError" style="color: red; display: none;">Nome de usuário ou senha incorretos.</div>
+        </form>
     </div>
-    <!-- Menus suspensos para selecionar URL -->
-    <select id="iframe1Menu" class="dropdown">
-        <option value="https://momento360.com/e/uc/e39b5e2ef7864507b34ca0ee97cebca3?utm_campaign=embed&utm_source=other&size=large&display-plan=true" selected>Modelo 3D Silicato</option>
-        <option value="https://momento360.com/e/uc/e0e6b60410484a949026c3aec52ef112?utm_campaign=embed&utm_source=other&size=large&display-plan=true">Real Capture Silicato</option>
-        <option value="https://momento360.com/e/uc/51c95022f269476289cc23adc2a69b03?utm_campaign=embed&utm_source=other&size=large&display-plan=true">Modelo 3D Virador de Vagões</option>
-    </select>
-    <select id="iframe2Menu" class="dropdown" style="left: 51%;">
-        <option value="https://momento360.com/e/uc/e39b5e2ef7864507b34ca0ee97cebca3?utm_campaign=embed&utm_source=other&size=large&display-plan=true" selected>Modelo 3D Silicato</option>
-        <option value="https://momento360.com/e/uc/e0e6b60410484a949026c3aec52ef112?utm_campaign=embed&utm_source=other&size=large&display-plan=true">Real Capture Silicato</option>
-        <option value="https://momento360.com/e/uc/51c95022f269476289cc23adc2a69b03?utm_campaign=embed&utm_source=other&size=large&display-plan=true">Modelo 3D Virador de Vagões</option>
-    </select>
+
+    <!-- Conteúdo principal -->
+    <div id="mainContent" style="display: none;">
+        <div id="toggleButton"></div>
+        <div id="container">
+            <iframe id="iframe1" src="https://momento360.com/e/uc/e39b5e2ef7864507b34ca0ee97cebca3?utm_campaign=embed&utm_source=other&size=large&display-plan=true"></iframe>
+            <iframe id="iframe2" src="https://momento360.com/e/uc/e39b5e2ef7864507b34ca0ee97cebca3?utm_campaign=embed&utm_source=other&size=large&display-plan=true"></iframe>
+            <iframe id="iframe3" src="https://svisuals.github.io/Cronograma/"></iframe>
+            <div id="toggleIframe3Button"></div>
+        </div>
+        <!-- Menus suspensos para selecionar URL -->
+        <select id="iframe1Menu" class="dropdown">
+            <option value="https://momento360.com/e/uc/e39b5e2ef7864507b34ca0ee97cebca3?utm_campaign=embed&utm_source=other&size=large&display-plan=true" selected>Modelo 3D Silicato</option>
+            <option value="https://momento360.com/e/uc/e0e6b60410484a949026c3aec52ef112?utm_campaign=embed&utm_source=other&size=large&display-plan=true">Real Capture Silicato</option>
+            <option value="https://momento360.com/e/uc/51c95022f269476289cc23adc2a69b03?utm_campaign=embed&utm_source=other&size=large&display-plan=true">Modelo 3D Virador de Vagões</option>
+        </select>
+        <select id="iframe2Menu" class="dropdown" style="left: 51%;">
+            <option value="https://momento360.com/e/uc/e39b5e2ef7864507b34ca0ee97cebca3?utm_campaign=embed&utm_source=other&size=large&display-plan=true" selected>Modelo 3D Silicato</option>
+            <option value="https://momento360.com/e/uc/e0e6b60410484a949026c3aec52ef112?utm_campaign=embed&utm_source=other&size=large&display-plan=true">Real Capture Silicato</option>
+            <option value="https://momento360.com/e/uc/51c95022f269476289cc23adc2a69b03?utm_campaign=embed&utm_source=other&size=large&display-plan=true">Modelo 3D Virador de Vagões</option>
+        </select>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

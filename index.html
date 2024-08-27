@@ -63,30 +63,12 @@
         #content {
             display: none;
         }
-
-        /* Estilo adicional para os iframes e menus suspensos */
-        #container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-
-        iframe {
-            width: 48%;
-            height: 400px; /* Ajuste a altura conforme necessário */
-            border: 1px solid #ccc;
-            margin: 1%;
-        }
-
-        .dropdown {
-            margin: 10px 0;
-        }
     </style>
 </head>
 <body>
 
 <div class="login-form" id="loginForm">
-    <img src="DELOITTE.png" alt="Logo"> <!-- Asegúrate de que la imagen esté en la misma carpeta que este archivo -->
+    <img src="SV AECO Logo.png" alt="Logo"> <!-- Asegúrate de que la imagen esté en la misma carpeta que este archivo -->
     <h2>Cronograma de Obra</h2>
     <input type="text" id="username" placeholder="Usuario">
     <input type="password" id="password" placeholder="Contraseña">
@@ -95,10 +77,12 @@
 
 <div id="content">
     <!-- Contenido de la página de seguimiento de obra -->
+    <div id="toggleButton"></div>
     <div id="container">
         <iframe id="iframe1" src="https://momento360.com/e/uc/e39b5e2ef7864507b34ca0ee97cebca3?utm_campaign=embed&utm_source=other&size=large&display-plan=true"></iframe>
         <iframe id="iframe2" src="https://momento360.com/e/uc/e39b5e2ef7864507b34ca0ee97cebca3?utm_campaign=embed&utm_source=other&size=large&display-plan=true"></iframe>
         <iframe id="iframe3" src="https://svisuals.github.io/Cronograma/"></iframe>
+        <div id="toggleIframe3Button"></div>
     </div>
     <!-- Menus suspensos para seleccionar URL -->
     <select id="iframe1Menu" class="dropdown">
@@ -106,7 +90,7 @@
         <option value="https://momento360.com/e/uc/e0e6b60410484a949026c3aec52ef112?utm_campaign=embed&utm_source=other&size=large&display-plan=true">Real Capture Silicato</option>
         <option value="https://momento360.com/e/uc/51c95022f269476289cc23adc2a69b03?utm_campaign=embed&utm_source=other&size=large&display-plan=true">Modelo 3D Virador Vagões</option>
     </select>
-    <select id="iframe2Menu" class="dropdown">
+    <select id="iframe2Menu" class="dropdown" style="left: 51%;">
         <option value="https://momento360.com/e/uc/e39b5e2ef7864507b34ca0ee97cebca3?utm_campaign=embed&utm_source=other&size=large&display-plan=true" selected>Modelo 3D Silicato</option>
         <option value="https://momento360.com/e/uc/e0e6b60410484a949026c3aec52ef112?utm_campaign=embed&utm_source=other&size=large&display-plan=true">Real Capture Silicato</option>
         <option value="https://momento360.com/e/uc/51c95022f269476289cc23adc2a69b03?utm_campaign=embed&utm_source=other&size=large&display-plan=true">Modelo 3D Virador Vagões</option>

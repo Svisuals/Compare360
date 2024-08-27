@@ -22,7 +22,7 @@ toggleIframe3Button.addEventListener('click', () => {
         iframe3.style.display = 'none';
         document.getElementById('container').classList.remove('horizontal-split');
         iframe1.style.width = '100%'; // Restaurar o iframe1 para ocupar toda a largura
-        toggleButton.style.left = 'calc(50% + 4cm)'; // Voltar o botão para 4 cm à direita
+        toggleButton.style.left = '4cm'; // Voltar o botão para 4 cm à esquerda
     }
 });
 
@@ -46,7 +46,7 @@ toggleButton.addEventListener('click', () => {
             iframe1.style.width = '100%';
             toggleIframe3Button.style.display = 'block';
             iframe2Menu.style.display = 'none'; // Ocultar o menu suspenso do iframe2 quando o iframe2 está invisível
-            toggleButton.style.left = 'calc(50% + 4cm)'; // Voltar o botão para 4 cm à direita
+            toggleButton.style.left = '4cm'; // Voltar o botão para 4 cm à esquerda
             document.getElementById('container').classList.remove('horizontal-split');
         } else {
             // Mostrar iframe2

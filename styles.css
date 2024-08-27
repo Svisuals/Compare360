@@ -1,3 +1,4 @@
+/* Estilos gerais para o body e html */
 body, html {
     margin: 0;
     padding: 0;
@@ -5,14 +6,69 @@ body, html {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
 }
 
+body {
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Estilos para a página de login */
+.login-form {
+    max-width: 300px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+.login-form img {
+    display: block;
+    margin: 0 auto 10px;
+    max-width: 100px;
+}
+
+.login-form h2 {
+    margin: 0 0 20px 0;
+}
+
+.login-form input[type="text"], .login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.login-form button:hover {
+    background-color: #45a049;
+}
+
+/* Estilos para o conteúdo após login */
 #container {
     display: flex;
     width: 100%;
     height: 100%;
     position: relative;
-    flex-direction: row; /* Por padrão, dividir horizontalmente */
+    flex-direction: row; /* Dividido horizontalmente por padrão */
 }
 
 iframe {
@@ -41,6 +97,7 @@ iframe {
     z-index: 999;
 }
 
+/* Botões de alternância */
 #toggleButton {
     position: fixed;
     top: 0;
@@ -65,9 +122,24 @@ iframe {
     border: none;
     cursor: pointer;
     z-index: 1000;
-     display: block; /* O botão agora está visível por padrão */
+    display: block; /* O botão agora está visível por padrão */
 }
 
+/* Menus suspensos */
+.dropdown {
+    position: absolute;
+    top: 0;
+    background: white;
+    border: 1px solid #ccc;
+    z-index: 1001;
+}
+
+/* Ocultar o menu suspenso do iframe2 quando o iframe2 não está visível */
+#iframe2Menu {
+    display: none;
+}
+
+/* Regras de mídia para dispositivos móveis */
 @media (max-width: 768px) {
     #toggleButton {
         display: none; /* Oculta o toggleButton em dispositivos móveis */
@@ -95,7 +167,7 @@ iframe {
     }
 }
 
-/* Nova regra para dividir horizontalmente quando o terceiro iframe está visível */
+/* Dividir horizontalmente quando o terceiro iframe está visível */
 @media (min-width: 769px) {
     #container.horizontal-split {
         flex-direction: row;
@@ -110,17 +182,4 @@ iframe {
         width: 50%; /* Terceiro iframe ocupa metade da largura */
         height: 100%; /* Altura de 100% para o terceiro iframe */
     }
-}
-
-.dropdown {
-    position: absolute;
-    top: 0;
-    background: white;
-    border: 1px solid #ccc;
-    z-index: 1001;
-}
-
-/* Ocultar o menu suspenso do iframe2 quando o iframe2 não está visível */
-#iframe2Menu {
-    display: none;
 }

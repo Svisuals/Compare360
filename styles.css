@@ -16,17 +16,22 @@ body, html {
 }
 
 iframe {
-    width: 50%;
+    width: 100%;
     height: 100%;
     border: none;
+    display: none; /* Inicialmente oculta todos os iframes */
+}
+
+#iframe1 {
+    display: block; /* Torna o iframe1 visível inicialmente */
 }
 
 #iframe2 {
-    display: none;
+    display: none; /* Torna o iframe2 invisível inicialmente */
 }
 
 #iframe3 {
-    display: none;
+    display: none; /* Torna o iframe3 invisível inicialmente */
     width: 50%; /* Tamanho inicial do terceiro iframe */
     height: 100%;
     position: absolute;
@@ -60,7 +65,7 @@ iframe {
     border: none;
     cursor: pointer;
     z-index: 1000;
-    display: none; /* Por padrão, o terceiro iframe está escondido */
+    display: none; /* Por padrão, o botão para o iframe3 está escondido */
 }
 
 @media (max-width: 768px) {
@@ -113,4 +118,9 @@ iframe {
     background: white;
     border: 1px solid #ccc;
     z-index: 1001;
+}
+
+/* Ocultar o menu suspenso do iframe2 quando o iframe2 não está visível */
+#iframe2Menu {
+    display: none;
 }

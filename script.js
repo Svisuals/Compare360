@@ -5,9 +5,6 @@ const iframe3 = document.getElementById('iframe3');
 const toggleIframe3Button = document.getElementById('toggleIframe3Button');
 const iframe1Menu = document.getElementById('iframe1Menu');
 const iframe2Menu = document.getElementById('iframe2Menu');
-const loginContainer = document.getElementById('login-container');
-const mainContent = document.getElementById('main-content');
-const loginForm = document.getElementById('login-form');
 
 // Inicialmente mostrar apenas o iframe1
 iframe1.style.display = 'block';
@@ -53,9 +50,9 @@ toggleButton.addEventListener('click', () => {
             toggleIframe3Button.style.display = 'block';
             iframe2Menu.style.display = 'none'; // Ocultar o menu suspenso do iframe2 quando o iframe2 está invisível
             toggleButton.style.left = 'calc(50% + 4cm)'; // Voltar o botão para 4 cm à direita
-            document.getElementById('container').classList.add('horizontal-split');
-        } else if (iframe3.style.display === 'block' && iframe2.style.display === 'none') {
-            // Mostrar iframe2 se iframe3 estiver visível
+            document.getElementById('container').classList.remove('horizontal-split');
+        } else {
+            // Mostrar iframe2
             iframe2.style.display = 'block';
             iframe1.style.width = '50%';
             iframe2.style.width = '50%';
@@ -78,7 +75,7 @@ iframe2Menu.addEventListener('change', (event) => {
     iframe2.src = event.target.value;
 });
 
-// Função para ajustar o layout baseado no tamanho da janela
+// Ajustar o layout com base no tamanho da janela
 function adjustLayout() {
     if (window.innerWidth <= 768) {
         // Modo celular/tablet
@@ -114,18 +111,3 @@ function adjustLayout() {
 // Event listener para ajustar o layout quando a janela é redimensionada
 window.addEventListener('resize', adjustLayout);
 adjustLayout();
-
-// Event listener para verificar o login
-loginForm.addEventListener('submit', (event) => {
-    event.preventDefault(); // Impede o envio do formulário
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    if (username === 'adm' && password === '1234') {
-        loginContainer.style.display = 'none'; // Esconde o container de login
-        mainContent.style.display = 'block'; // Mostra o conteúdo principal
-        document.body.style.backgroundColor = 'white'; // Remove o fundo negro após o login
-    } else {
-        alert('Usuário ou senha inválidos.');
-    }
-});

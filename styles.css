@@ -3,62 +3,124 @@ body, html {
     padding: 0;
     height: 100%;
     overflow: hidden;
-    background-color: black; /* Fundo negro inicial */
-    transition: background-color 0.3s ease; /* Transição suave */
+    display: flex;
+    flex-direction: column;
 }
 
-#login-container {
+#container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
+    height: 100%;
+    position: relative;
+    flex-direction: row; /* Por padrão, dividir horizontalmente */
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: none; /* Inicialmente oculta todos os iframes */
+}
+
+#iframe1 {
+    display: block; /* Torna o iframe1 visível inicialmente */
+}
+
+#iframe2 {
+    display: none; /* Torna o iframe2 invisível inicialmente */
+}
+
+#iframe3 {
+    display: none; /* Torna o iframe3 invisível inicialmente */
+    width: 50%; /* Tamanho inicial do terceiro iframe */
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 1px solid #ccc;
+    z-index: 999;
+}
+
+#toggleButton {
     position: fixed;
     top: 0;
-    left: 0;
-    z-index: 9999; /* Garante que o login esteja acima de outros elementos */
-}
-
-#login-box {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    width: 300px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-#logo {
-    width: 100px; /* Ajuste conforme o tamanho do seu logo */
-    margin-bottom: 20px;
-}
-
-#login-form input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-#login-form button {
-    width: 100%;
-    padding: 10px;
+    left: calc(50% + 4cm); /* Começa 4 cm à direita */
+    width: 32px; /* Largura do logo DUP */
+    height: 32px; /* Altura do logo DUP */
+    background: url('DUP.jpg') no-repeat center center;
+    background-size: cover;
     border: none;
-    background-color: #007bff;
-    color: white;
-    border-radius: 5px;
     cursor: pointer;
+    z-index: 1000;
 }
 
-#login-form button:hover {
-    background-color: #0056b3;
+#toggleIframe3Button {
+    position: absolute;
+    top: 2cm; /* Ajustado conforme solicitado */
+    left: 1cm; /* Ajustado conforme solicitado */
+    width: 32px;
+    height: 32px;
+    background: url('CRO.jpg') no-repeat center center;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+    display: block; /* O botão agora está visível por padrão */
 }
 
-#main-content {
+@media (max-width: 768px) {
+    #toggleButton {
+        display: none; /* Oculta o toggleButton em dispositivos móveis */
+    }
+
+    #toggleIframe3Button {
+        display: none; /* Oculta o toggleIframe3Button em dispositivos móveis */
+    }
+
+    #container {
+        flex-direction: column; /* Altera para coluna em dispositivos móveis */
+    }
+
+    iframe {
+        width: 100%;
+        height: 50%;
+    }
+
+    #iframe2 {
+        display: block;
+    }
+
+    #iframe3 {
+        display: none;
+    }
+}
+
+/* Nova regra para dividir horizontalmente quando o terceiro iframe está visível */
+@media (min-width: 769px) {
+    #container.horizontal-split {
+        flex-direction: row;
+    }
+
+    #iframe1 {
+        width: 50%; /* Ocupa metade da largura */
+    }
+
+    #iframe3 {
+        display: block;
+        width: 50%; /* Terceiro iframe ocupa metade da largura */
+        height: 100%; /* Altura de 100% para o terceiro iframe */
+    }
+}
+
+.dropdown {
+    position: absolute;
+    top: 0;
+    background: white;
+    border: 1px solid #ccc;
+    z-index: 1001;
+}
+
+/* Ocultar o menu suspenso do iframe2 quando o iframe2 não está visível */
+#iframe2Menu {
     display: none;
-    height: 100%;
 }
-
-/* Outros estilos conforme necessário */

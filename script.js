@@ -6,7 +6,9 @@ const toggleIframe3Button = document.getElementById('toggleIframe3Button');
 const iframe1Menu = document.getElementById('iframe1Menu');
 const iframe2Menu = document.getElementById('iframe2Menu');
 
-// Esconder o terceiro iframe por padrão
+// Inicialmente mostrar apenas o iframe1
+iframe1.style.display = 'block';
+iframe2.style.display = 'none';
 iframe3.style.display = 'none';
 
 // Event listener para alternar visibilidade do terceiro iframe ao clicar no botão vermelho
@@ -33,6 +35,7 @@ toggleButton.addEventListener('click', () => {
         iframe2.style.width = '50%';
         iframe3.style.display = 'none'; // Garantir que o terceiro iframe esteja oculto ao mostrar iframe2
         toggleIframe3Button.style.display = 'none';
+        iframe2Menu.style.display = 'block'; // Mostrar o menu suspenso do iframe2 quando o iframe2 está visível
         toggleButton.style.left = '49%'; // Centralizar o botão quando o iframe2 está visível
         document.getElementById('container').classList.remove('horizontal-split');
     } else {
@@ -42,6 +45,7 @@ toggleButton.addEventListener('click', () => {
             iframe2.style.display = 'none';
             iframe1.style.width = '100%';
             toggleIframe3Button.style.display = 'block';
+            iframe2Menu.style.display = 'none'; // Ocultar o menu suspenso do iframe2 quando o iframe2 está invisível
             toggleButton.style.left = 'calc(50% + 4cm)'; // Voltar o botão para 4 cm à direita
             document.getElementById('container').classList.remove('horizontal-split');
         } else {
@@ -51,6 +55,7 @@ toggleButton.addEventListener('click', () => {
             iframe2.style.width = '50%';
             iframe3.style.display = 'none';
             toggleIframe3Button.style.display = 'none';
+            iframe2Menu.style.display = 'block'; // Mostrar o menu suspenso do iframe2 quando o iframe2 está visível
             toggleButton.style.left = '49%'; // Centralizar o botão quando o iframe2 está visível
             document.getElementById('container').classList.remove('horizontal-split');
         }

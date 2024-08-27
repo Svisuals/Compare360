@@ -65,7 +65,7 @@ iframe {
     border: none;
     cursor: pointer;
     z-index: 1000;
-    display: none; /* Por padrão, o botão para o iframe3 está escondido */
+     display: block; /* O botão agora está visível por padrão */
 }
 
 @media (max-width: 768px) {

@@ -8,6 +8,8 @@ const iframe2Menu = document.getElementById('iframe2Menu');
 
 // Inicialmente mostrar apenas o iframe1
 iframe1.style.display = 'block';
+iframe1.style.width = '100%';  // Ocupar 100% da largura
+iframe1.style.height = '100%'; // Ocupar 100% da altura
 iframe2.style.display = 'none';
 iframe3.style.display = 'none';
 

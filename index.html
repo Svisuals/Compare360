@@ -8,9 +8,12 @@
 </head>
 <body>
 
+<!-- Camada de fundo para o login -->
+<div id="overlay"></div>
+
 <!-- Formulario de Inicio de Sesión -->
 <div class="login-form">
-    <img src="DELOITTE.png" alt="Logo"> <!-- Asegúrate de que la imagen esté en la misma carpeta que este archivo -->
+    <img src="DELOITTE.png" alt="Logo">
     <h2>Cronograma de Obra</h2>
     <input type="text" id="username" placeholder="Usuario">
     <input type="password" id="password" placeholder="Contraseña">
@@ -18,7 +21,7 @@
 </div>
 
 <!-- Página de Acompanhamento de Obra 360 -->
-<div id="container">
+<div id="container" class="hidden">
     <div id="toggleButton"></div>
     <iframe id="iframe1" src="https://momento360.com/e/uc/e39b5e2ef7864507b34ca0ee97cebca3?utm_campaign=embed&utm_source=other&size=large&display-plan=true"></iframe>
     <iframe id="iframe2" src="https://momento360.com/e/uc/e39b5e2ef7864507b34ca0ee97cebca3?utm_campaign=embed&utm_source=other&size=large&display-plan=true"></iframe>

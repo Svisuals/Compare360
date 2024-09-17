@@ -51,7 +51,7 @@ iframe {
     right: 10px;
     width: 32px;
     height: 32px;
-    background: url('DUP.jpg') no-repeat center center; /* Puedes cambiar la imagen */
+    background: url('DUP.jpg') no-repeat center center;
     background-size: cover;
     border: none;
     cursor: pointer;
@@ -76,14 +76,62 @@ iframe {
 /* Menús desplegables */
 .dropdown {
     position: absolute;
-    top: 40px;
-    background: white;
-    border: 1px solid #ccc;
+    top: 10px;
     z-index: 1001;
 }
 
+#iframe1Menu {
+    left: 10px;
+}
+
 #iframe2Menu {
-    left: 51%;
+    right: 10px;
+    left: auto;
+}
+
+/* Estilos para los botones del menú */
+.dropdown button {
+    background-color: #3498DB;
+    color: white;
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown button::after {
+    content: '';
+    display: inline-block;
+    margin-left: 5px;
+    vertical-align: middle;
+    border-width: 5px;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+}
+
+/* Estilos para el contenido del menú */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+/* Mostrar el menú al agregar la clase 'show' */
+.dropdown.show .dropdown-content {
+    display: block;
 }
 
 /* Media Queries */
@@ -115,6 +163,17 @@ iframe {
     #iframe2 {
         display: none;
     }
+
+    /* Ocultar iframe3 en móviles */
+    #iframe3 {
+        display: none;
+    }
+
+    /* Posicionar el menú de iframe2 a la derecha */
+    #iframe2Menu {
+        right: 10px;
+        left: auto;
+    }
 }
 
 /* Orientación vertical en móviles */
@@ -130,6 +189,11 @@ iframe {
     iframe {
         height: 100%;
     }
+
+    /* Ocultar el menú de iframe2 inicialmente */
+    #iframe2Menu {
+        display: none;
+    }
 }
 
 /* Orientación horizontal en móviles */
@@ -144,7 +208,16 @@ iframe {
     }
 
     #iframe2 {
-        display: block;
+        display: none; /* Se mostrará al presionar el botón */
+    }
+
+    /* Ocultar botón cronograma e iframe3 */
+    #toggleIframe3Button {
+        display: none;
+    }
+
+    #iframe3 {
+        display: none;
     }
 }
 
@@ -162,9 +235,5 @@ iframe {
     #iframe1, #iframe3 {
         width: 50%;
         height: 100%;
-    }
-
-    #iframe2Menu {
-        display: none; /* Mostrar menú de iframe2 según visibilidad en JavaScript */
     }
 }

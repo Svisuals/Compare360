@@ -142,9 +142,16 @@ iframe {
 
 /* Dispositivos móviles */
 @media (max-width: 768px) {
-    #toggleButton,
+    #toggleButton {
+        display: block; /* Mostrar botón DUP en móviles */
+        position: fixed;
+        top: 10px;
+        right: 10px; /* Alinear a la derecha */
+        left: auto;   /* Anular propiedad 'left' */
+    }
+
     #toggleIframe3Button {
-        display: none; /* Ocultar botones de escritorio */
+        display: none; /* Ocultar botón cronograma en móviles */
     }
 
     #toggleIframe2ButtonMobile {
@@ -181,13 +188,44 @@ iframe {
 
 /* Orientación vertical en móviles */
 @media (max-width: 768px) and (orientation: portrait) {
-    iframe {
-        height: 100%;
+    #container {
+        flex-direction: column;
     }
 
-    /* Ocultar el menú de iframe2 inicialmente */
+    #iframe1,
+    #iframe2 {
+        width: 100%;
+    }
+
+    #iframe1 {
+        height: 50%;
+    }
+
+    #iframe2 {
+        height: 50%;
+    }
+
+    /* Posicionar menús */
+    #iframe1Menu {
+        top: 10px;
+        left: 10px;
+    }
+
     #iframe2Menu {
-        display: none;
+        top: calc(50% + 10px);
+        left: 10px;
+    }
+
+    /* Posicionar botones */
+    #toggleButton {
+        top: 10px;
+        right: 10px;
+        left: auto;
+    }
+
+    #toggleIframe2ButtonMobile {
+        top: 10px;
+        left: 50px;
     }
 }
 
@@ -211,6 +249,29 @@ iframe {
     #iframe3 {
         display: none;
     }
+
+    /* Posicionar menús */
+    #iframe1Menu {
+        top: 10px;
+        left: 10px;
+    }
+
+    #iframe2Menu {
+        top: 10px;
+        left: calc(50% + 10px);
+    }
+
+    /* Posicionar botones */
+    #toggleButton {
+        top: 10px;
+        right: 10px;
+        left: auto;
+    }
+
+    #toggleIframe2ButtonMobile {
+        top: 10px;
+        left: 10px;
+    }
 }
 
 /* Dispositivos de escritorio */
@@ -220,12 +281,6 @@ iframe {
     }
 
     /* Alinear el menú de iframe2 hacia la izquierda */
-    #iframe2Menu .dropdown-content {
-        right: 0;
-        left: auto;
-    }
-
-    /* Ajustar menú de iframe2 para abrir hacia la izquierda */
     #iframe2Menu .dropdown-content {
         right: 0;
         left: auto;

@@ -48,8 +48,7 @@ iframe {
 #toggleIframe2ButtonMobile {
     position: fixed;
     top: 10px;
-    right: 10px; /* Cambiado para posicionar a la derecha */
-    left: auto;  /* Asegurar que 'left' no interfiera */
+    left: 10px;
     width: 32px;
     height: 32px;
     background: url('DUP.jpg') no-repeat center center;
@@ -75,7 +74,69 @@ iframe {
 }
 
 /* Menús desplegables */
-/* ... (resto de tus estilos de menús) ... */
+.dropdown {
+    position: fixed;
+    top: 10px;
+    z-index: 1001;
+}
+
+#iframe1Menu {
+    left: 10px;
+}
+
+#iframe2Menu {
+    right: 10px;
+    left: auto;
+}
+
+.dropdown button {
+    background-color: #3498DB;
+    color: white;
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown button::after {
+    content: '';
+    display: inline-block;
+    margin-left: 5px;
+    vertical-align: middle;
+    border-width: 5px;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+/* Mostrar el menú al agregar la clase 'show' */
+.dropdown.show .dropdown-content {
+    display: block;
+}
+
+/* Alinear el menú de iframe2 hacia la izquierda */
+#iframe2Menu .dropdown-content {
+    right: 0;
+    left: auto;
+}
 
 /* Media Queries */
 
@@ -128,14 +189,6 @@ iframe {
     #iframe2Menu {
         display: none;
     }
-
-    /* Posicionar el botón en la parte superior derecha */
-    #toggleIframe2ButtonMobile {
-        top: 10px;
-        right: 10px;
-        left: auto;
-        display: block; /* Asegurar que el botón se muestre */
-    }
 }
 
 /* Orientación horizontal en móviles */
@@ -156,11 +209,6 @@ iframe {
     }
 
     #iframe3 {
-        display: none;
-    }
-
-    /* Ocultar el botón en orientación horizontal */
-    #toggleIframe2ButtonMobile {
         display: none;
     }
 }

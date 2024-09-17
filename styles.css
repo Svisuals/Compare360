@@ -1,224 +1,103 @@
-/* Estilos generales */
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-
-#container {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    flex-direction: row; /* Por defecto, dividir horizontalmente */
-}
-
-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    display: none; /* Inicialmente ocultar todos los iframes */
-}
-
-#iframe1 {
-    display: block; /* Mostrar iframe1 por defecto */
-}
-
-#iframe2, #iframe3 {
-    display: none;
-}
-
-/* Botones */
-#toggleButton {
-    position: fixed;
-    top: 10px;
-    right: 50px;
-    width: 32px;
-    height: 32px;
-    background: url('DUP.jpg') no-repeat center center;
-    background-size: cover;
-    cursor: pointer;
-    z-index: 1000;
-}
-
-#toggleIframe2ButtonMobile {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    width: 32px;
-    height: 32px;
-    background: url('DUP.jpg') no-repeat center center;
-    background-size: cover;
-    cursor: pointer;
-    z-index: 1000;
-    display: none; /* Oculto por defecto */
-}
-
-#toggleIframe3Button {
-    position: fixed;
-    top: 10px;
-    right: 90px;
-    width: 32px;
-    height: 32px;
-    background: url('CRO.jpg') no-repeat center center;
-    background-size: cover;
-    cursor: pointer;
-    z-index: 1000;
-    display: none; /* Ocultar el botón cronograma en móviles */
-}
-
-/* Menús desplegables */
-.dropdown {
-    position: fixed;
-    top: 50px; /* Ajustado para que no se superponga al botón */
-    z-index: 1001;
-}
-
-#iframe1Menu {
-    left: 10px;
-}
-
-#iframe2Menu {
-    right: 10px;
-}
-
-/* Posicionar la flecha del menú del iframe2 a la izquierda en móviles verticales */
-@media (max-width: 768px) and (orientation: portrait) {
-    #iframe2Menu {
-        left: 10px;
-        right: auto;
-        top: 10px; /* Ajustado para estar en el mismo nivel que el iframe */
-    }
-
-    /* Mostrar el menú cuando el iframe2 está visible */
-    #iframe2Menu {
-        display: block;
-    }
-}
-
-.dropdown button {
-    background-color: #3498DB;
-    color: white;
-    padding: 8px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-.dropdown button::after {
-    content: '';
-    display: inline-block;
-    margin-left: 5px;
-    vertical-align: middle;
-    border-width: 5px;
-    border-style: solid;
-    border-color: white transparent transparent transparent;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 180px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 8px 12px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #ddd;
-}
-
-/* Mostrar el menú al agregar la clase 'show' */
-.dropdown.show .dropdown-content {
-    display: block;
-}
-
-/* Media Queries */
+/* ... estilos existentes ... */
 
 /* Dispositivos móviles */
 @media (max-width: 768px) {
+    /* Ocultar botones de escritorio */
     #toggleButton,
     #toggleIframe3Button {
-        display: none; /* Ocultar botones de escritorio y cronograma */
-    }
-
-    #toggleIframe2ButtonMobile {
-        display: block; /* Mostrar botón móvil */
-    }
-
-    #container {
-        flex-direction: column; /* Disposición vertical */
-    }
-
-    iframe {
-        width: 100%;
-        height: 50%; /* Ajustar la altura para dos iframes */
-    }
-
-    /* Ocultar iframe2 e iframe3 en móviles inicialmente */
-    #iframe2,
-    #iframe3 {
         display: none;
     }
 
-    /* Ajustar la posición del botón y menú para que no se superpongan */
+    /* Mostrar botón móvil */
     #toggleIframe2ButtonMobile {
+        display: block;
         top: 10px;
         right: 10px;
     }
 
-    #iframe2Menu {
-        top: 10px; /* Evitar superposición con el botón */
-        right: 10px;
+    /* Disposición vertical */
+    @media (orientation: portrait) {
+        #container {
+            flex-direction: column;
+        }
+
+        iframe {
+            width: 100%;
+        }
+
+        /* Ajustar alturas de iframes */
+        #iframe1 {
+            height: calc(50% - 20px); /* Restamos 20px para el espacio de menús */
+        }
+
+        #iframe2 {
+            height: calc(50% - 20px);
+            display: none; /* Oculto inicialmente */
+        }
+
+        /* Menú de iframe1 */
+        #iframe1Menu {
+            top: 10px;
+            left: 10px;
+        }
+
+        /* Menú de iframe2 sobre iframe2 en el lado izquierdo */
+        #iframe2Menu {
+            top: calc(50% + 10px);
+            left: 10px;
+            right: auto;
+            display: none; /* Mostrarlo solo cuando iframe2 está visible */
+        }
+
+        /* Alinear el contenido del menú hacia la derecha */
+        #iframe2Menu .dropdown-content {
+            left: 0;
+            right: auto;
+        }
+    }
+
+    /* Disposición horizontal */
+    @media (orientation: landscape) {
+        #container {
+            flex-direction: row;
+        }
+
+        #iframe1,
+        #iframe2 {
+            width: 50%;
+            height: calc(100% - 20px);
+        }
+
+        /* Menú de iframe1 */
+        #iframe1Menu {
+            top: 10px;
+            left: 10px;
+        }
+
+        /* Menú de iframe2 en la esquina superior derecha */
+        #iframe2Menu {
+            top: 10px;
+            right: 10px;
+            left: auto;
+            display: none; /* Mostrarlo solo cuando iframe2 está visible */
+        }
+
+        /* Alinear el contenido del menú hacia la izquierda */
+        #iframe2Menu .dropdown-content {
+            right: 0;
+            left: auto;
+        }
+
+        /* Ocultar botón del cronograma */
+        #toggleIframe3Button {
+            display: none;
+        }
+
+        /* Asegurar que no haya espacio en blanco */
+        iframe {
+            height: calc(100% - 20px);
+        }
     }
 }
 
-/* Dispositivos en modo horizontal */
-@media (max-width: 768px) and (orientation: landscape) {
-    #container {
-        flex-direction: row;
-    }
-
-    #iframe1, #iframe2 {
-        width: 50%;
-        height: 100%;
-    }
-
-    #iframe2 {
-        display: none; /* Mostrar solo al hacer clic en el botón */
-    }
-
-    #toggleIframe3Button {
-        display: none; /* Ocultar el botón cronograma en horizontal */
-    }
-
-    #iframe3 {
-        display: none; /* Asegurar que iframe3 no se muestre */
-    }
-
-    /* Evitar espacio en blanco en horizontal */
-    iframe {
-        height: 100%;
-    }
-}
-
-/* Dispositivos de escritorio */
-@media (min-width: 769px) {
-    #toggleIframe2ButtonMobile {
-        display: none; /* Ocultar botón móvil en escritorio */
-    }
-
-    #iframe2Menu {
-        top: 50px;
-        right: 10px;
-    }
-}
+/* ... resto de estilos ... */

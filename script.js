@@ -116,23 +116,45 @@ function adjustLayout() {
             iframe1.style.height = iframe2.style.display === 'block' ? '50%' : '100%';
             iframe2.style.width = '100%';
             iframe2.style.height = '50%';
-            iframe2Menu.style.top = 'calc(50% + 10px)';
-            iframe2Menu.style.left = 'auto';
-            iframe2Menu.style.right = '10px';
+
+            // Posicionar menús
+            iframe1Menu.style.top = '10px';
+            iframe1Menu.style.left = '10px';
+
+            iframe2Menu.style.top = iframe2.style.display === 'block' ? 'calc(50% + 10px)' : '10px';
+            iframe2Menu.style.left = '10px';
+
+            // Posicionar botón móvil
+            toggleIframe2ButtonMobile.style.top = '10px';
+            toggleIframe2ButtonMobile.style.left = '10px';
         } else {
             // Orientación horizontal
             iframe1.style.width = iframe2.style.display === 'block' ? '50%' : '100%';
             iframe1.style.height = '100%';
             iframe2.style.width = '50%';
             iframe2.style.height = '100%';
+
+            // Posicionar menús
+            iframe1Menu.style.top = '10px';
+            iframe1Menu.style.left = '10px';
+
             iframe2Menu.style.top = '10px';
-            iframe2Menu.style.left = 'calc(50% + 10px)';
-            iframe2Menu.style.right = 'auto';
+            iframe2Menu.style.left = iframe2.style.display === 'block' ? 'calc(50% + 10px)' : '10px';
+
+            // Posicionar botón móvil
+            toggleIframe2ButtonMobile.style.top = '10px';
+            toggleIframe2ButtonMobile.style.left = '10px';
         }
     } else {
         // Modo escritorio
         iframe1.style.height = '100%';
         toggleIframe3Button.style.display = 'block';
+
+        iframe1Menu.style.top = '10px';
+        iframe1Menu.style.left = '10px';
+
+        iframe2Menu.style.top = '10px';
+        iframe2Menu.style.right = '10px';
 
         if (iframe2.style.display === 'block') {
             iframe1.style.width = '50%';
@@ -153,15 +175,9 @@ function adjustLayout() {
         }
     }
 
-    // Ajustar posición de los menús
-    iframe1Menu.style.top = '10px';
-    iframe1Menu.style.left = '10px';
-
-    if (iframe2.style.display === 'block') {
-        iframe2Menu.style.display = 'block';
-    } else {
-        iframe2Menu.style.display = 'none';
-    }
+    // Asegurar que los menús no afecten la posición de los botones
+    iframe1Menu.style.position = 'fixed';
+    iframe2Menu.style.position = 'fixed';
 }
 
 window.addEventListener('resize', adjustLayout);
@@ -175,4 +191,4 @@ window.onclick = function(event) {
     if (!event.target.matches('#iframe2MenuButton')) {
         iframe2Menu.classList.remove('show');
     }
-}
+};

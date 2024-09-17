@@ -69,14 +69,14 @@ toggleButton.addEventListener('click', () => {
         iframe2.style.width = '50%';
         iframe3.style.display = 'none';
         toggleIframe3Button.style.display = 'none';
-        toggleButton.style.left = '49%';
+        toggleButton.style.right = '50px';
         document.getElementById('container').classList.remove('horizontal-split');
     } else {
         iframe2.style.display = 'none';
         iframe2Menu.style.display = 'none'; // Ocultar menú de iframe2
         iframe1.style.width = '100%';
         toggleIframe3Button.style.display = 'block';
-        toggleButton.style.left = 'calc(50% + 4cm)';
+        toggleButton.style.right = '50px';
         document.getElementById('container').classList.remove('horizontal-split');
     }
 });
@@ -90,13 +90,13 @@ toggleIframe3Button.addEventListener('click', () => {
         iframe2.style.display = 'none';
         iframe2Menu.style.display = 'none'; // Ocultar menú de iframe2
         toggleIframe3Button.style.display = 'block';
-        toggleButton.style.left = '49%';
+        toggleButton.style.right = '50px';
         document.getElementById('container').classList.add('horizontal-split');
     } else {
         iframe3.style.display = 'none';
         iframe1.style.width = '100%';
         toggleIframe3Button.style.display = 'block';
-        toggleButton.style.left = 'calc(50% + 4cm)';
+        toggleButton.style.right = '50px';
         document.getElementById('container').classList.remove('horizontal-split');
     }
 });
@@ -121,12 +121,12 @@ function adjustLayout() {
             iframe1Menu.style.top = '10px';
             iframe1Menu.style.left = '10px';
 
-            iframe2Menu.style.top = iframe2.style.display === 'block' ? 'calc(50% + 10px)' : '10px';
-            iframe2Menu.style.left = '10px';
+            iframe2Menu.style.top = '10px';
+            iframe2Menu.style.right = '10px';
 
-            // Posicionar botón móvil
+            // Posicionar botón móvil en la esquina superior derecha
             toggleIframe2ButtonMobile.style.top = '10px';
-            toggleIframe2ButtonMobile.style.left = '10px';
+            toggleIframe2ButtonMobile.style.right = '10px';
         } else {
             // Orientación horizontal
             iframe1.style.width = iframe2.style.display === 'block' ? '50%' : '100%';
@@ -139,11 +139,11 @@ function adjustLayout() {
             iframe1Menu.style.left = '10px';
 
             iframe2Menu.style.top = '10px';
-            iframe2Menu.style.left = iframe2.style.display === 'block' ? 'calc(50% + 10px)' : '10px';
+            iframe2Menu.style.right = '10px';
 
-            // Posicionar botón móvil
+            // Posicionar botón móvil en la esquina superior derecha
             toggleIframe2ButtonMobile.style.top = '10px';
-            toggleIframe2ButtonMobile.style.left = '10px';
+            toggleIframe2ButtonMobile.style.right = '10px';
         }
     } else {
         // Modo escritorio
@@ -161,16 +161,16 @@ function adjustLayout() {
             iframe2.style.width = '50%';
             iframe3.style.display = 'none';
             toggleIframe3Button.style.display = 'none';
-            toggleButton.style.left = '49%';
+            toggleButton.style.right = '50px';
             document.getElementById('container').classList.remove('horizontal-split');
         } else if (iframe3.style.display === 'block') {
             iframe1.style.width = '50%';
             iframe3.style.width = '50%';
-            toggleButton.style.left = '49%';
+            toggleButton.style.right = '50px';
             document.getElementById('container').classList.add('horizontal-split');
         } else {
             iframe1.style.width = '100%';
-            toggleButton.style.left = 'calc(50% + 4cm)';
+            toggleButton.style.right = '50px';
             document.getElementById('container').classList.remove('horizontal-split');
         }
     }

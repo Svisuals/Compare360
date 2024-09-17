@@ -1,5 +1,4 @@
 const toggleButton = document.getElementById('toggleButton');
-const toggleIframe2ButtonMobile = document.getElementById('toggleIframe2ButtonMobile');
 const iframe1 = document.getElementById('iframe1');
 const iframe2 = document.getElementById('iframe2');
 const iframe3 = document.getElementById('iframe3');
@@ -47,38 +46,26 @@ iframe2MenuContent.addEventListener('click', (event) => {
     }
 });
 
-// Event listener para el botón móvil
-toggleIframe2ButtonMobile.addEventListener('click', () => {
-    if (iframe2.style.display === 'none') {
-        iframe2.style.display = 'block';
-        iframe2Menu.style.display = 'block'; // Mostrar menú de iframe2
-    } else {
-        iframe2.style.display = 'none';
-        iframe2Menu.style.display = 'none'; // Ocultar menú de iframe2
-    }
-    adjustLayout(); // Ajustar layout después de mostrar u ocultar iframe2
-});
-
-// Event listener para el botón de escritorio
+// Event listener para el botón 'DUP'
 toggleButton.addEventListener('click', () => {
     if (iframe2.style.display === 'none') {
         iframe2.style.display = 'block';
         iframe2Menu.style.display = 'block'; // Mostrar menú de iframe2
-        iframe1.style.width = '50%';
-        iframe2.style.width = '50%';
+        iframe1.style.width = '100%';
+        iframe2.style.width = '100%';
+        iframe1.style.height = '50%';
+        iframe2.style.height = '50%';
         iframe3.style.display = 'none';
         toggleIframe3Button.style.display = 'none';
-        toggleButton.style.left = '49%';
-        document.getElementById('container').classList.remove('horizontal-split');
+        adjustLayout();
     } else {
         iframe2.style.display = 'none';
         iframe2Menu.style.display = 'none'; // Ocultar menú de iframe2
         iframe1.style.width = '100%';
+        iframe1.style.height = '100%';
         toggleIframe3Button.style.display = 'block';
-        toggleButton.style.left = 'calc(50% + 4cm)';
-        document.getElementById('container').classList.remove('horizontal-split');
+        adjustLayout();
     }
-    adjustLayout(); // Ajustar layout después de mostrar u ocultar iframe2
 });
 
 // Event listener para el botón del cronograma
@@ -87,19 +74,19 @@ toggleIframe3Button.addEventListener('click', () => {
         iframe3.style.display = 'block';
         iframe1.style.width = '50%';
         iframe3.style.width = '50%';
+        iframe1.style.height = '100%';
+        iframe3.style.height = '100%';
         iframe2.style.display = 'none';
         iframe2Menu.style.display = 'none'; // Ocultar menú de iframe2
         toggleIframe3Button.style.display = 'block';
-        toggleButton.style.left = '49%';
-        document.getElementById('container').classList.add('horizontal-split');
+        adjustLayout();
     } else {
         iframe3.style.display = 'none';
         iframe1.style.width = '100%';
+        iframe1.style.height = '100%';
         toggleIframe3Button.style.display = 'block';
-        toggleButton.style.left = 'calc(50% + 4cm)';
-        document.getElementById('container').classList.remove('horizontal-split');
+        adjustLayout();
     }
-    adjustLayout(); // Ajustar layout después de mostrar u ocultar iframe3
 });
 
 // Función para ajustar el layout
@@ -111,49 +98,28 @@ function adjustLayout() {
         iframe3.style.display = 'none'; // Asegurarse de que iframe3 esté oculto en móviles
         toggleIframe3Button.style.display = 'none'; // Ocultar botón cronograma en móviles
 
-        if (isPortrait) {
-            // Orientación vertical
+        if (iframe2.style.display === 'block') {
+            // Si iframe2 está activo
             iframe1.style.width = '100%';
-            iframe1.style.height = iframe2.style.display === 'block' ? '50%' : '100%';
+            iframe1.style.height = '50%';
             iframe2.style.width = '100%';
             iframe2.style.height = '50%';
-
-            // Posicionar menús
-            iframe1Menu.style.top = '10px';
-            iframe1Menu.style.left = '10px';
-
-            iframe2Menu.style.top = iframe2.style.display === 'block' ? 'calc(50% + 10px)' : '10px';
-            iframe2Menu.style.left = '10px';
-
-            // Posicionar botones
-            toggleButton.style.top = '10px';
-            toggleButton.style.right = '10px';
-            toggleButton.style.left = 'auto';
-
-            toggleIframe2ButtonMobile.style.top = '10px';
-            toggleIframe2ButtonMobile.style.left = '50px';
         } else {
-            // Orientación horizontal
-            iframe1.style.width = iframe2.style.display === 'block' ? '50%' : '100%';
+            iframe1.style.width = '100%';
             iframe1.style.height = '100%';
-            iframe2.style.width = '50%';
-            iframe2.style.height = '100%';
-
-            // Posicionar menús
-            iframe1Menu.style.top = '10px';
-            iframe1Menu.style.left = '10px';
-
-            iframe2Menu.style.top = '10px';
-            iframe2Menu.style.left = iframe2.style.display === 'block' ? 'calc(50% + 10px)' : '10px';
-
-            // Posicionar botones
-            toggleButton.style.top = '10px';
-            toggleButton.style.right = '10px';
-            toggleButton.style.left = 'auto';
-
-            toggleIframe2ButtonMobile.style.top = '10px';
-            toggleIframe2ButtonMobile.style.left = '10px';
         }
+
+        // Posicionar menús
+        iframe1Menu.style.top = '10px';
+        iframe1Menu.style.left = '10px';
+
+        iframe2Menu.style.top = iframe2.style.display === 'block' ? 'calc(50% + 10px)' : '10px';
+        iframe2Menu.style.left = '10px';
+
+        // Posicionar botón
+        toggleButton.style.top = '10px';
+        toggleButton.style.right = '10px';
+        toggleButton.style.left = 'auto';
     } else {
         // Modo escritorio
         iframe1.style.height = '100%';
@@ -171,17 +137,11 @@ function adjustLayout() {
             iframe2.style.width = '50%';
             iframe3.style.display = 'none';
             toggleIframe3Button.style.display = 'none';
-            toggleButton.style.left = '49%';
-            document.getElementById('container').classList.remove('horizontal-split');
         } else if (iframe3.style.display === 'block') {
             iframe1.style.width = '50%';
             iframe3.style.width = '50%';
-            toggleButton.style.left = '49%';
-            document.getElementById('container').classList.add('horizontal-split');
         } else {
             iframe1.style.width = '100%';
-            toggleButton.style.left = 'calc(50% + 4cm)';
-            document.getElementById('container').classList.remove('horizontal-split');
         }
     }
 
@@ -191,7 +151,7 @@ function adjustLayout() {
 }
 
 window.addEventListener('resize', adjustLayout);
-window.addEventListener('orientationchange', adjustLayout); // Agregado para manejar cambios de orientación
+window.addEventListener('orientationchange', adjustLayout);
 adjustLayout();
 
 // Cerrar el menú si el usuario hace clic fuera de él

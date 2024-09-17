@@ -17,60 +17,65 @@ body, html {
 }
 
 iframe {
-    width: 100%;
-    height: 100%;
     border: none;
-    display: none; /* Inicialmente oculta todos los iframes */
 }
 
-#iframe1 {
-    display: block; /* Mostrar iframe1 por defecto */
-}
-
-#iframe2, #iframe3 {
+.hidden {
     display: none;
 }
 
+.visible {
+    display: block;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.half-width {
+    width: 50%;
+}
+
+/* Definir la clase horizontal-split */
+#container.horizontal-split {
+    flex-direction: row;
+}
+
+#container.horizontal-split iframe {
+    width: 50%;
+    height: 100%;
+}
+
 /* Botones */
-#toggleButton {
+#toggleButton,
+#toggleIframe2ButtonMobile,
+#toggleIframe3Button {
     position: fixed;
-    top: 10px;
-    left: calc(50% + 4cm);
     width: 32px;
     height: 32px;
-    background: url('DUP.jpg') no-repeat center center;
     background-size: cover;
     border: none;
     cursor: pointer;
     z-index: 1000;
 }
 
+#toggleButton {
+    top: 10px;
+    left: calc(50% + 4cm);
+    background: url('DUP.jpg') no-repeat center center;
+}
+
 #toggleIframe2ButtonMobile {
-    position: fixed;
     top: 10px;
     left: 10px;
-    width: 32px;
-    height: 32px;
     background: url('DUP.jpg') no-repeat center center;
-    background-size: cover;
-    border: none;
-    cursor: pointer;
-    z-index: 1000;
     display: none; /* Oculto por defecto */
 }
 
 #toggleIframe3Button {
-    position: fixed;
     top: 10px;
     left: 50px;
-    width: 32px;
-    height: 32px;
     background: url('CRO.jpg') no-repeat center center;
-    background-size: cover;
-    border: none;
-    cursor: pointer;
-    z-index: 1000;
-    display: block;
 }
 
 /* Menús desplegables */
@@ -157,7 +162,6 @@ iframe {
 
     iframe {
         width: 100%;
-        height: 100%;
     }
 
     /* Ocultar iframe2 e iframe3 en móviles inicialmente */
@@ -197,9 +201,7 @@ iframe {
         flex-direction: row;
     }
 
-    #iframe1,
-    #iframe2 {
-        width: 50%;
+    iframe {
         height: 100%;
     }
 
@@ -220,12 +222,6 @@ iframe {
     }
 
     /* Alinear el menú de iframe2 hacia la izquierda */
-    #iframe2Menu .dropdown-content {
-        right: 0;
-        left: auto;
-    }
-
-    /* Ajustar menú de iframe2 para abrir hacia la izquierda */
     #iframe2Menu .dropdown-content {
         right: 0;
         left: auto;

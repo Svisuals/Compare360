@@ -1,103 +1,194 @@
-/* ... estilos existentes ... */
+const toggleButton = document.getElementById('toggleButton');
+const toggleIframe2ButtonMobile = document.getElementById('toggleIframe2ButtonMobile');
+const iframe1 = document.getElementById('iframe1');
+const iframe2 = document.getElementById('iframe2');
+const iframe3 = document.getElementById('iframe3');
+const toggleIframe3Button = document.getElementById('toggleIframe3Button');
+const iframe1Menu = document.getElementById('iframe1Menu');
+const iframe2Menu = document.getElementById('iframe2Menu');
+const iframe1MenuButton = document.getElementById('iframe1MenuButton');
+const iframe2MenuButton = document.getElementById('iframe2MenuButton');
+const iframe1MenuContent = document.getElementById('iframe1MenuContent');
+const iframe2MenuContent = document.getElementById('iframe2MenuContent');
 
-/* Dispositivos móviles */
-@media (max-width: 768px) {
-    /* Ocultar botones de escritorio */
-    #toggleButton,
-    #toggleIframe3Button {
-        display: none;
+// Inicialmente mostrar solo iframe1
+iframe1.style.display = 'block';
+iframe2.style.display = 'none';
+iframe3.style.display = 'none';
+
+// Ocultar menú de iframe2 inicialmente
+iframe2Menu.style.display = 'none';
+
+// Event listener para el botón del menú de iframe1
+iframe1MenuButton.addEventListener('click', () => {
+    iframe1Menu.classList.toggle('show');
+});
+
+// Event listener para los enlaces del menú de iframe1
+iframe1MenuContent.addEventListener('click', (event) => {
+    if (event.target.tagName === 'A') {
+        iframe1.src = event.target.href;
+        iframe1Menu.classList.remove('show');
+        event.preventDefault();
+    }
+});
+
+// Event listener para el botón del menú de iframe2
+iframe2MenuButton.addEventListener('click', () => {
+    iframe2Menu.classList.toggle('show');
+});
+
+// Event listener para los enlaces del menú de iframe2
+iframe2MenuContent.addEventListener('click', (event) => {
+    if (event.target.tagName === 'A') {
+        iframe2.src = event.target.href;
+        iframe2Menu.classList.remove('show');
+        event.preventDefault();
+    }
+});
+
+// Event listener para el botón móvil
+toggleIframe2ButtonMobile.addEventListener('click', () => {
+    if (iframe2.style.display === 'none') {
+        iframe2.style.display = 'block';
+        iframe2Menu.style.display = 'block'; // Mostrar menú de iframe2
+        adjustLayout(); // Ajustar layout después de mostrar iframe2
+    } else {
+        iframe2.style.display = 'none';
+        iframe2Menu.style.display = 'none'; // Ocultar menú de iframe2
+        adjustLayout(); // Ajustar layout después de ocultar iframe2
+    }
+});
+
+// Event listener para el botón de escritorio
+toggleButton.addEventListener('click', () => {
+    if (iframe2.style.display === 'none') {
+        iframe2.style.display = 'block';
+        iframe2Menu.style.display = 'block'; // Mostrar menú de iframe2
+        iframe1.style.width = '50%';
+        iframe2.style.width = '50%';
+        iframe3.style.display = 'none';
+        toggleIframe3Button.style.display = 'none';
+        toggleButton.style.right = '50px';
+        document.getElementById('container').classList.remove('horizontal-split');
+    } else {
+        iframe2.style.display = 'none';
+        iframe2Menu.style.display = 'none'; // Ocultar menú de iframe2
+        iframe1.style.width = '100%';
+        toggleIframe3Button.style.display = 'block';
+        toggleButton.style.right = '50px';
+        document.getElementById('container').classList.remove('horizontal-split');
+    }
+});
+
+// Event listener para el botón del cronograma
+toggleIframe3Button.addEventListener('click', () => {
+    if (iframe3.style.display === 'none') {
+        iframe3.style.display = 'block';
+        iframe1.style.width = '50%';
+        iframe3.style.width = '50%';
+        iframe2.style.display = 'none';
+        iframe2Menu.style.display = 'none'; // Ocultar menú de iframe2
+        toggleIframe3Button.style.display = 'block';
+        toggleButton.style.right = '50px';
+        document.getElementById('container').classList.add('horizontal-split');
+    } else {
+        iframe3.style.display = 'none';
+        iframe1.style.width = '100%';
+        toggleIframe3Button.style.display = 'block';
+        toggleButton.style.right = '50px';
+        document.getElementById('container').classList.remove('horizontal-split');
+    }
+});
+
+// Función para ajustar el layout
+function adjustLayout() {
+    const isMobile = window.innerWidth <= 768;
+    const isPortrait = window.innerHeight > window.innerWidth;
+
+    if (isMobile) {
+        iframe3.style.display = 'none'; // Asegurarse de que iframe3 esté oculto en móviles
+        toggleIframe3Button.style.display = 'none'; // Ocultar botón cronograma en móviles
+
+        if (isPortrait) {
+            // Orientación vertical
+            iframe1.style.width = '100%';
+            iframe1.style.height = iframe2.style.display === 'block' ? '50%' : '100%';
+            iframe2.style.width = '100%';
+            iframe2.style.height = '50%';
+
+            // Posicionar menús
+            iframe1Menu.style.top = '10px';
+            iframe1Menu.style.left = '10px';
+
+            iframe2Menu.style.top = '10px';
+            iframe2Menu.style.right = '10px';
+
+            // Posicionar botón móvil en la esquina superior derecha
+            toggleIframe2ButtonMobile.style.top = '10px';
+            toggleIframe2ButtonMobile.style.right = '10px';
+        } else {
+            // Orientación horizontal
+            iframe1.style.width = iframe2.style.display === 'block' ? '50%' : '100%';
+            iframe1.style.height = '100%';
+            iframe2.style.width = '50%';
+            iframe2.style.height = '100%';
+
+            // Posicionar menús
+            iframe1Menu.style.top = '10px';
+            iframe1Menu.style.left = '10px';
+
+            iframe2Menu.style.top = '10px';
+            iframe2Menu.style.right = '10px';
+
+            // Posicionar botón móvil en la esquina superior derecha
+            toggleIframe2ButtonMobile.style.top = '10px';
+            toggleIframe2ButtonMobile.style.right = '10px';
+        }
+    } else {
+        // Modo escritorio
+        iframe1.style.height = '100%';
+        toggleIframe3Button.style.display = 'block';
+
+        iframe1Menu.style.top = '10px';
+        iframe1Menu.style.left = '10px';
+
+        iframe2Menu.style.top = '10px';
+        iframe2Menu.style.right = '10px';
+
+        if (iframe2.style.display === 'block') {
+            iframe1.style.width = '50%';
+            iframe2.style.width = '50%';
+            iframe3.style.display = 'none';
+            toggleIframe3Button.style.display = 'none';
+            toggleButton.style.right = '50px';
+            document.getElementById('container').classList.remove('horizontal-split');
+        } else if (iframe3.style.display === 'block') {
+            iframe1.style.width = '50%';
+            iframe3.style.width = '50%';
+            toggleButton.style.right = '50px';
+            document.getElementById('container').classList.add('horizontal-split');
+        } else {
+            iframe1.style.width = '100%';
+            toggleButton.style.right = '50px';
+            document.getElementById('container').classList.remove('horizontal-split');
+        }
     }
 
-    /* Mostrar botón móvil */
-    #toggleIframe2ButtonMobile {
-        display: block;
-        top: 10px;
-        right: 10px;
-    }
-
-    /* Disposición vertical */
-    @media (orientation: portrait) {
-        #container {
-            flex-direction: column;
-        }
-
-        iframe {
-            width: 100%;
-        }
-
-        /* Ajustar alturas de iframes */
-        #iframe1 {
-            height: calc(50% - 20px); /* Restamos 20px para el espacio de menús */
-        }
-
-        #iframe2 {
-            height: calc(50% - 20px);
-            display: none; /* Oculto inicialmente */
-        }
-
-        /* Menú de iframe1 */
-        #iframe1Menu {
-            top: 10px;
-            left: 10px;
-        }
-
-        /* Menú de iframe2 sobre iframe2 en el lado izquierdo */
-        #iframe2Menu {
-            top: calc(50% + 10px);
-            left: 10px;
-            right: auto;
-            display: none; /* Mostrarlo solo cuando iframe2 está visible */
-        }
-
-        /* Alinear el contenido del menú hacia la derecha */
-        #iframe2Menu .dropdown-content {
-            left: 0;
-            right: auto;
-        }
-    }
-
-    /* Disposición horizontal */
-    @media (orientation: landscape) {
-        #container {
-            flex-direction: row;
-        }
-
-        #iframe1,
-        #iframe2 {
-            width: 50%;
-            height: calc(100% - 20px);
-        }
-
-        /* Menú de iframe1 */
-        #iframe1Menu {
-            top: 10px;
-            left: 10px;
-        }
-
-        /* Menú de iframe2 en la esquina superior derecha */
-        #iframe2Menu {
-            top: 10px;
-            right: 10px;
-            left: auto;
-            display: none; /* Mostrarlo solo cuando iframe2 está visible */
-        }
-
-        /* Alinear el contenido del menú hacia la izquierda */
-        #iframe2Menu .dropdown-content {
-            right: 0;
-            left: auto;
-        }
-
-        /* Ocultar botón del cronograma */
-        #toggleIframe3Button {
-            display: none;
-        }
-
-        /* Asegurar que no haya espacio en blanco */
-        iframe {
-            height: calc(100% - 20px);
-        }
-    }
+    // Asegurar que los menús no afecten la posición de los botones
+    iframe1Menu.style.position = 'fixed';
+    iframe2Menu.style.position = 'fixed';
 }
 
-/* ... resto de estilos ... */
+window.addEventListener('resize', adjustLayout);
+adjustLayout();
+
+// Cerrar el menú si el usuario hace clic fuera de él
+window.onclick = function(event) {
+    if (!event.target.matches('#iframe1MenuButton')) {
+        iframe1Menu.classList.remove('show');
+    }
+    if (!event.target.matches('#iframe2MenuButton')) {
+        iframe2Menu.classList.remove('show');
+    }
+};

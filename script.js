@@ -46,13 +46,21 @@ iframe2MenuContent.addEventListener('click', (event) => {
     }
 });
 
-// Asegurar que el iframe que reciba el toque obtenga el foco y el otro pierda el foco
-iframe1.addEventListener('focus', () => {
-    iframe2.blur();  // Asegurar que iframe2 pierda el foco
+// Función para recargar el iframe cuando se hace clic en él
+function reloadIframe(iframe) {
+    const src = iframe.src;
+    iframe.src = '';  // Limpiar src temporalmente
+    iframe.src = src; // Volver a cargar el iframe con su src original
+}
+
+// Recargar iframe1 al hacer clic en él
+iframe1.addEventListener('click', () => {
+    reloadIframe(iframe1);
 });
 
-iframe2.addEventListener('focus', () => {
-    iframe1.blur();  // Asegurar que iframe1 pierda el foco
+// Recargar iframe2 al hacer clic en él
+iframe2.addEventListener('click', () => {
+    reloadIframe(iframe2);
 });
 
 // Event listener para el botón 'DUP' (ahora único)

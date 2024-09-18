@@ -18,19 +18,6 @@ iframe3.style.display = 'none';
 // Ocultar menú de iframe2 inicialmente
 iframe2Menu.style.display = 'none';
 
-// Función para reinsertar los iframes (forzar redibujado)
-function reinsertIframes() {
-    const container = document.getElementById('container');
-
-    // Eliminar iframes del DOM temporalmente
-    container.removeChild(iframe1);
-    container.removeChild(iframe2);
-    
-    // Reinsertar los iframes para forzar recalculo
-    container.appendChild(iframe1);
-    container.appendChild(iframe2);
-}
-
 // Event listener para el botón del menú de iframe1
 iframe1MenuButton.addEventListener('click', () => {
     iframe1Menu.classList.toggle('show');
@@ -84,84 +71,4 @@ toggleIframe3Button.addEventListener('click', () => {
     if (iframe3.style.display === 'none') {
         iframe3.style.display = 'block';
         iframe1.style.width = '50%';
-        iframe3.style.width = '50%';
-        iframe2.style.display = 'none';
-        iframe2Menu.style.display = 'none'; // Ocultar menú de iframe2
-        toggleIframe3Button.style.display = 'block';
-        document.getElementById('container').classList.add('horizontal-split');
-    } else {
-        iframe3.style.display = 'none';
-        iframe1.style.width = '100%';
-        toggleIframe3Button.style.display = 'block';
-        document.getElementById('container').classList.remove('horizontal-split');
-    }
-    adjustLayout(); // Ajustar layout después de mostrar u ocultar iframe3
-});
-
-// Función para ajustar el layout
-function adjustLayout() {
-    const isMobile = window.innerWidth <= 768;
-    const isPortrait = window.innerHeight > window.innerWidth;
-
-    if (isMobile) {
-        // Asegurar que iframe3 esté oculto en móviles
-        iframe3.style.display = 'none';
-        toggleIframe3Button.style.display = 'none';
-
-        if (isPortrait) {
-            // Orientación vertical: iframes dividen la pantalla
-            iframe1.style.width = '100%';
-            iframe1.style.height = iframe2.style.display === 'block' ? '50%' : '100%';
-            iframe2.style.width = '100%';
-            iframe2.style.height = '50%';
-        } else {
-            // Orientación horizontal: ambos iframes ocupan el 50% del ancho y el 100% de la altura
-            iframe1.style.width = '50%';
-            iframe1.style.height = '100%';
-            iframe2.style.width = '50%';
-            iframe2.style.height = '100%';
-            iframe2.style.display = 'block'; // Asegurar que iframe2 esté visible si está activo
-            reinsertIframes(); // Forzar recalculo después del cambio de orientación
-        }
-    } else {
-        // Modo escritorio
-        iframe1.style.height = '100%';
-        toggleIframe3Button.style.display = 'block';
-
-        if (iframe2.style.display === 'block') {
-            iframe1.style.width = '50%';
-            iframe2.style.width = '50%';
-            iframe3.style.display = 'none';
-        } else if (iframe3.style.display === 'block') {
-            iframe1.style.width = '50%';
-            iframe3.style.width = '50%';
-        } else {
-            iframe1.style.width = '100%';
-        }
-    }
-}
-
-// Evento para manejar cambio de orientación
-window.addEventListener('orientationchange', () => {
-    // Forzar un redibujo y recalculación del layout después del cambio de orientación
-    setTimeout(() => {
-        adjustLayout();
-        window.scrollTo(0, 0); // Asegurarse de que el viewport se ajusta correctamente
-    }, 300); // Le damos un pequeño retraso para que el navegador termine de ajustar el cambio de orientación
-});
-
-// También se asegura que ajuste el layout al redimensionar la ventana
-window.addEventListener('resize', adjustLayout);
-
-// Ejecutar ajuste inicial
-adjustLayout();
-
-// Cerrar el menú si el usuario hace clic fuera de él
-window.onclick = function(event) {
-    if (!event.target.matches('#iframe1MenuButton')) {
-        iframe1Menu.classList.remove('show');
-    }
-    if (!event.target.matches('#iframe2MenuButton')) {
-        iframe2Menu.classList.remove('show');
-    }
-};
+        iframe3.style.width

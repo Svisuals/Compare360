@@ -32,9 +32,10 @@ function toggleIframe(iframeToToggle, isVisible, otherIframe = null, button = nu
 
 // Event listeners para los botones de alternancia
 toggleButton.addEventListener('click', () => {
-    const isIframe2Visible = iframe2.style.display === 'none';
-    toggleIframe(iframe2, isIframe2Visible, iframe1, toggleIframe3Button);
-    if (!isIframe2Visible) iframe3.style.display = 'none'; // Asegurar que iframe3 se oculta
+    // Ocultar iframe2 y iframe3, mostrar solo iframe1 a pantalla completa
+    iframe2.style.display = 'none';
+    iframe3.style.display = 'none';
+    iframe1.style.width = '100%';
 });
 
 toggleIframe3Button.addEventListener('click', () => {

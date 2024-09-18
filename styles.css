@@ -226,10 +226,6 @@ iframe {
         height: 100%; /* Ambos iframes ocupan el 100% de la altura */
         display: block; /* Asegurar que se mantengan visibles */
     }
-    /* Ocultar botón cronograma e iframe3 */
-    #toggleIframe3Button {
-        display: none;
-    }
 
     #iframe3 {
         display: none;

@@ -101,62 +101,28 @@ function adjustLayout() {
             iframe1.style.height = iframe2.style.display === 'block' ? '50%' : '100%';
             iframe2.style.width = '100%';
             iframe2.style.height = '50%';
-
-            // Posicionar menús
-            iframe1Menu.style.top = '10px';
-            iframe1Menu.style.left = '10px';
-
-            iframe2Menu.style.top = iframe2.style.display === 'block' ? 'calc(50% + 10px)' : '10px';
-            iframe2Menu.style.left = '10px';
-
-            // Posicionar botón
-            toggleButton.style.top = '10px';
-            toggleButton.style.right = '10px';
-            toggleButton.style.left = 'auto';
         } else {
             // Orientación horizontal
             iframe1.style.width = iframe2.style.display === 'block' ? '50%' : '100%';
             iframe1.style.height = '100%';
-            iframe2.style.width = '50%';
+            iframe2.style.width = iframe2.style.display === 'block' ? '50%' : '0'; // Cambia el ancho a 0 si iframe2 está oculto
             iframe2.style.height = '100%';
-
-            // Posicionar menús
-            iframe1Menu.style.top = '10px';
-            iframe1Menu.style.left = '10px';
-
-            iframe2Menu.style.top = '10px';
-            iframe2Menu.style.left = iframe2.style.display === 'block' ? 'calc(50% + 10px)' : '10px';
-
-            // Posicionar botón
-            toggleButton.style.top = '10px';
-            toggleButton.style.right = '10px';
-            toggleButton.style.left = 'auto';
+            iframe2.style.display = iframe2.style.display === 'none' ? 'none' : 'block'; // Asegura que iframe2 esté bloque cuando se debe mostrar
         }
     } else {
         // Modo escritorio
         iframe1.style.height = '100%';
         toggleIframe3Button.style.display = 'block';
 
-        iframe1Menu.style.top = '10px';
-        iframe1Menu.style.left = '10px';
-
-        iframe2Menu.style.top = '10px';
-        iframe2Menu.style.right = '10px';
-        iframe2Menu.style.left = 'auto';
-
         if (iframe2.style.display === 'block') {
             iframe1.style.width = '50%';
             iframe2.style.width = '50%';
             iframe3.style.display = 'none';
-            toggleIframe3Button.style.display = 'none';
-            document.getElementById('container').classList.remove('horizontal-split');
         } else if (iframe3.style.display === 'block') {
             iframe1.style.width = '50%';
             iframe3.style.width = '50%';
-            document.getElementById('container').classList.add('horizontal-split');
         } else {
             iframe1.style.width = '100%';
-            document.getElementById('container').classList.remove('horizontal-split');
         }
     }
 

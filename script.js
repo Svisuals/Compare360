@@ -46,22 +46,6 @@ iframe2MenuContent.addEventListener('click', (event) => {
     }
 });
 
-// Función para alternar entre iframes y desactivar el touch en el iframe inactivo
-function toggleIframeTouch(activeIframe, inactiveIframe) {
-    activeIframe.style.pointerEvents = 'auto';  // Permitir eventos táctiles en el iframe activo
-    inactiveIframe.style.pointerEvents = 'none'; // Desactivar eventos táctiles en el iframe inactivo
-}
-
-// Activar eventos táctiles en iframe1 y desactivarlos en iframe2 cuando se toca iframe1
-iframe1.addEventListener('click', () => {
-    toggleIframeTouch(iframe1, iframe2);
-});
-
-// Activar eventos táctiles en iframe2 y desactivarlos en iframe1 cuando se toca iframe2
-iframe2.addEventListener('click', () => {
-    toggleIframeTouch(iframe2, iframe1);
-});
-
 // Event listener para el botón 'DUP' (ahora único)
 toggleButton.addEventListener('click', () => {
     if (iframe2.style.display === 'none') {
@@ -107,15 +91,18 @@ function adjustLayout() {
     const isPortrait = window.innerHeight > window.innerWidth;
 
     if (isMobile) {
+        // En modo móvil, ocultamos iframe3
         iframe3.style.display = 'none';
         toggleIframe3Button.style.display = 'none';
 
         if (isPortrait) {
+            // En orientación vertical, iframes dividen la altura
             iframe1.style.width = '100%';
             iframe1.style.height = iframe2.style.display === 'block' ? '50%' : '100%';
             iframe2.style.width = '100%';
             iframe2.style.height = iframe2.style.display === 'block' ? '50%' : '0';
         } else {
+            // En orientación horizontal, ambos iframes ocupan el 50% del ancho y el 100% de la altura
             iframe1.style.width = '50%';
             iframe1.style.height = '100%';
             iframe2.style.width = '50%';
@@ -123,29 +110,29 @@ function adjustLayout() {
             iframe2.style.display = 'block'; // Asegurar que iframe2 sea visible si está activo
         }
     } else {
+        // En modo escritorio, los iframes ocupan toda la altura y se distribuyen por ancho
         iframe1.style.height = '100%';
         toggleIframe3Button.style.display = 'block';
 
         if (iframe2.style.display === 'block') {
             iframe1.style.width = '50%';
             iframe2.style.width = '50%';
-            iframe2.style.height = '100%';  
+            iframe2.style.height = '100%';  // Asegurarse de que iframe2 ocupe toda la altura
             iframe3.style.display = 'none';
         } else if (iframe3.style.display === 'block') {
             iframe1.style.width = '50%';
             iframe3.style.width = '50%';
-            iframe2.style.height = '0';  
+            iframe2.style.height = '0';  // Asegurarse de que iframe2 esté oculto correctamente
         } else {
             iframe1.style.width = '100%';
-            iframe2.style.height = '0';  
+            iframe2.style.height = '0';  // Asegurarse de que iframe2 esté oculto correctamente
         }
     }
 
+    // Asegurar que los menús no afecten la posición de los botones
     iframe1Menu.style.position = 'fixed';
     iframe2Menu.style.position = 'fixed';
 }
-
-// Ajustar el layout cuando cambian el tamaño o la orientación
 window.addEventListener('resize', adjustLayout);
 window.addEventListener('orientationchange', adjustLayout);
 adjustLayout();

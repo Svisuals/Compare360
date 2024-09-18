@@ -61,40 +61,6 @@ iframe {
 #iframe2, #iframe3 {
     display: none;
 }
-
-/* Estilos generales */
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-
-#container {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    flex-direction: row; /* Por defecto, dividir horizontalmente */
-}
-
-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    display: none; /* Inicialmente oculta todos los iframes */
-}
-
-#iframe1 {
-    display: block; /* Mostrar iframe1 por defecto */
-}
-
-#iframe2, #iframe3 {
-    display: none;
-}
-
 /* Botones */
 #toggleButton {
     position: fixed;

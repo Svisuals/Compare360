@@ -13,19 +13,29 @@ body, html {
     width: 100%;
     height: 100%;
     position: relative;
-    flex-direction: row;
+    flex-direction: row; /* Por defecto, dividir horizontalmente */
 }
 
 iframe {
     width: 100%;
     height: 100%;
     border: none;
+    display: none; /* Inicialmente oculta todos los iframes */
 }
 
+#iframe1 {
+    display: block; /* Mostrar iframe1 por defecto */
+}
+
+#iframe2, #iframe3 {
+    display: none;
+}
+
+/* Botones */
 #toggleButton {
     position: fixed;
     top: 10px;
-    left: calc(50% + 4cm);
+    left: calc(50%);
     width: 32px;
     height: 32px;
     background: url('DUP.jpg') no-repeat center center;
@@ -33,6 +43,11 @@ iframe {
     border: none;
     cursor: pointer;
     z-index: 1000;
+}
+
+#toggleIframe2ButtonMobile {
+    /* Ocultar este botón por defecto */
+    display: none;
 }
 
 #toggleIframe3Button {
@@ -46,8 +61,10 @@ iframe {
     border: none;
     cursor: pointer;
     z-index: 1000;
+    display: block;
 }
 
+/* Menús desplegables */
 .dropdown {
     position: fixed;
     top: 10px;
@@ -106,10 +123,10 @@ iframe {
     display: block;
 }
 
-/* Ajuste para asegurar proporciones iguales al mostrar dos iframes */
-#container.horizontal-split iframe {
-    width: 50%;
-    height: 100%;
+/* Alinear el menú de iframe2 hacia la izquierda */
+#iframe2Menu .dropdown-content {
+    right: 0;
+    left: auto;
 }
 
 /* Media Queries */
@@ -117,45 +134,131 @@ iframe {
 /* Dispositivos móviles */
 @media (max-width: 768px) {
     #toggleButton {
-        display: block;
+        display: block; /* Mostrar botón DUP en móviles */
         position: fixed;
         top: 10px;
-        right: 10px;
-        left: auto;
+        right: 10px; /* Alinear a la derecha */
+        left: auto;   /* Anular propiedad 'left' */
     }
 
     #toggleIframe3Button {
+        display: none; /* Ocultar botón cronograma en móviles */
+    }
+
+    /* Ocultar el botón móvil duplicado */
+    #toggleIframe2ButtonMobile {
         display: none;
     }
 
     #container {
-        flex-direction: column;
+        flex-direction: column; /* Disposición vertical */
     }
 
     iframe {
         width: 100%;
-        height: 50%;
+        height: 100%;
     }
 
-    /* Asegurar que los menús sean visibles en vertical */
-    #iframe1Menu {
-        top: 10px;
-        left: 10px;
+    /* Ocultar iframe2 e iframe3 en móviles inicialmente */
+    #iframe2,
+    #iframe3 {
+        display: none;
     }
 
+    /* Posicionar el menú de iframe2 a la izquierda en móviles */
     #iframe2Menu {
-        top: calc(50% + 10px);  /* Se ajusta la posición según la altura del iframe1 */
         left: 10px;
+        right: auto;
     }
 
-    /* Alinear el menú correctamente */
+    /* Alinear el menú de iframe2 hacia la izquierda */
     #iframe2Menu .dropdown-content {
         left: 0;
         right: auto;
     }
 }
 
+/* Orientación vertical en móviles */
+@media (max-width: 768px) and (orientation: portrait) {
+    #container {
+        flex-direction: column;
+    }
+
+    #iframe1,
+    #iframe2 {
+        width: 100%;
+    }
+
+    #iframe1 {
+        height: 50%;
+    }
+
+    #iframe2 {
+        height: 50%;
+    }
+
+    /* Posicionar menús */
+    #iframe1Menu {
+        top: 10px;
+        left: 10px;
+    }
+
+    #iframe2Menu {
+        top: calc(50% + 10px);
+        left: 10px;
+    }
+
+    /* Posicionar botón */
+    #toggleButton {
+        top: 10px;
+        right: 10px;
+        left: auto;
+    }
+}
+
+/* Orientación horizontal en móviles */
+@media (max-width: 768px) and (orientation: landscape) {
+    #container {
+        flex-direction: row;
+    }
+
+    #iframe1,
+    #iframe2 {
+        width: 50%;
+        height: 100%;
+    }
+
+    /* Ocultar botón cronograma e iframe3 */
+    #toggleIframe3Button {
+        display: none;
+    }
+
+    #iframe3 {
+        display: none;
+    }
+
+    /* Posicionar menús */
+    #iframe1Menu {
+        top: 10px;
+        left: 10px;
+    }
+
+    #iframe2Menu {
+        top: 10px;
+        left: calc(50% + 10px);
+    }
+
+    /* Posicionar botón */
+    #toggleButton {
+        top: 10px;
+        right: 10px;
+        left: auto;
+    }
+}
+
+/* Dispositivos de escritorio */
 @media (min-width: 769px) {
+    /* Asegurar que el botón móvil no se muestre en escritorio */
     #toggleIframe2ButtonMobile {
         display: none;
     }

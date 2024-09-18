@@ -145,11 +145,6 @@ iframe {
         display: none; /* Ocultar botón cronograma en móviles */
     }
 
-    /* Ocultar el botón móvil duplicado */
-    #toggleIframe2ButtonMobile {
-        display: none;
-    }
-
     #container {
         flex-direction: column; /* Disposición vertical */
     }
@@ -252,14 +247,6 @@ iframe {
     #toggleButton {
         top: 10px;
         right: 10px;
-        left: auto;
-    }
-}
-
-/* Dispositivos de escritorio */
-@media (min-width: 769px) {
-    /* Asegurar que el botón móvil no se muestre en escritorio */
-    #toggleIframe2ButtonMobile {
-        display: none;
+        left: calc(50%);
     }
 }

@@ -213,16 +213,21 @@ iframe {
 
 /* Orientación horizontal en móviles */
 @media (max-width: 768px) and (orientation: landscape) {
+    html, body {
+        height: 100%; /* Asegurar que el body ocupe el 100% de la altura */
+    }
+
     #container {
-        flex-direction: row;
+        height: 100%; /* Asegurar que el contenedor ocupe toda la altura */
+        flex-direction: row; /* Disposición horizontal */
     }
 
     #iframe1,
     #iframe2 {
-        width: 50%;
-        height: 100%;
+        width: 50%;  /* Ambos iframes ocupan el 50% del ancho */
+        height: 100%; /* Ambos iframes ocupan el 100% de la altura */
     }
-
+    
     /* Ocultar botón cronograma e iframe3 */
     #toggleIframe3Button {
         display: none;

@@ -106,18 +106,17 @@ function adjustLayout() {
             iframe1.style.width = '50%';
             iframe1.style.height = '100%';
             iframe2.style.width = '50%';
-            iframe2.style.height = '100%';  // Cambiado a 100% de altura
-            iframe2.style.display = iframe2.style.display === 'block' ? 'block' : 'none'; // Asegura que el iframe2 sea visible si está activo
+            iframe2.style.height = '100%';
+            iframe2.style.display = 'block'; // Asegurar que iframe2 sea visible si está activo
         }
     } else {
-        // Para pantallas de 769px o más grandes, ajustamos a la disposición completa
+        // En modo escritorio, los iframes ocupan toda la altura y se distribuyen por ancho
         iframe1.style.height = '100%';
         toggleIframe3Button.style.display = 'block';
 
         if (iframe2.style.display === 'block') {
             iframe1.style.width = '50%';
             iframe2.style.width = '50%';
-            iframe2.style.height = '100%';  // Asegura que el iframe2 tenga 100% de altura
             iframe3.style.display = 'none';
         } else if (iframe3.style.display === 'block') {
             iframe1.style.width = '50%';

@@ -31,11 +31,6 @@ iframe {
     display: none;
 }
 
-/* Desactivar eventos táctiles cuando un iframe no está activo */
-iframe.inactive {
-    pointer-events: none;
-}
-
 /* Botones */
 #toggleButton {
     position: fixed;

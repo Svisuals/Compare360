@@ -128,16 +128,17 @@ iframe {
 
 /* Dispositivos móviles */
 @media (max-width: 768px) {
+
+    #toggleIframe3Button {
+        display: none; /* ocultación en móviles */
+    }
+    
     #toggleButton {
         display: block; /* Mostrar botón DUP en móviles */
         position: fixed;
         top: 10px;
         right: 10px; /* Alinear a la derecha */
         left: auto;   /* Anular propiedad 'left' */
-    }
-
-    #toggleIframe3Button {
-        display: none; /* ocultación en móviles */
     }
 
     #container {

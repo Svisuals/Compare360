@@ -142,7 +142,7 @@ iframe {
     }
 
     #toggleIframe3Button {
-        display: none !important; /* Forzar la ocultación en móviles */
+        display: none; /* ocultación en móviles */
     }
 
     #container {

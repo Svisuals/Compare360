@@ -142,7 +142,7 @@ iframe {
     }
 
     #toggleIframe3Button {
-        display: none; /* Ocultar botón cronograma en móviles */
+        display: none !important; /* Forzar la ocultación en móviles */
     }
 
     #container {

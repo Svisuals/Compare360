@@ -45,6 +45,11 @@ iframe {
     z-index: 1000;
 }
 
+#toggleIframe2ButtonMobile {
+    /* Ocultar este botón por defecto */
+    display: none;
+}
+
 #toggleIframe3Button {
     position: fixed;
     top: 10px;
@@ -76,7 +81,7 @@ iframe {
 }
 
 .dropdown button {
-    background-color: #0c7a20;
+    background-color: #3498DB;
     color: white;
     padding: 8px;
     font-size: 16px;
@@ -128,17 +133,16 @@ iframe {
 
 /* Dispositivos móviles */
 @media (max-width: 1300px) {
-
-    #toggleIframe3Button {
-        display: none; /* ocultación en móviles */
-    }
-    
     #toggleButton {
         display: block; /* Mostrar botón DUP en móviles */
         position: fixed;
         top: 10px;
         right: 10px; /* Alinear a la derecha */
         left: auto;   /* Anular propiedad 'left' */
+    }
+
+    #toggleIframe3Button {
+        display: none; /* Ocultar botón cronograma en móviles */
     }
 
     #container {
@@ -226,6 +230,10 @@ iframe {
         height: 100%; /* Ambos iframes ocupan el 100% de la altura */
         display: block; /* Asegurar que se mantengan visibles */
     }
+    /* Ocultar botón cronograma e iframe3 */
+    #toggleIframe3Button {
+        display: none;
+    }
 
     #iframe3 {
         display: none;
@@ -237,7 +245,7 @@ iframe {
         left: 10px;
     }
 
-     #iframe2Menu {
+    #iframe2Menu {
         top: 10px;
         left: calc(50% + 10px);
     }
@@ -246,6 +254,6 @@ iframe {
     #toggleButton {
         top: 10px;
         right: 10px;
-        left: auto;
+        left: calc(50%);
     }
 }

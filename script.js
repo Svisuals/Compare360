@@ -46,21 +46,20 @@ iframe2MenuContent.addEventListener('click', (event) => {
     }
 });
 
-// Función para recargar el iframe cuando se hace clic en él
-function reloadIframe(iframe) {
-    const src = iframe.src;
-    iframe.src = '';  // Limpiar src temporalmente
-    iframe.src = src; // Volver a cargar el iframe con su src original
+// Función para alternar entre iframes y desactivar el touch en el iframe inactivo
+function toggleIframeTouch(activeIframe, inactiveIframe) {
+    activeIframe.style.pointerEvents = 'auto';  // Permitir eventos táctiles en el iframe activo
+    inactiveIframe.style.pointerEvents = 'none'; // Desactivar eventos táctiles en el iframe inactivo
 }
 
-// Recargar iframe1 al hacer clic en él
+// Activar eventos táctiles en iframe1 y desactivarlos en iframe2 cuando se toca iframe1
 iframe1.addEventListener('click', () => {
-    reloadIframe(iframe1);
+    toggleIframeTouch(iframe1, iframe2);
 });
 
-// Recargar iframe2 al hacer clic en él
+// Activar eventos táctiles en iframe2 y desactivarlos en iframe1 cuando se toca iframe2
 iframe2.addEventListener('click', () => {
-    reloadIframe(iframe2);
+    toggleIframeTouch(iframe2, iframe1);
 });
 
 // Event listener para el botón 'DUP' (ahora único)

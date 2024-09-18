@@ -45,11 +45,6 @@ iframe {
     z-index: 1000;
 }
 
-#toggleIframe2ButtonMobile {
-    /* Ocultar este botón por defecto */
-    display: none;
-}
-
 #toggleIframe3Button {
     position: fixed;
     top: 10px;
@@ -81,7 +76,7 @@ iframe {
 }
 
 .dropdown button {
-    background-color: #3498DB;
+    background-color: #0c7a20;
     color: white;
     padding: 8px;
     font-size: 16px;

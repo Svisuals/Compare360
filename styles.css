@@ -128,4 +128,35 @@ iframe {
         display: none;
     }
 
-    #container
+    #container {
+        flex-direction: column;
+    }
+
+    iframe {
+        width: 100%;
+        height: 50%;
+    }
+
+    /* Asegurar que los menús sean visibles en vertical */
+    #iframe1Menu {
+        top: 10px;
+        left: 10px;
+    }
+
+    #iframe2Menu {
+        top: calc(50% + 10px);  /* Se ajusta la posición según la altura del iframe1 */
+        left: 10px;
+    }
+
+    /* Alinear el menú correctamente */
+    #iframe2Menu .dropdown-content {
+        left: 0;
+        right: auto;
+    }
+}
+
+@media (min-width: 769px) {
+    #toggleIframe2ButtonMobile {
+        display: none;
+    }
+}

@@ -4,21 +4,16 @@ body, html {
     padding: 0;
     height: 100%;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
 }
 
 #container {
     display: flex;
     width: 100%;
     height: 100%;
-    position: relative;
-    flex-direction: row; /* Por defecto, dividir horizontalmente */
+    flex-direction: row; /* Por defecto, disposición horizontal */
 }
 
 iframe {
-    width: 100%;
-    height: 100%;
     border: none;
     display: none; /* Inicialmente oculta todos los iframes */
 }
@@ -45,10 +40,6 @@ iframe {
     z-index: 1000;
 }
 
-#toggleIframe2ButtonMobile {
-    display: none;
-}
-
 #toggleIframe3Button {
     position: fixed;
     top: 10px;
@@ -63,87 +54,10 @@ iframe {
     display: block;
 }
 
-/* Menús desplegables */
-.dropdown {
-    position: fixed;
-    top: 10px;
-    z-index: 1001;
-}
-
-#iframe1Menu {
-    left: 10px;
-}
-
-#iframe2Menu {
-    right: 10px;
-    left: auto;
-}
-
-.dropdown button {
-    background-color: #3498DB;
-    color: white;
-    padding: 8px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
-
-.dropdown button::after {
-    content: '';
-    display: inline-block;
-    margin-left: 5px;
-    vertical-align: middle;
-    border-width: 5px;
-    border-style: solid;
-    border-color: white transparent transparent transparent;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 180px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 8px 12px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #ddd;
-}
-
-/* Mostrar el menú al agregar la clase 'show' */
-.dropdown.show .dropdown-content {
-    display: block;
-}
-
-/* Alinear el menú de iframe2 hacia la izquierda */
-#iframe2Menu .dropdown-content {
-    right: 0;
-    left: auto;
-}
-
-/* Dispositivos móviles */
+/* Media Queries para dispositivos móviles */
 @media (max-width: 768px) {
-    #toggleButton {
-        display: block; /* Mostrar botón DUP en móviles */
-        position: fixed;
-        top: 10px;
-        right: 10px; /* Alinear a la derecha */
-        left: auto;   /* Anular propiedad 'left' */
-    }
-
-    #toggleIframe3Button {
-        display: none; /* Ocultar botón cronograma en móviles */
-    }
-
     #container {
-        flex-direction: column; /* Disposición vertical */
+        flex-direction: column;
     }
 
     iframe {
@@ -151,35 +65,6 @@ iframe {
         height: 100%;
     }
 
-    /* Ocultar iframe2 e iframe3 en móviles inicialmente */
-    #iframe2,
-    #iframe3 {
-        display: none;
-    }
-
-    /* Posicionar el menú de iframe2 a la izquierda en móviles */
-    #iframe2Menu {
-        left: 10px;
-        right: auto;
-    }
-
-    #iframe2Menu .dropdown-content {
-        left: 0;
-        right: auto;
-    }
-}
-
-/* Orientación vertical en móviles */
-@media (max-width: 768px) and (orientation: portrait) {
-    #container {
-        flex-direction: column;
-    }
-
-    #iframe1,
-    #iframe2 {
-        width: 100%;
-    }
-
     #iframe1 {
         height: 50%;
     }
@@ -188,78 +73,27 @@ iframe {
         height: 50%;
     }
 
-    #iframe1Menu {
-        top: 10px;
-        left: 10px;
-    }
-
-    #iframe2Menu {
-        top: calc(50% + 10px);
-        left: 10px;
-    }
-
-    #toggleButton {
-        top: 10px;
-        right: 10px;
-        left: auto;
-    }
-}
-
-/* Orientación horizontal en móviles */
-@media (max-width: 768px) and (orientation: landscape) {
-    #container {
-        flex-direction: row;
-    }
-
-    #iframe1,
-    #iframe2 {
-        width: 50%;
-        height: 100%;
-    }
-
     #toggleIframe3Button {
         display: none;
-    }
-
-    #iframe3 {
-        display: none;
-    }
-
-    #iframe1Menu {
-        top: 10px;
-        left: 10px;
-    }
-
-    #iframe2Menu {
-        top: 10px;
-        left: calc(50% + 10px);
-    }
-
-    #toggleButton {
-        top: 10px;
-        right: 10px;
-        left: calc(50%);
     }
 }
 
 /* Dispositivos con más de 768px de ancho */
 @media (min-width: 769px) {
     #container {
-        display: flex;
-        flex-direction: row;
         height: 100vh; /* Asegurar que el contenedor ocupe toda la altura del viewport */
     }
 
-    #iframe1, #iframe2, #iframe3 {
+    iframe {
         height: 100%;
-        width: 50%; /* Los iframes ocupan el 50% del ancho */
     }
 
     #iframe1 {
-        width: 100%; /* Por defecto, iframe1 ocupa todo el ancho */
+        width: 100%;
     }
 
     #iframe2, #iframe3 {
-        display: none; /* iframe2 e iframe3 ocultos por defecto */
+        display: none;
+        width: 50%;
     }
 }

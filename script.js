@@ -105,7 +105,7 @@ function adjustLayout() {
             // Orientación horizontal
             iframe1.style.width = iframe2.style.display === 'block' ? '50%' : '100%';
             iframe1.style.height = '100%';
-            iframe2.style.width = iframe2.style.display === 'block' ? '50%' : '0'; // Cambia el ancho a 0 si iframe2 está oculto
+            iframe2.style.width = '50%';  // Cambia el ancho a 0 si iframe2 está oculto
             iframe2.style.height = '100%';
             iframe2.style.display = iframe2.style.display === 'none' ? 'none' : 'block'; // Asegura que iframe2 esté bloque cuando se debe mostrar
         }

@@ -108,6 +108,10 @@ function adjustLayout() {
             iframe2.style.width = '50%';
             iframe2.style.height = '100%';
             iframe2.style.display = 'block'; // Asegurar que iframe2 esté visible si está activo
+
+            // Forzar un recalculo de estilos
+            forceRedraw(iframe1);
+            forceRedraw(iframe2);
         }
     } else {
         // Modo escritorio
@@ -125,6 +129,13 @@ function adjustLayout() {
             iframe1.style.width = '100%';
         }
     }
+}
+
+// Forzar el recalculo de estilos
+function forceRedraw(element) {
+    element.style.display = 'none';
+    element.offsetHeight; // Forzar recalculo de estilo
+    element.style.display = 'block';
 }
 
 // Evento para manejar cambio de orientación

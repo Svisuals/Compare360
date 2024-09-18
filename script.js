@@ -10,6 +10,19 @@ const iframe2MenuButton = document.getElementById('iframe2MenuButton');
 const iframe1MenuContent = document.getElementById('iframe1MenuContent');
 const iframe2MenuContent = document.getElementById('iframe2MenuContent');
 
+// Función para eliminar el iframe del DOM
+function removeIframe(iframe) {
+    if (iframe && iframe.parentNode) {
+        iframe.parentNode.removeChild(iframe);
+    }
+}
+
+// Función para agregar el iframe de nuevo al DOM
+function addIframe(iframe, src) {
+    iframe.src = src;
+    document.getElementById('container').appendChild(iframe);
+}
+
 // Inicialmente mostrar solo iframe1
 iframe1.style.display = 'block';
 iframe2.style.display = 'none';
@@ -46,26 +59,13 @@ iframe2MenuContent.addEventListener('click', (event) => {
     }
 });
 
-// Función para recargar el iframe cuando se hace clic en él
-function reloadIframe(iframe) {
-    const src = iframe.src;
-    iframe.src = '';  // Limpiar src temporalmente
-    iframe.src = src; // Volver a cargar el iframe con su src original
-}
-
-// Recargar iframe1 al hacer clic en él
-iframe1.addEventListener('click', () => {
-    reloadIframe(iframe1);
-});
-
-// Recargar iframe2 al hacer clic en él
-iframe2.addEventListener('click', () => {
-    reloadIframe(iframe2);
-});
-
 // Event listener para el botón 'DUP' (ahora único)
 toggleButton.addEventListener('click', () => {
     if (iframe2.style.display === 'none') {
+        // Eliminar iframe1 del DOM y agregar iframe2
+        removeIframe(iframe1);
+        addIframe(iframe2, iframe2.src);
+        
         iframe2.style.display = 'block';
         iframe2Menu.style.display = 'block'; // Mostrar menú de iframe2
         iframe1.style.width = '50%';
@@ -74,6 +74,10 @@ toggleButton.addEventListener('click', () => {
         toggleIframe3Button.style.display = 'none';
         document.getElementById('container').classList.remove('horizontal-split');
     } else {
+        // Eliminar iframe2 del DOM y volver a agregar iframe1
+        removeIframe(iframe2);
+        addIframe(iframe1, iframe1.src);
+
         iframe2.style.display = 'none';
         iframe2Menu.style.display = 'none'; // Ocultar menú de iframe2
         iframe1.style.width = '100%';

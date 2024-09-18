@@ -127,7 +127,7 @@ iframe {
 /* Media Queries */
 
 /* Dispositivos móviles */
-@media (max-width: 768px) {
+@media (max-width: 1300px) {
 
     #toggleIframe3Button {
         display: none; /* ocultación en móviles */
@@ -170,7 +170,7 @@ iframe {
 }
 
 /* Orientación vertical en móviles */
-@media (max-width: 768px) and (orientation: portrait) {
+@media (max-width: 1300px) and (orientation: portrait) {
     #container {
         flex-direction: column;
     }
@@ -208,7 +208,7 @@ iframe {
 }
 
 /* Orientación horizontal en móviles */
-@media (max-width: 768px) and (orientation: landscape) {
+@media (max-width: 1300px) and (orientation: landscape) {
     html, body {
         height: 100%; /* Asegurar que html y body ocupen 100% de la altura */
         margin: 0;

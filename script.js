@@ -92,25 +92,26 @@ function adjustLayout() {
     const isPortrait = window.innerHeight > window.innerWidth;
 
     if (isMobile) {
-        iframe3.style.display = 'none'; // Asegurarse de que iframe3 esté oculto en móviles
-        toggleIframe3Button.style.display = 'none'; // Ocultar botón cronograma en móviles
+        // En modo móvil, ocultamos iframe3
+        iframe3.style.display = 'none';
+        toggleIframe3Button.style.display = 'none';
 
         if (isPortrait) {
-            // Orientación vertical
+            // En orientación vertical, iframes dividen la altura
             iframe1.style.width = '100%';
             iframe1.style.height = iframe2.style.display === 'block' ? '50%' : '100%';
             iframe2.style.width = '100%';
             iframe2.style.height = '50%';
         } else {
-            // Orientación horizontal
-            iframe1.style.width = iframe2.style.display === 'block' ? '50%' : '100%';
+            // En orientación horizontal, ambos iframes ocupan el 50% del ancho y el 100% de la altura
+            iframe1.style.width = '50%';
             iframe1.style.height = '100%';
-            iframe2.style.width = '50%';  // Cambia el ancho a 0 si iframe2 está oculto
+            iframe2.style.width = '50%';
             iframe2.style.height = '100%';
-            iframe2.style.display = iframe2.style.display === 'none' ? 'none' : 'block'; // Asegura que iframe2 esté bloque cuando se debe mostrar
+            iframe2.style.display = 'block'; // Asegurar que iframe2 sea visible si está activo
         }
     } else {
-        // Modo escritorio
+        // En modo escritorio, los iframes ocupan toda la altura y se distribuyen por ancho
         iframe1.style.height = '100%';
         toggleIframe3Button.style.display = 'block';
 

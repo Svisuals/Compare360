@@ -18,22 +18,6 @@ iframe3.style.display = 'none';
 // Ocultar menú de iframe2 inicialmente
 iframe2Menu.style.display = 'none';
 
-// Función para alternar los iframes activos e inactivos
-function toggleIframeFocus(activeIframe, inactiveIframe) {
-    activeIframe.classList.remove('inactive'); // Activar el iframe
-    inactiveIframe.classList.add('inactive');  // Desactivar el iframe
-}
-
-// Event listener para cuando se hace clic en iframe1
-iframe1.addEventListener('click', () => {
-    toggleIframeFocus(iframe1, iframe2); // iframe1 activo, iframe2 inactivo
-});
-
-// Event listener para cuando se hace clic en iframe2
-iframe2.addEventListener('click', () => {
-    toggleIframeFocus(iframe2, iframe1); // iframe2 activo, iframe1 inactivo
-});
-
 // Event listener para el botón del menú de iframe1
 iframe1MenuButton.addEventListener('click', () => {
     iframe1Menu.classList.toggle('show');
@@ -62,7 +46,7 @@ iframe2MenuContent.addEventListener('click', (event) => {
     }
 });
 
-// Event listener para el botón 'DUP'
+// Event listener para el botón 'DUP' (ahora único)
 toggleButton.addEventListener('click', () => {
     if (iframe2.style.display === 'none') {
         iframe2.style.display = 'block';
@@ -116,7 +100,7 @@ function adjustLayout() {
             iframe1.style.width = '100%';
             iframe1.style.height = iframe2.style.display === 'block' ? '50%' : '100%';
             iframe2.style.width = '100%';
-            iframe2.style.height = '50%';
+            iframe2.style.height = iframe2.style.display === 'block' ? '50%' : '0';
         } else {
             // En orientación horizontal, ambos iframes ocupan el 50% del ancho y el 100% de la altura
             iframe1.style.width = '50%';
@@ -133,12 +117,15 @@ function adjustLayout() {
         if (iframe2.style.display === 'block') {
             iframe1.style.width = '50%';
             iframe2.style.width = '50%';
+            iframe2.style.height = '100%';  // Asegurarse de que iframe2 ocupe toda la altura
             iframe3.style.display = 'none';
         } else if (iframe3.style.display === 'block') {
             iframe1.style.width = '50%';
             iframe3.style.width = '50%';
+            iframe2.style.height = '0';  // Asegurarse de que iframe2 esté oculto correctamente
         } else {
             iframe1.style.width = '100%';
+            iframe2.style.height = '0';  // Asegurarse de que iframe2 esté oculto correctamente
         }
     }
 
@@ -146,7 +133,6 @@ function adjustLayout() {
     iframe1Menu.style.position = 'fixed';
     iframe2Menu.style.position = 'fixed';
 }
-
 window.addEventListener('resize', adjustLayout);
 window.addEventListener('orientationchange', adjustLayout);
 adjustLayout();

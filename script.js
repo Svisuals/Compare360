@@ -1,5 +1,4 @@
 const toggleButton = document.getElementById('toggleButton');
-// Eliminamos la referencia a toggleIframe2ButtonMobile
 const iframe1 = document.getElementById('iframe1');
 const iframe2 = document.getElementById('iframe2');
 const iframe3 = document.getElementById('iframe3');
@@ -92,26 +91,26 @@ function adjustLayout() {
     const isPortrait = window.innerHeight > window.innerWidth;
 
     if (isMobile) {
-        // En modo móvil, ocultamos iframe3
+        // Asegurar que iframe3 esté oculto en móviles
         iframe3.style.display = 'none';
         toggleIframe3Button.style.display = 'none';
 
         if (isPortrait) {
-            // En orientación vertical, iframes dividen la altura
+            // Orientación vertical: iframes dividen la pantalla
             iframe1.style.width = '100%';
             iframe1.style.height = iframe2.style.display === 'block' ? '50%' : '100%';
             iframe2.style.width = '100%';
             iframe2.style.height = '50%';
         } else {
-            // En orientación horizontal, ambos iframes ocupan el 50% del ancho y el 100% de la altura
+            // Orientación horizontal: ambos iframes ocupan el 50% del ancho y el 100% de la altura
             iframe1.style.width = '50%';
             iframe1.style.height = '100%';
             iframe2.style.width = '50%';
             iframe2.style.height = '100%';
-            iframe2.style.display = 'block'; // Asegurar que iframe2 sea visible si está activo
+            iframe2.style.display = 'block'; // Asegurar que iframe2 esté visible si está activo
         }
     } else {
-        // En modo escritorio, los iframes ocupan toda la altura y se distribuyen por ancho
+        // Modo escritorio
         iframe1.style.height = '100%';
         toggleIframe3Button.style.display = 'block';
 
@@ -126,14 +125,21 @@ function adjustLayout() {
             iframe1.style.width = '100%';
         }
     }
-
-    // Asegurar que los menús no afecten la posición de los botones
-    iframe1Menu.style.position = 'fixed';
-    iframe2Menu.style.position = 'fixed';
 }
 
+// Evento para manejar cambio de orientación
+window.addEventListener('orientationchange', () => {
+    // Forzar un redibujo y recalculación del layout después del cambio de orientación
+    setTimeout(() => {
+        adjustLayout();
+        window.scrollTo(0, 0); // Asegurarse de que el viewport se ajusta correctamente
+    }, 300); // Le damos un pequeño retraso para que el navegador termine de ajustar el cambio de orientación
+});
+
+// También se asegura que ajuste el layout al redimensionar la ventana
 window.addEventListener('resize', adjustLayout);
-window.addEventListener('orientationchange', adjustLayout);
+
+// Ejecutar ajuste inicial
 adjustLayout();
 
 // Cerrar el menú si el usuario hace clic fuera de él

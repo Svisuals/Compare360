@@ -1,27 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Acompanhamento de Obra 360</title>
+    <title>Acompañamiento de Obra 360</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Descripción para SEO -->
+    <meta name="description" content="Visualización interactiva de modelos 3D y cronogramas de obra en tiempo real.">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Botón para dispositivos de escritorio -->
-    <button id="toggleButton" aria-label="Mostrar u ocultar el segundo iframe"></button>
-    <!-- Botón para móviles -->
-    <button id="toggleIframe2ButtonMobile" aria-label="Mostrar u ocultar el segundo iframe en móvil"></button>
+    <!-- Botón para alternar el segundo visor 3D -->
+    <button id="toggleButton" aria-label="Mostrar u ocultar el segundo visor 3D"></button>
+    <!-- Botón para mostrar u ocultar el cronograma -->
+    <button id="toggleIframe3Button" aria-label="Mostrar u ocultar el cronograma"></button>
+
     <div id="container">
-        <iframe id="iframe1" src="https://momento360.com/e/uc/e39b5e2ef7864507b34ca0ee97cebca3?utm_campaign=embed&utm_source=other&size=large&display-plan=true"></iframe>
-        <iframe id="iframe2" src="https://momento360.com/e/uc/e39b5e2ef7864507b34ca0ee97cebca3?utm_campaign=embed&utm_source=other&size=large&display-plan=true"></iframe>
-        <iframe id="iframe3" src="https://svisuals.github.io/Cronograma/"></iframe>
-        <!-- Botón para el cronograma -->
-        <button id="toggleIframe3Button" aria-label="Mostrar u ocultar el cronograma"></button>
+        <iframe id="iframe1" src="https://momento360.com/e/uc/e39b5e2ef7864507b34ca0ee97cebca3?utm_campaign=embed&utm_source=other&size=large&display-plan=true" title="Visor 3D principal" sandbox></iframe>
+        <iframe id="iframe2" src="" title="Visor 3D secundario" sandbox></iframe>
+        <iframe id="iframe3" src="https://svisuals.github.io/Cronograma/" title="Cronograma de obra" sandbox></iframe>
     </div>
 
     <!-- Menú desplegable para iframe1 -->
     <div id="iframe1Menu" class="dropdown">
-        <button id="iframe1MenuButton" aria-label="Menú del primer iframe">▼</button>
+        <button id="iframe1MenuButton" aria-label="Menú del primer visor 3D">▼</button>
         <div id="iframe1MenuContent" class="dropdown-content">
             <a href="https://momento360.com/e/uc/e39b5e2ef7864507b34ca0ee97cebca3?utm_campaign=embed&utm_source=other&size=large&display-plan=true">Modelo 3D Silicato</a>
             <a href="https://momento360.com/e/uc/e0e6b60410484a949026c3aec52ef112?utm_campaign=embed&utm_source=other&size=large&display-plan=true">Real Capture Silicato</a>
@@ -31,7 +32,7 @@
 
     <!-- Menú desplegable para iframe2 -->
     <div id="iframe2Menu" class="dropdown">
-        <button id="iframe2MenuButton" aria-label="Menú del segundo iframe">▼</button>
+        <button id="iframe2MenuButton" aria-label="Menú del segundo visor 3D">▼</button>
         <div id="iframe2MenuContent" class="dropdown-content">
             <a href="https://momento360.com/e/uc/e39b5e2ef7864507b34ca0ee97cebca3?utm_campaign=embed&utm_source=other&size=large&display-plan=true">Modelo 3D Silicato</a>
             <a href="https://momento360.com/e/uc/e0e6b60410484a949026c3aec52ef112?utm_campaign=embed&utm_source=other&size=large&display-plan=true">Real Capture Silicato</a>
@@ -39,6 +40,7 @@
         </div>
     </div>
 
+    <!-- Script principal -->
     <script src="script.js"></script>
 </body>
 </html>

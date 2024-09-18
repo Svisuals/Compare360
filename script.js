@@ -71,4 +71,78 @@ toggleIframe3Button.addEventListener('click', () => {
     if (iframe3.style.display === 'none') {
         iframe3.style.display = 'block';
         iframe1.style.width = '50%';
-        iframe3.style.width
+        iframe3.style.width = '50%';
+        iframe2.style.display = 'none';
+        iframe2Menu.style.display = 'none'; // Ocultar menú de iframe2
+        toggleIframe3Button.style.display = 'block';
+        document.getElementById('container').classList.add('horizontal-split');
+    } else {
+        iframe3.style.display = 'none';
+        iframe1.style.width = '100%';
+        toggleIframe3Button.style.display = 'block';
+        document.getElementById('container').classList.remove('horizontal-split');
+    }
+    adjustLayout(); // Ajustar layout después de mostrar u ocultar iframe3
+});
+
+// Función para ajustar el layout
+function adjustLayout() {
+    const isMobile = window.innerWidth <= 768;
+    const isPortrait = window.innerHeight > window.innerWidth;
+
+    if (isMobile) {
+        iframe3.style.display = 'none';
+        toggleIframe3Button.style.display = 'none';
+
+        if (isPortrait) {
+            iframe1.style.width = '100%';
+            iframe1.style.height = iframe2.style.display === 'block' ? '50%' : '100%';
+            iframe2.style.width = '100%';
+            iframe2.style.height = '50%';
+        } else {
+            iframe1.style.width = '50%';
+            iframe1.style.height = '100%';
+            iframe2.style.width = '50%';
+            iframe2.style.height = '100%';
+            iframe2.style.display = 'block';
+        }
+    } else {
+        iframe1.style.height = '100%';
+        toggleIframe3Button.style.display = 'block';
+
+        if (iframe2.style.display === 'block') {
+            iframe1.style.width = '50%';
+            iframe2.style.width = '50%';
+            iframe3.style.display = 'none';
+        } else if (iframe3.style.display === 'block') {
+            iframe1.style.width = '50%';
+            iframe3.style.width = '50%';
+        } else {
+            iframe1.style.width = '100%';
+        }
+    }
+}
+
+// Evento para manejar cambio de orientación
+window.addEventListener('orientationchange', () => {
+    setTimeout(() => {
+        adjustLayout();
+        window.scrollTo(0, 0);
+    }, 300);
+});
+
+// También se asegura que ajuste el layout al redimensionar la ventana
+window.addEventListener('resize', adjustLayout);
+
+// Ejecutar ajuste inicial
+adjustLayout();
+
+// Cerrar el menú si el usuario hace clic fuera de él
+window.onclick = function(event) {
+    if (!event.target.matches('#iframe1MenuButton')) {
+        iframe1Menu.classList.remove('show');
+    }
+    if (!event.target.matches('#iframe2MenuButton')) {
+        iframe2Menu.classList.remove('show');
+    }
+};

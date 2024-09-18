@@ -14,34 +14,36 @@ iframe1.style.display = 'block';
 iframe2.style.display = 'none';
 iframe3.style.display = 'none';
 
-// Función para alternar la visibilidad de un iframe y asegurar proporciones
-function toggleIframe(iframeToToggle, isVisible, otherIframe = null, button = null) {
-    if (isVisible) {
-        iframeToToggle.style.display = 'block';
-        otherIframe.style.display = 'block';
-        iframe1.style.width = '50%';
-        iframeToToggle.style.width = '50%';
-        if (button) button.style.display = 'none';
-    } else {
-        iframeToToggle.style.display = 'none';
-        otherIframe.style.width = '100%';
-        iframe1.style.width = '100%';
-        if (button) button.style.display = 'block';
-    }
-}
-
-// Event listeners para los botones de alternancia
+// Función para alternar la visibilidad de iframe2 y manejar otros iframes
 toggleButton.addEventListener('click', () => {
-    // Ocultar iframe2 y iframe3, mostrar solo iframe1 a pantalla completa
-    iframe2.style.display = 'none';
-    iframe3.style.display = 'none';
-    iframe1.style.width = '100%';
+    if (iframe2.style.display === 'none') {
+        // Mostrar iframe2, ajustar ambos iframe1 y iframe2 al 50% del ancho
+        iframe2.style.display = 'block';
+        iframe1.style.width = '50%';
+        iframe2.style.width = '50%';
+        // Ocultar iframe3 si está visible
+        iframe3.style.display = 'none';
+    } else {
+        // Ocultar iframe2, expandir iframe1 a pantalla completa
+        iframe2.style.display = 'none';
+        iframe1.style.width = '100%';
+    }
 });
 
+// Función para alternar la visibilidad de iframe3 y manejar otros iframes
 toggleIframe3Button.addEventListener('click', () => {
-    const isIframe3Visible = iframe3.style.display === 'none';
-    toggleIframe(iframe3, isIframe3Visible, iframe1, toggleIframe3Button);
-    if (!isIframe3Visible) iframe2.style.display = 'none'; // Asegurar que iframe2 se oculta
+    if (iframe3.style.display === 'none') {
+        // Mostrar iframe3, ajustar ambos iframe1 y iframe3 al 50% del ancho
+        iframe3.style.display = 'block';
+        iframe1.style.width = '50%';
+        iframe3.style.width = '50%';
+        // Ocultar iframe2 si está visible
+        iframe2.style.display = 'none';
+    } else {
+        // Ocultar iframe3, expandir iframe1 a pantalla completa
+        iframe3.style.display = 'none';
+        iframe1.style.width = '100%';
+    }
 });
 
 // Menú desplegable del iframe1

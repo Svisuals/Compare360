@@ -13,7 +13,7 @@ body, html {
     width: 100%;
     height: 100%;
     position: relative;
-    flex-direction: row; /* Por defecto, dividir horizontalmente */
+    flex-direction: row;
 }
 
 iframe {
@@ -106,6 +106,12 @@ iframe {
     display: block;
 }
 
+/* Ajuste para asegurar proporciones iguales al mostrar dos iframes */
+#container.horizontal-split iframe {
+    width: 50%;
+    height: 100%;
+}
+
 /* Media Queries */
 
 /* Dispositivos móviles */
@@ -122,28 +128,4 @@ iframe {
         display: none;
     }
 
-    #container {
-        flex-direction: column;
-    }
-
-    iframe {
-        width: 100%;
-        height: 100%;
-    }
-
-    #iframe2Menu {
-        left: 10px;
-        right: auto;
-    }
-
-    #iframe2Menu .dropdown-content {
-        left: 0;
-        right: auto;
-    }
-}
-
-@media (min-width: 769px) {
-    #toggleIframe2ButtonMobile {
-        display: none;
-    }
-}
+    #container

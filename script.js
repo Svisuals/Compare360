@@ -14,15 +14,17 @@ iframe1.style.display = 'block';
 iframe2.style.display = 'none';
 iframe3.style.display = 'none';
 
-// Función para alternar la visibilidad de un iframe
-function toggleIframe(iframe, visible, otherIframe = null, button = null) {
-    if (visible) {
-        iframe.style.display = 'block';
+// Función para alternar la visibilidad de un iframe y asegurar proporciones
+function toggleIframe(iframeToToggle, isVisible, otherIframe = null, button = null) {
+    if (isVisible) {
+        iframeToToggle.style.display = 'block';
+        otherIframe.style.display = 'block';
         iframe1.style.width = '50%';
-        if (otherIframe) otherIframe.style.display = 'none';
+        iframeToToggle.style.width = '50%';
         if (button) button.style.display = 'none';
     } else {
-        iframe.style.display = 'none';
+        iframeToToggle.style.display = 'none';
+        otherIframe.style.width = '100%';
         iframe1.style.width = '100%';
         if (button) button.style.display = 'block';
     }
@@ -30,11 +32,15 @@ function toggleIframe(iframe, visible, otherIframe = null, button = null) {
 
 // Event listeners para los botones de alternancia
 toggleButton.addEventListener('click', () => {
-    toggleIframe(iframe2, iframe2.style.display === 'none', iframe3, toggleIframe3Button);
+    const isIframe2Visible = iframe2.style.display === 'none';
+    toggleIframe(iframe2, isIframe2Visible, iframe1, toggleIframe3Button);
+    if (!isIframe2Visible) iframe3.style.display = 'none'; // Asegurar que iframe3 se oculta
 });
 
 toggleIframe3Button.addEventListener('click', () => {
-    toggleIframe(iframe3, iframe3.style.display === 'none', iframe2, toggleIframe3Button);
+    const isIframe3Visible = iframe3.style.display === 'none';
+    toggleIframe(iframe3, isIframe3Visible, iframe1, toggleIframe3Button);
+    if (!isIframe3Visible) iframe2.style.display = 'none'; // Asegurar que iframe2 se oculta
 });
 
 // Menú desplegable del iframe1

@@ -1,3 +1,33 @@
+/* Estilos para la pantalla de login */
+#loginScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#loginForm {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#loginForm label, #loginForm input {
+    margin: 10px;
+}
+
+#mainContent {
+    display: none; /* Ocultar el contenido principal hasta que se complete el login */
+}
+
 /* Estilos generales */
 body, html {
     margin: 0;
@@ -46,7 +76,6 @@ iframe {
 }
 
 #toggleIframe2ButtonMobile {
-    /* Ocultar este botón por defecto */
     display: none;
 }
 
@@ -118,35 +147,14 @@ iframe {
     background-color: #ddd;
 }
 
-/* Mostrar el menú al agregar la clase 'show' */
 .dropdown.show .dropdown-content {
     display: block;
 }
 
-/* Alinear el menú de iframe2 hacia la izquierda */
-#iframe2Menu .dropdown-content {
-    right: 0;
-    left: auto;
-}
-
 /* Media Queries */
-
-/* Dispositivos móviles */
-@media (max-width: 1300px) {
-    #toggleButton {
-        display: block; /* Mostrar botón DUP en móviles */
-        position: fixed;
-        top: 10px;
-        right: 10px; /* Alinear a la derecha */
-        left: auto;   /* Anular propiedad 'left' */
-    }
-
-    #toggleIframe3Button {
-        display: none; /* Ocultar botón cronograma en móviles */
-    }
-
+@media (max-width: 768px) {
     #container {
-        flex-direction: column; /* Disposición vertical */
+        flex-direction: column;
     }
 
     iframe {
@@ -154,105 +162,28 @@ iframe {
         height: 100%;
     }
 
-    /* Ocultar iframe2 e iframe3 en móviles inicialmente */
-    #iframe2,
-    #iframe3 {
-        display: none;
-    }
-
-    /* Posicionar el menú de iframe2 a la izquierda en móviles */
-    #iframe2Menu {
-        left: 10px;
-        right: auto;
-    }
-
-    /* Alinear el menú de iframe2 hacia la izquierda */
-    #iframe2Menu .dropdown-content {
-        left: 0;
-        right: auto;
-    }
-}
-
-/* Orientación vertical en móviles */
-@media (max-width: 1300px) and (orientation: portrait) {
-    #container {
-        flex-direction: column;
-    }
-
-    #iframe1,
-    #iframe2 {
-        width: 100%;
-    }
-
-    #iframe1 {
-        height: 50%;
-    }
-
-    #iframe2 {
-        height: 50%;
-    }
-
-    /* Posicionar menús */
-    #iframe1Menu {
-        top: 10px;
-        left: 10px;
-    }
-
-    #iframe2Menu {
-        top: calc(50% + 10px);
-        left: 10px;
-    }
-
-    /* Posicionar botón */
     #toggleButton {
         top: 10px;
         right: 10px;
         left: auto;
     }
+
+    #iframe1, #iframe2 {
+        height: 50%;
+    }
 }
 
-/* Orientación horizontal en móviles */
-@media (max-width: 1300px) and (orientation: landscape) {
-    html, body {
-        height: 100%; /* Asegurar que html y body ocupen 100% de la altura */
-        margin: 0;
-        padding: 0;
-    }
-
+@media (max-width: 768px) and (orientation: landscape) {
     #container {
-        height: 100%; /* Asegurar que el contenedor ocupe 100% de la altura */
-        width: 100%;  /* Asegurar que el contenedor ocupe el 100% del ancho */
-        flex-direction: row; /* Disposición horizontal */
+        flex-direction: row;
     }
 
     #iframe1, #iframe2 {
-        width: 50%;  /* Ambos iframes ocupan el 50% del ancho */
-        height: 100%; /* Ambos iframes ocupan el 100% de la altura */
-        display: block; /* Asegurar que se mantengan visibles */
-    }
-    /* Ocultar botón cronograma e iframe3 */
-    #toggleIframe3Button {
-        display: none;
+        width: 50%;
+        height: 100%;
     }
 
-    #iframe3 {
-        display: none;
-    }
-
-    /* Posicionar menús */
-    #iframe1Menu {
-        top: 10px;
-        left: 10px;
-    }
-
-    #iframe2Menu {
-        top: 10px;
-        left: calc(50% + 10px);
-    }
-
-    /* Posicionar botón */
     #toggleButton {
-        top: 10px;
         right: 10px;
         left: calc(50%);
     }

@@ -9,54 +9,6 @@ const iframe1MenuButton = document.getElementById('iframe1MenuButton');
 const iframe2MenuButton = document.getElementById('iframe2MenuButton');
 const iframe1MenuContent = document.getElementById('iframe1MenuContent');
 const iframe2MenuContent = document.getElementById('iframe2MenuContent');
-const loginScreen = document.getElementById('loginScreen');
-const loginForm = document.getElementById('loginForm');
-const mainContent = document.getElementById('mainContent');
-
-// Validación de login
-loginForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    if (username === 'ADM' && password === '1234') {
-        loginScreen.style.display = 'none'; // Ocultar pantalla de login
-        mainContent.style.display = 'block'; // Mostrar contenido principal
-    } else {
-        alert('Usuario o contraseña incorrectos');
-    }
-});
-
-const toggleButton = document.getElementById('toggleButton');
-const iframe1 = document.getElementById('iframe1');
-const iframe2 = document.getElementById('iframe2');
-const iframe3 = document.getElementById('iframe3');
-const toggleIframe3Button = document.getElementById('toggleIframe3Button');
-const iframe1Menu = document.getElementById('iframe1Menu');
-const iframe2Menu = document.getElementById('iframe2Menu');
-const iframe1MenuButton = document.getElementById('iframe1MenuButton');
-const iframe2MenuButton = document.getElementById('iframe2MenuButton');
-const iframe1MenuContent = document.getElementById('iframe1MenuContent');
-const iframe2MenuContent = document.getElementById('iframe2MenuContent');
-const loginScreen = document.getElementById('loginScreen');
-const loginForm = document.getElementById('loginForm');
-const mainContent = document.getElementById('mainContent');
-
-// Validación de login
-loginForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-
-    if (username === 'ADM' && password === '1234') {
-        loginScreen.style.display = 'none'; // Ocultar pantalla de login
-        mainContent.style.display = 'block'; // Mostrar contenido principal
-    } else {
-        alert('Usuario o contraseña incorrectos');
-    }
-});
 
 // Inicialmente mostrar solo iframe1
 iframe1.style.display = 'block';
@@ -194,5 +146,3 @@ window.onclick = function(event) {
         iframe2Menu.classList.remove('show');
     }
 };
-
-

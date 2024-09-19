@@ -35,7 +35,7 @@ iframe {
 #toggleButton {
     position: fixed;
     top: 10px;
-    left: calc(50%);
+    left: calc(49%);
     width: 32px;
     height: 32px;
     background: url('DUP.png') no-repeat center center;

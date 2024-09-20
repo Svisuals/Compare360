@@ -1,29 +1,29 @@
-// Obter elementos de início de sessão
+// Obtener elementos de inicio de sesión
 const loginOverlay = document.getElementById('loginOverlay');
 const authForm = document.getElementById('authForm');
 const usernameInput = document.getElementById('username');
 const passwordInput = document.getElementById('password');
 const errorMessage = document.getElementById('errorMessage');
 
-// Lógica de autenticação
+// Manejar el envío del formulario de autenticación
 authForm.addEventListener('submit', (event) => {
-    event.preventDefault(); // Prevenir o comportamento padrão do formulário
+    event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
 
     const username = usernameInput.value.trim();
     const password = passwordInput.value.trim();
 
-    // Verificar as credenciais
+    // Verificar las credenciales
     if (username === 'ADM' && password === '1234') {
-        // Ocultar a tela de início de sessão
+        // Ocultar la pantalla de inicio de sesión
         loginOverlay.style.display = 'none';
     } else {
-        // Mostrar mensagem de erro
-        errorMessage.textContent = 'Usuário ou senha incorretos.';
+        // Mostrar mensaje de error
+        errorMessage.textContent = 'Usuario o contraseña incorrectos.';
         errorMessage.style.display = 'block';
     }
 });
 
-// Elementos dos iframes e botões
+// Resto del código existente
 const toggleButton = document.getElementById('toggleButton');
 const iframe1 = document.getElementById('iframe1');
 const iframe2 = document.getElementById('iframe2');
@@ -36,20 +36,20 @@ const iframe2MenuButton = document.getElementById('iframe2MenuButton');
 const iframe1MenuContent = document.getElementById('iframe1MenuContent');
 const iframe2MenuContent = document.getElementById('iframe2MenuContent');
 
-// Inicialmente mostrar apenas iframe1
+// Inicialmente mostrar solo iframe1
 iframe1.style.display = 'block';
 iframe2.style.display = 'none';
 iframe3.style.display = 'none';
 
-// Ocultar menu do iframe2 inicialmente
+// Ocultar menú de iframe2 inicialmente
 iframe2Menu.style.display = 'none';
 
-// Event listener para o botão do menu do iframe1
+// Event listener para el botón del menú de iframe1
 iframe1MenuButton.addEventListener('click', () => {
     iframe1Menu.classList.toggle('show');
 });
 
-// Event listener para os links do menu do iframe1
+// Event listener para los enlaces del menú de iframe1
 iframe1MenuContent.addEventListener('click', (event) => {
     if (event.target.tagName === 'A') {
         iframe1.src = event.target.href;
@@ -58,12 +58,12 @@ iframe1MenuContent.addEventListener('click', (event) => {
     }
 });
 
-// Event listener para o botão do menu do iframe2
+// Event listener para el botón del menú de iframe2
 iframe2MenuButton.addEventListener('click', () => {
     iframe2Menu.classList.toggle('show');
 });
 
-// Event listener para os links do menu do iframe2
+// Event listener para los enlaces del menú de iframe2
 iframe2MenuContent.addEventListener('click', (event) => {
     if (event.target.tagName === 'A') {
         iframe2.src = event.target.href;
@@ -72,49 +72,34 @@ iframe2MenuContent.addEventListener('click', (event) => {
     }
 });
 
-// Event listener para o botão 'DUP'
+// Event listener para el botón 'DUP' (ahora único)
 toggleButton.addEventListener('click', () => {
-    const isMobileLandscape = window.innerWidth <= 1300 && window.innerHeight < window.innerWidth;
-
-    if (isMobileLandscape) {
-        // Modo horizontal em dispositivos móveis
-        if (iframe2.style.display === 'none') {
-            iframe2.style.display = 'block';
-            iframe1.style.width = '50%';
-            iframe2.style.width = '50%';
-        } else {
-            iframe2.style.display = 'none';
-            iframe1.style.width = '100%';
-        }
+    if (iframe2.style.display === 'none') {
+        iframe2.style.display = 'block';
+        iframe2Menu.style.display = 'block'; // Mostrar menú de iframe2
+        iframe1.style.width = '50%';
+        iframe2.style.width = '50%';
+        iframe3.style.display = 'none';
+        toggleIframe3Button.style.display = 'none';
+        document.getElementById('container').classList.remove('horizontal-split');
     } else {
-        // Modo normal (desktop ou móvel vertical)
-        if (iframe2.style.display === 'none') {
-            iframe2.style.display = 'block';
-            iframe2Menu.style.display = 'block'; // Mostrar menu do iframe2
-            iframe1.style.width = '50%';
-            iframe2.style.width = '50%';
-            iframe3.style.display = 'none';
-            toggleIframe3Button.style.display = 'none';
-            document.getElementById('container').classList.remove('horizontal-split');
-        } else {
-            iframe2.style.display = 'none';
-            iframe2Menu.style.display = 'none'; // Ocultar menu do iframe2
-            iframe1.style.width = '100%';
-            toggleIframe3Button.style.display = 'block';
-            document.getElementById('container').classList.remove('horizontal-split');
-        }
+        iframe2.style.display = 'none';
+        iframe2Menu.style.display = 'none'; // Ocultar menú de iframe2
+        iframe1.style.width = '100%';
+        toggleIframe3Button.style.display = 'block';
+        document.getElementById('container').classList.remove('horizontal-split');
     }
-    adjustLayout(); // Ajustar layout após mostrar ou ocultar iframe2
+    adjustLayout(); // Ajustar layout después de mostrar u ocultar iframe2
 });
 
-// Event listener para o botão do cronograma
+// Event listener para el botón del cronograma
 toggleIframe3Button.addEventListener('click', () => {
     if (iframe3.style.display === 'none') {
         iframe3.style.display = 'block';
         iframe1.style.width = '50%';
         iframe3.style.width = '50%';
         iframe2.style.display = 'none';
-        iframe2Menu.style.display = 'none'; // Ocultar menu do iframe2
+        iframe2Menu.style.display = 'none'; // Ocultar menú de iframe2
         toggleIframe3Button.style.display = 'block';
         document.getElementById('container').classList.add('horizontal-split');
     } else {
@@ -123,69 +108,63 @@ toggleIframe3Button.addEventListener('click', () => {
         toggleIframe3Button.style.display = 'block';
         document.getElementById('container').classList.remove('horizontal-split');
     }
-    adjustLayout(); // Ajustar layout após mostrar ou ocultar iframe3
+    adjustLayout(); // Ajustar layout después de mostrar u ocultar iframe3
 });
 
-// Função para ajustar o layout
+// Función para ajustar el layout
 function adjustLayout() {
     const isMobile = window.innerWidth <= 1300;
     const isPortrait = window.innerHeight > window.innerWidth;
-    const isMobileLandscape = isMobile && !isPortrait;
 
     if (isMobile) {
-        // Modo móvel
-        // Ocultar iframe3
+        // En modo móvil, ocultamos iframe3
         iframe3.style.display = 'none';
         toggleIframe3Button.style.display = 'none';
 
         if (isPortrait) {
-            // Orientação vertical
+            // En orientación vertical, iframes dividen la altura
             iframe1.style.width = '100%';
             iframe1.style.height = iframe2.style.display === 'block' ? '50%' : '100%';
             iframe2.style.width = '100%';
             iframe2.style.height = iframe2.style.display === 'block' ? '50%' : '0';
         } else {
-            // Orientação horizontal
-            if (iframe2.style.display === 'block') {
-                iframe1.style.width = '50%';
-                iframe2.style.width = '50%';
-            } else {
-                iframe1.style.width = '100%';
-            }
+            // En orientación horizontal, ambos iframes ocupan el 50% del ancho y el 100% de la altura
+            iframe1.style.width = '50%';
             iframe1.style.height = '100%';
+            iframe2.style.width = '50%';
             iframe2.style.height = '100%';
+            iframe2.style.display = 'block'; // Asegurar que iframe2 sea visible si está activo
         }
     } else {
-        // Modo desktop
+        // En modo escritorio, los iframes ocupan toda la altura y se distribuyen por ancho
         iframe1.style.height = '100%';
         toggleIframe3Button.style.display = 'block';
 
         if (iframe2.style.display === 'block') {
             iframe1.style.width = '50%';
             iframe2.style.width = '50%';
-            iframe2.style.height = '100%';  // Assegurar que iframe2 ocupe toda a altura
+            iframe2.style.height = '100%';  // Asegurarse de que iframe2 ocupe toda la altura
             iframe3.style.display = 'none';
         } else if (iframe3.style.display === 'block') {
             iframe1.style.width = '50%';
             iframe3.style.width = '50%';
-            iframe2.style.height = '0';  // Assegurar que iframe2 esteja oculto corretamente
+            iframe2.style.height = '0';  // Asegurarse de que iframe2 esté oculto correctamente
         } else {
             iframe1.style.width = '100%';
-            iframe2.style.height = '0';  // Assegurar que iframe2 esteja oculto corretamente
+            iframe2.style.height = '0';  // Asegurar que iframe2 esté oculto correctamente
         }
     }
 
-    // Assegurar que os menus não afetem a posição dos botões
+    // Asegurar que los menús no afecten la posición de los botones
     iframe1Menu.style.position = 'fixed';
     iframe2Menu.style.position = 'fixed';
 }
 
-// Eventos de redimensionamento e mudança de orientação
 window.addEventListener('resize', adjustLayout);
 window.addEventListener('orientationchange', adjustLayout);
 adjustLayout();
 
-// Fechar o menu se o usuário clicar fora dele
+// Cerrar el menú si el usuario hace clic fuera de él
 window.onclick = function(event) {
     if (!event.target.matches('#iframe1MenuButton')) {
         iframe1Menu.classList.remove('show');

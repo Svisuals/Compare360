@@ -156,10 +156,9 @@ iframe {
         left: 10px;
     }
 
-    #iframe2Menu {
-        top: 10px; /* Revertido para o topo */
-        left: 10px; /* Alinhado à esquerda */
-        transform: none; /* Removido o translateY */
+     #iframe2Menu {
+        top: calc(50% + 10px);
+        left: 10px;
     }
 
     /* Posicionar botão */

@@ -1,3 +1,29 @@
+// Obtener elementos de inicio de sesión
+const loginOverlay = document.getElementById('loginOverlay');
+const authForm = document.getElementById('authForm');
+const usernameInput = document.getElementById('username');
+const passwordInput = document.getElementById('password');
+const errorMessage = document.getElementById('errorMessage');
+
+// Manejar el envío del formulario de autenticación
+authForm.addEventListener('submit', (event) => {
+    event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
+
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    // Verificar las credenciales
+    if (username === 'ADM' && password === '1234') {
+        // Ocultar la pantalla de inicio de sesión
+        loginOverlay.style.display = 'none';
+    } else {
+        // Mostrar mensaje de error
+        errorMessage.textContent = 'Usuario o contraseña incorrectos.';
+        errorMessage.style.display = 'block';
+    }
+});
+
+// Resto del código existente
 const toggleButton = document.getElementById('toggleButton');
 const iframe1 = document.getElementById('iframe1');
 const iframe2 = document.getElementById('iframe2');
@@ -102,16 +128,12 @@ function adjustLayout() {
             iframe2.style.width = '100%';
             iframe2.style.height = iframe2.style.display === 'block' ? '50%' : '0';
         } else {
-            // En orientación horizontal, ajustar según la visibilidad de iframe2
-            if (iframe2.style.display === 'none') {
-                iframe1.style.width = '100%';
-                iframe2.style.width = '0%';
-            } else {
-                iframe1.style.width = '50%';
-                iframe2.style.width = '50%';
-            }
+            // En orientación horizontal, ambos iframes ocupan el 50% del ancho y el 100% de la altura
+            iframe1.style.width = '50%';
             iframe1.style.height = '100%';
+            iframe2.style.width = '50%';
             iframe2.style.height = '100%';
+            iframe2.style.display = 'block'; // Asegurar que iframe2 sea visible si está activo
         }
     } else {
         // En modo escritorio, los iframes ocupan toda la altura y se distribuyen por ancho
@@ -129,7 +151,7 @@ function adjustLayout() {
             iframe2.style.height = '0';  // Asegurarse de que iframe2 esté oculto correctamente
         } else {
             iframe1.style.width = '100%';
-            iframe2.style.height = '0';  // Asegurarse de que iframe2 esté oculto correctamente
+            iframe2.style.height = '0';  // Asegurar que iframe2 esté oculto correctamente
         }
     }
 
@@ -137,6 +159,7 @@ function adjustLayout() {
     iframe1Menu.style.position = 'fixed';
     iframe2Menu.style.position = 'fixed';
 }
+
 window.addEventListener('resize', adjustLayout);
 window.addEventListener('orientationchange', adjustLayout);
 adjustLayout();

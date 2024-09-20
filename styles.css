@@ -231,6 +231,15 @@ iframe {
     box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.7); /* Sombra interna */
 }
 
+/* Logo dentro del formulario de inicio de sesión */
+#loginLogo {
+    max-width: 80%; /* Asegura que el logo no sea más ancho que el 80% del formulario */
+    height: auto; /* Mantener proporciones */
+    display: block;
+    margin: 0 auto 20px auto; /* Centra la imagen y agrega espacio inferior */
+}
+
+/* Estilos para el formulario de inicio de sesión */
 #loginForm {
     background-color: #ffffff;
     padding: 20px 30px;
@@ -239,6 +248,9 @@ iframe {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); /* Sombra externa suave */
     max-width: 350px;
     font-family: 'Open Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra el contenido del formulario */
 }
 
 #loginForm h2 {

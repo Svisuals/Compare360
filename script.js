@@ -23,7 +23,7 @@ authForm.addEventListener('submit', (event) => {
     }
 });
 
-// Resto do código existente
+// Elementos dos iframes e botões
 const toggleButton = document.getElementById('toggleButton');
 const iframe1 = document.getElementById('iframe1');
 const iframe2 = document.getElementById('iframe2');
@@ -72,7 +72,7 @@ iframe2MenuContent.addEventListener('click', (event) => {
     }
 });
 
-// Event listener para o botão 'DUP' (agora único)
+// Event listener para o botão 'DUP'
 toggleButton.addEventListener('click', () => {
     const isMobileLandscape = window.innerWidth <= 1300 && window.innerHeight < window.innerWidth;
 

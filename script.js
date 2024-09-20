@@ -4,7 +4,7 @@ import { initializeAuth } from './modules/auth.js';
 import { initializeIframes } from './modules/iframe.js';
 import { initializeUI } from './modules/ui.js';
 
-// Función para ajustar el layout, previamente definida en tu script original
+// Función para ajustar el layout
 function adjustLayout() {
     const iframe1 = document.getElementById('iframe1');
     const iframe2 = document.getElementById('iframe2');
@@ -15,7 +15,7 @@ function adjustLayout() {
     const isPortrait = window.innerHeight > window.innerWidth;
 
     if (isMobile) {
-        // En modo móvil, ocultamos iframe3
+        // En dispositivos móviles, ocultamos iframe3 por defecto
         iframe3.style.display = 'none';
         toggleIframe3Button.style.display = 'none';
 
@@ -26,12 +26,15 @@ function adjustLayout() {
             iframe2.style.width = '100%';
             iframe2.style.height = iframe2.style.display === 'block' ? '50%' : '0';
         } else {
-            // En orientación horizontal, ambos iframes ocupan el 50% del ancho y el 100% de la altura
-            iframe1.style.width = '50%';
+            // En orientación horizontal, mostrar solo iframe1
+            iframe1.style.width = '100%';
             iframe1.style.height = '100%';
-            iframe2.style.width = '50%';
-            iframe2.style.height = '100%';
-            iframe2.style.display = 'block'; // Asegurar que iframe2 sea visible si está activo
+            iframe2.style.display = 'none'; // Ocultar iframe2
+            iframe2.style.width = '0';
+            iframe2.style.height = '0';
+            iframe3.style.display = 'none'; // Asegurarse de ocultar iframe3
+            iframe3.style.width = '0';
+            iframe3.style.height = '0';
         }
     } else {
         // En modo escritorio, los iframes ocupan toda la altura y se distribuyen por ancho
@@ -59,6 +62,7 @@ function adjustLayout() {
     iframe1Menu.style.position = 'fixed';
     iframe2Menu.style.position = 'fixed';
 }
+
 
 // Inicializar módulos
 document.addEventListener('DOMContentLoaded', () => {

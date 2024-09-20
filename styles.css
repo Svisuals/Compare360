@@ -224,11 +224,12 @@ iframe {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #2f2f2f, #565656); /* Degradado basado en la imagen */
+    background: linear-gradient(135deg, #2f2f2f, #565656); /* Degradado gris oscuro */
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 2000; /* Superior a otros elementos */
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.7); /* Sombra interna para el efecto de profundidad */
 }
 
 #loginForm {

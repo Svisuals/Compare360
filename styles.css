@@ -83,37 +83,45 @@ iframe {
 .dropdown button {
     background-color: #0c7a20;
     color: white;
-    padding: 8px;
+    padding: 8px 12px;
     font-size: 16px;
     border: none;
     cursor: pointer;
-    position: relative; /* Para o pseudo-elemento ficar corretamente posicionado */
+    position: relative; /* Necessário para o pseudo-elemento */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .dropdown button::after {
     content: '';
     display: inline-block;
     margin-left: 5px;
-    vertical-align: middle;
-    border-width: 5px;
-    border-style: solid;
-    border-color: white transparent transparent transparent;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid white; /* Cor da flecha */
 }
 
-/* Ajustar a cor da flecha quando o menu estiver aberto */
-.dropdown.show button::after {
-    border-color: transparent transparent white transparent; /* Flecha para cima */
-}
-
-/* Dropdown content */
+/* Conteúdo do dropdown */
 .dropdown-content {
     display: none;
     position: absolute;
     background-color: #f1f1f1;
     min-width: 180px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1002; /* Superior aos botões */
+    top: 100%; /* Posiciona abaixo do botão */
+    left: 0;
 }
 
+/* Mostrar o conteúdo do dropdown ao clicar */
+.dropdown.show .dropdown-content {
+    display: block;
+}
+
+/* Estilos para os links dentro do dropdown */
 .dropdown-content a {
     color: black;
     padding: 8px 12px;
@@ -125,51 +133,10 @@ iframe {
     background-color: #ddd;
 }
 
-/* Mostrar o menu ao adicionar a classe 'show' */
-.dropdown.show .dropdown-content {
-    display: block;
-}
-
 /* Media Queries */
 
-/* Media Query para telas com largura ou altura <= 768px */
-@media (max-width: 768px), (max-height: 768px) {
-    #loginForm {
-        /* Reduzir o padding em 50% */
-        padding: 10px 15px; /* Original: 20px 30px */
-
-        /* Ajustar a largura máxima do formulário */
-        max-width: 300px; /* Ajuste conforme necessário */
-
-        /* Manter o formulário centrado */
-        /* Já está centrado por flexbox em #loginOverlay, não é necessário ajustar position */
-    }
-
-    #loginForm h2 {
-        /* Reduzir o tamanho da fonte em 20% */
-        font-size: 1.2em; /* Ajuste conforme necessário */
-    }
-
-    #loginForm label,
-    #loginForm input,
-    #loginForm button {
-        /* Reduzir o tamanho da fonte em 10% */
-        font-size: 0.9em;
-    }
-
-    #loginForm input {
-        /* Reduzir o padding dos inputs */
-        padding: 4px; /* Original: 8px */
-    }
-
-    #loginForm button {
-        /* Reduzir o padding do botão */
-        padding: 5px; /* Original: 10px */
-    }
-}
-
 /* Orientação vertical em dispositivos móveis */
-@media (max-width: 768px) and (orientation: portrait) {
+@media (max-width: 1300px) and (orientation: portrait) {
     #container {
         flex-direction: column;
     }
@@ -194,8 +161,8 @@ iframe {
     }
 
     #iframe2Menu {
-        top: 10px; /* Revertido para o topo */
-        left: 10px; /* Alinhado à esquerda */
+        top: 10px; /* Alinhar ao topo */
+        left: 10px; /* Alinhar à esquerda */
         transform: none; /* Remover transformações */
     }
 
@@ -316,4 +283,40 @@ iframe {
     color: red;
     margin-top: 10px;
     display: none;
+}
+
+/* Media Query para telas com largura ou altura <= 768px */
+@media (max-width: 768px), (max-height: 768px) {
+    #loginForm {
+        /* Reduzir o padding em 50% */
+        padding: 10px 15px; /* Original: 20px 30px */
+
+        /* Ajustar a largura máxima do formulário */
+        max-width: 300px; /* Ajuste conforme necessário */
+
+        /* Manter o formulário centrado */
+        /* Já está centrado por flexbox em #loginOverlay, não é necessário ajustar position */
+    }
+
+    #loginForm h2 {
+        /* Reduzir o tamanho da fonte em 20% */
+        font-size: 1.2em; /* Ajuste conforme necessário */
+    }
+
+    #loginForm label,
+    #loginForm input,
+    #loginForm button {
+        /* Reduzir o tamanho da fonte em 10% */
+        font-size: 0.9em;
+    }
+
+    #loginForm input {
+        /* Reduzir o padding dos inputs */
+        padding: 4px; /* Original: 8px */
+    }
+
+    #loginForm button {
+        /* Reduzir o padding do botão */
+        padding: 5px; /* Original: 10px */
+    }
 }

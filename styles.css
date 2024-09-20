@@ -290,6 +290,7 @@ iframe {
 
 #loginForm button {
     width: 100%;
+    max-width: 200px; /* Controla el ancho máximo del botón */
     padding: 10px;
     background-color: #0c7a20;
     color: white;
@@ -300,6 +301,8 @@ iframe {
     transition: background-color 0.3s ease;
     margin-top: 10px; /* Espacio entre el botón y los inputs */
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #loginForm button:hover {
@@ -310,13 +313,6 @@ iframe {
     color: red;
     margin-top: 10px;
     display: none;
-}
-
-/* Centrar botón */
-#loginForm button {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 /* Media Query para pantallas más pequeñas */

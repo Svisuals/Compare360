@@ -183,11 +183,6 @@ iframe {
         flex-direction: row; /* Disposición horizontal */
     }
 
-    #iframe1, #iframe2 {
-        width: 50%;  /* Ambos iframes ocupan el 50% del ancho */
-        height: 100%; /* Ambos iframes ocupan el 100% de la altura */
-        display: block; /* Asegurar que se mantengan visibles */
-    }
     /* Ocultar botón cronograma e iframe3 */
     #toggleIframe3Button {
         display: none;

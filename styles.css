@@ -1,233 +1,27 @@
-/* Estilos generales */
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    font-family: Arial, sans-serif;
-}
-
-#container {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    flex-direction: row; /* Por defecto, dividir horizontalmente */
-    transition: all 0.5s ease;
-}
-
-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    display: none; /* Inicialmente oculta todos los iframes */
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
-iframe.show {
-    display: block;
-    opacity: 1;
-}
-
-#iframe1 {
-    display: block; /* Mostrar iframe1 por defecto */
-    opacity: 1;
-}
-
-#iframe2, #iframe3 {
-    display: none;
-    opacity: 0;
-}
-
-/* Botones */
-#controls {
-    position: fixed;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
-    z-index: 1000;
-}
-
-#controls button {
-    width: 40px;
-    height: 40px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-#controls button:active {
-    transform: scale(0.95);
-}
-
-#toggleButton {
-    background-image: url('DUP.png');
-}
-
-#toggleIframe2ButtonMobile {
-    background-image: url('DUP.png');
-    display: none;
-}
-
-#toggleIframe3Button {
-    background-image: url('CRO.png');
-}
-
-/* Menús desplegables */
-.dropdown {
-    position: fixed;
-    top: 10px;
-    z-index: 1001;
-}
-
-#iframe1Menu {
-    left: 10px;
-}
-
-#iframe2Menu {
-    right: 10px;
-    left: auto;
-}
-
-.dropdown button {
-    background-color: #0c7a20;
-    color: white;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-}
-
-.dropdown button:hover,
-.dropdown button:focus {
-    background-color: #095c16;
-}
-
-.dropdown button::after {
-    content: '';
-    display: inline-block;
-    margin-left: 5px;
-    vertical-align: middle;
-    border-width: 5px;
-    border-style: solid;
-    border-color: white transparent transparent transparent;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f1f1f1;
-    min-width: 200px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    border-radius: 4px;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    transition: background-color 0.2s ease;
-}
-
-.dropdown-content a:hover {
-    background-color: #ddd;
-}
-
-.dropdown.show .dropdown-content {
-    display: block;
-    opacity: 1;
-}
-
-/* Media Queries */
-
-/* Ajuste de puntos de ruptura para dispositivos específicos */
-@media (max-width: 1600px) {
-    #controls button {
-        width: 35px;
-        height: 35px;
-    }
-
-    .dropdown-content {
-        min-width: 180px;
-    }
-}
-
-@media (max-width: 1300px) and (orientation: portrait) {
-    #container {
-        flex-direction: column;
-    }
-
-    iframe {
-        width: 100%;
-    }
-
-    #iframe1 {
-        height: 50%;
-    }
-
-    #iframe2 {
-        height: 50%;
-    }
-
-    /* Posicionar menús */
-    #iframe1Menu {
-        top: 10px;
-        left: 10px;
-    }
-
-    #iframe2Menu {
-        top: calc(50% + 10px);
-        left: 10px;
-    }
-
-    /* Posicionar botón */
-    #controls {
-        top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    /* Mostrar botón para móviles */
-    #toggleIframe2ButtonMobile {
-        display: block;
-    }
-
-    #toggleButton {
-        display: none;
-    }
-}
-
+/* Orientación horizontal en móviles */
 @media (max-width: 1300px) and (orientation: landscape) {
     html, body {
-        height: 100%;
+        height: 100%; /* Asegurar que html y body ocupen 100% de la altura */
         margin: 0;
         padding: 0;
     }
 
     #container {
-        height: 100%;
-        width: 100%;
-        flex-direction: row;
+        height: 100%; /* Asegurar que el contenedor ocupe 100% de la altura */
+        width: 100%;  /* Asegurar que el contenedor ocupe el 100% del ancho */
+        flex-direction: row; /* Disposición horizontal */
     }
 
-    #iframe1, #iframe2 {
-        width: 50%;
-        height: 100%;
-        display: block;
-        opacity: 1;
+    #iframe1 {
+        width: 100%;  /* Ocupa todo el ancho por defecto */
+        height: 100%; /* Ocupa toda la altura */
+        display: block; /* Asegurar que iframe1 sea visible */
+    }
+
+    #iframe2 {
+        width: 0;           /* Sin ancho por defecto */
+        height: 100%;      /* Mantener la altura */
+        display: none;     /* Ocultar iframe2 por defecto */
     }
 
     /* Ocultar botón cronograma e iframe3 */
@@ -237,7 +31,6 @@ iframe.show {
 
     #iframe3 {
         display: none;
-        opacity: 0;
     }
 
     /* Posicionar menús */
@@ -252,123 +45,10 @@ iframe.show {
         left: auto;
     }
 
-    /* Posicionar controles */
-    #controls {
+    /* Posicionar botón */
+    #toggleButton {
         top: 10px;
-        left: 50%;
-        transform: translateX(-50%);
+        right: 10px;
+        left: auto; /* Asegurar que el botón esté alineado a la derecha */
     }
 }
-
-@media (max-width: 768px), (max-height: 768px) {
-    #loginForm {
-        padding: 10px 15px;
-        max-width: 300px;
-    }
-
-    #loginForm h2 {
-        font-size: 1.2em;
-    }
-
-    #loginForm label,
-    #loginForm input,
-    #loginForm button {
-        font-size: 0.9em;
-    }
-
-    #loginForm input {
-        padding: 4px;
-    }
-
-    #loginForm button {
-        padding: 5px;
-    }
-
-    /* Aumentar el tamaño de los botones para facilitar el uso táctil */
-    #controls button {
-        width: 50px;
-        height: 50px;
-    }
-
-    .dropdown button {
-        padding: 12px;
-    }
-
-    .dropdown-content {
-        min-width: 160px;
-    }
-}
-
-/* Estilos para la pantalla de inicio de sesión */
-#loginOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9); /* Fondo negro semitransparente */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    transition: opacity 0.5s ease;
-}
-
-#loginForm {
-    background-color: #ffffff;
-    padding: 20px 30px;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    transition: transform 0.5s ease;
-}
-
-#loginForm h2 {
-    margin-bottom: 20px;
-    color: #0c7a20;
-}
-
-#loginForm label {
-    display: block;
-    margin: 10px 0 5px;
-    text-align: left;
-    color: #333;
-}
-
-#loginForm input {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-#loginForm button {
-    width: 100%;
-    padding: 10px;
-    background-color: #0c7a20;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-#loginForm button:hover {
-    background-color: #095c16;
-}
-
-.error {
-    color: red;
-    margin-top: 10px;
-    display: none;
-}
-
-/* Transiciones al mostrar/ocultar el overlay de login */
-#loginOverlay.hide {
-    opacity: 0;
-    pointer-events: none;
-    visibility: hidden;
-}
-

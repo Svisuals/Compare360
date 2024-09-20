@@ -35,7 +35,7 @@ iframe {
 #toggleButton {
     position: fixed;
     top: 10px;
-    left: calc(49%);
+    left: 10px; /* Ajuste para alinhar consistentemente */
     width: 32px;
     height: 32px;
     background: url('DUP.png') no-repeat center center;
@@ -43,11 +43,6 @@ iframe {
     border: none;
     cursor: pointer;
     z-index: 1000;
-}
-
-#toggleIframe2ButtonMobile {
-    /* Ocultar este botão por padrão */
-    display: none;
 }
 
 #toggleIframe3Button {
@@ -72,12 +67,11 @@ iframe {
 }
 
 #iframe1Menu {
-    left: 10px;
+    left: 60px; /* Posicionado ao lado do toggleButton */
 }
 
 #iframe2Menu {
-    right: 10px;
-    left: auto;
+    left: 110px; /* Ajuste para posicionar ao lado do toggleIframe3Button */
 }
 
 .dropdown button {
@@ -123,12 +117,6 @@ iframe {
     display: block;
 }
 
-/* Alinear o menu do iframe2 para a direita */
-#iframe2Menu .dropdown-content {
-    right: 0;
-    left: auto;
-}
-
 /* Media Queries */
 
 /* Orientação vertical em dispositivos móveis */
@@ -157,16 +145,20 @@ iframe {
     }
 
     #iframe2Menu {
-        top: 10px; /* Revertido para o topo */
-        left: 10px; /* Alinhado à esquerda */
-        transform: none; /* Removido o translateY */
+        top: 10px;
+        left: 10px;
+        transform: none; /* Remover centralização vertical */
     }
 
     /* Posicionar botão */
     #toggleButton {
         top: 10px;
-        right: 10px;
-        left: auto;
+        left: 10px;
+    }
+
+    #toggleIframe3Button {
+        top: 10px;
+        left: 55px;
     }
 }
 
@@ -206,15 +198,13 @@ iframe {
 
     #iframe2Menu {
         top: 10px;
-        right: 10px;
-        left: auto;
+        left: 55px;
     }
 
     /* Posicionar botão */
     #toggleButton {
         top: 10px;
-        right: 10px;
-        left: calc(49%);
+        left: 10px;
     }
 }
 

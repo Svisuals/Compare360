@@ -245,11 +245,12 @@ iframe {
 
 /* Estilos para el formulario de inicio de sesión */
 #loginForm {
-    background-color: #ffffff;
+    background: linear-gradient(135deg, #2f2f2f, #565656); /* Degradado para el fondo del formulario */
     padding: 20px 30px;
     border-radius: 12px;
     text-align: center;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), /* Sombra más profunda */
+                0 4px 10px rgba(0, 0, 0, 0.3);  /* Sombra más suave */
     max-width: 350px;
     width: 100%; /* Para que el formulario no exceda el 100% */
     font-family: 'Open Sans', sans-serif;

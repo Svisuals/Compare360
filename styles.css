@@ -205,7 +205,8 @@ iframe {
 
     #iframe2Menu {
         top: 10px;
-        left: calc(90%);
+        right: 10px;
+        left: auto;
     }
 
     /* Posicionar botón */

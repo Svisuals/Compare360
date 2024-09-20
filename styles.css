@@ -1,4 +1,4 @@
-/* Estilos generales */
+/* Estilos gerais */
 body, html {
     margin: 0;
     padding: 0;
@@ -13,25 +13,25 @@ body, html {
     width: 100%;
     height: 100%;
     position: relative;
-    flex-direction: row; /* Por defecto, dividir horizontalmente */
+    flex-direction: row; /* Por padrão, dividir horizontalmente */
 }
 
 iframe {
     width: 100%;
     height: 100%;
     border: none;
-    display: none; /* Inicialmente oculta todos los iframes */
+    display: none; /* Inicialmente oculta todos os iframes */
 }
 
 #iframe1 {
-    display: block; /* Mostrar iframe1 por defecto */
+    display: block; /* Mostrar iframe1 por padrão */
 }
 
 #iframe2, #iframe3 {
     display: none;
 }
 
-/* Botones */
+/* Botões */
 #toggleButton {
     position: fixed;
     top: 10px;
@@ -46,7 +46,7 @@ iframe {
 }
 
 #toggleIframe2ButtonMobile {
-    /* Ocultar este botón por defecto */
+    /* Ocultar este botão por padrão */
     display: none;
 }
 
@@ -64,7 +64,7 @@ iframe {
     display: block;
 }
 
-/* Menús desplegables */
+/* Menus dropdown */
 .dropdown {
     position: fixed;
     top: 10px;
@@ -118,12 +118,12 @@ iframe {
     background-color: #ddd;
 }
 
-/* Mostrar el menú al agregar la clase 'show' */
+/* Mostrar o menu ao adicionar a classe 'show' */
 .dropdown.show .dropdown-content {
     display: block;
 }
 
-/* Alinear el menú de iframe2 hacia la izquierda */
+/* Alinhar o menu do iframe2 para a esquerda */
 #iframe2Menu .dropdown-content {
     right: 0;
     left: auto;
@@ -131,7 +131,7 @@ iframe {
 
 /* Media Queries */
 
-/* Orientación vertical en móviles */
+/* Orientação vertical em dispositivos móveis */
 @media (max-width: 1300px) and (orientation: portrait) {
     #container {
         flex-direction: column;
@@ -150,7 +150,7 @@ iframe {
         height: 50%;
     }
 
-    /* Posicionar menús */
+    /* Posicionar menus */
     #iframe1Menu {
         top: 10px;
         left: 10px;
@@ -161,7 +161,7 @@ iframe {
         left: 10px;
     }
 
-    /* Posicionar botón */
+    /* Posicionar botão */
     #toggleButton {
         top: 10px;
         right: 10px;
@@ -169,21 +169,26 @@ iframe {
     }
 }
 
-/* Orientación horizontal en móviles */
+/* Orientação horizontal em dispositivos móveis */
 @media (max-width: 1300px) and (orientation: landscape) {
     html, body {
-        height: 100%; /* Asegurar que html y body ocupen 100% de la altura */
+        height: 100%; /* Assegurar que html e body ocupem 100% da altura */
         margin: 0;
         padding: 0;
     }
 
     #container {
-        height: 100%; /* Asegurar que el contenedor ocupe 100% de la altura */
-        width: 100%;  /* Asegurar que el contenedor ocupe el 100% del ancho */
-        flex-direction: row; /* Disposición horizontal */
+        height: 100%; /* Assegurar que o contêiner ocupe 100% da altura */
+        width: 100%;  /* Assegurar que o contêiner ocupe 100% do largura */
+        flex-direction: row; /* Disposição horizontal */
     }
 
-    /* Ocultar botón cronograma e iframe3 */
+    #iframe1, #iframe2 {
+        width: 50%;  /* Ambos os iframes ocupam 50% do largura */
+        height: 100%; /* Ambos os iframes ocupam 100% da altura */
+        display: block; /* Assegurar que permaneçam visíveis */
+    }
+    /* Ocultar botão cronograma e iframe3 */
     #toggleIframe3Button {
         display: none;
     }
@@ -192,7 +197,7 @@ iframe {
         display: none;
     }
 
-    /* Posicionar menús */
+    /* Posicionar menus */
     #iframe1Menu {
         top: 10px;
         left: 10px;
@@ -204,7 +209,7 @@ iframe {
         left: auto;
     }
 
-    /* Posicionar botón */
+    /* Posicionar botão */
     #toggleButton {
         top: 10px;
         right: 10px;
@@ -212,18 +217,18 @@ iframe {
     }
 }
 
-/* Estilos para la pantalla de inicio de sesión */
+/* Estilos para a tela de início de sessão */
 #loginOverlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #000000; /* Fondo negro completamente opaco */
+    background-color: #000000; /* Fundo preto completamente opaco */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2000; /* Superior a otros elementos */
+    z-index: 2000; /* Superior a outros elementos */
 }
 
 #loginForm {
@@ -275,38 +280,47 @@ iframe {
     display: none;
 }
 
-/* Media Query para pantallas con ancho o altura <= 768px */
+/* Media Query para telas com largura ou altura <= 768px */
 @media (max-width: 768px), (max-height: 768px) {
     #loginForm {
-        /* Reducir el padding al 50% */
+        /* Reduzir o padding em 50% */
         padding: 10px 15px; /* Original: 20px 30px */
 
-        /* Opcional: Ajustar el tamaño máximo del formulario */
-        max-width: 300px; /* Ajusta según necesidad */
+        /* Ajustar a largura máxima do formulário */
+        max-width: 300px; /* Ajuste conforme necessário */
 
-        /* Mantener el formulario centrado */
-        /* Ya está centrado por flexbox en #loginOverlay, no es necesario ajustar position */
+        /* Manter o formulário centrado */
+        /* Já está centrado por flexbox em #loginOverlay, não é necessário ajustar position */
     }
 
     #loginForm h2 {
-        /* Reducir el tamaño de la fuente al 80% */
-        font-size: 1.2em; /* Ajusta según necesidad */
+        /* Reduzir o tamanho da fonte em 20% */
+        font-size: 1.2em; /* Ajuste conforme necessário */
     }
 
     #loginForm label,
     #loginForm input,
     #loginForm button {
-        /* Reducir el tamaño de la fuente al 90% */
+        /* Reduzir o tamanho da fonte em 10% */
         font-size: 0.9em;
     }
 
     #loginForm input {
-        /* Reducir el padding de los inputs */
+        /* Reduzir o padding dos inputs */
         padding: 4px; /* Original: 8px */
     }
 
     #loginForm button {
-        /* Reducir el padding del botón */
+        /* Reduzir o padding do botão */
         padding: 5px; /* Original: 10px */
+    }
+
+    /* Ajustar o menu do iframe2 no modo vertical para alinhar à esquerda e centralizar verticalmente */
+    @media (max-width: 768px) and (orientation: portrait) {
+        #iframe2Menu {
+            top: 50%; /* Centralizar verticalmente */
+            left: 10px; /* Alinhar à esquerda */
+            transform: translateY(-50%);
+        }
     }
 }

@@ -186,7 +186,7 @@ iframe {
     #iframe1, #iframe2 {
         width: 50%;  /* Ambos iframes ocupan el 50% del ancho */
         height: 100%; /* Ambos iframes ocupan el 100% de la altura */
-        /*display: block; */ /* Asegurar que se mantengan visibles */
+        /* display: block; */ /* Comentado para evitar mostrar iframe2 por defecto */
     }
     /* Ocultar botón cronograma e iframe3 */
     #toggleIframe3Button {

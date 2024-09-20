@@ -87,7 +87,7 @@ toggleIframe3Button.addEventListener('click', () => {
 
 // Función para ajustar el layout
 function adjustLayout() {
-    const isMobile = window.innerWidth <= 768;
+    const isMobile = window.innerWidth <= 1300;
     const isPortrait = window.innerHeight > window.innerWidth;
 
     if (isMobile) {

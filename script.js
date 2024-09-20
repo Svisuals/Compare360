@@ -121,15 +121,15 @@ function adjustLayout() {
         if (iframe2.style.display === 'block') {
             iframe1.style.width = '50%';
             iframe2.style.width = '50%';
-            iframe2.style.height = '100%';  // Asegurarse de que iframe2 ocupe toda la altura
+            iframe2.style.height = '100%';  // Asegurar que iframe2 ocupe toda la altura
             iframe3.style.display = 'none';
         } else if (iframe3.style.display === 'block') {
             iframe1.style.width = '50%';
             iframe3.style.width = '50%';
-            iframe2.style.height = '0';  // Asegurarse de que iframe2 esté oculto correctamente
+            iframe2.style.height = '0';  // Asegurar que iframe2 esté oculto correctamente
         } else {
             iframe1.style.width = '100%';
-            iframe2.style.height = '0';  // Asegurarse de que iframe2 esté oculto correctamente
+            iframe2.style.height = '0';  // Asegurar que iframe2 esté oculto correctamente
         }
     }
 

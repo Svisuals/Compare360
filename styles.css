@@ -1,98 +1,65 @@
-/* Estilos generales */
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-}
-
-#container {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    flex-direction: row; /* Por defecto, dividir horizontalmente */
-}
-
-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    display: none; /* Inicialmente oculta todos los iframes */
-}
-
-#iframe1 {
-    display: block; /* Mostrar iframe1 por defecto */
-}
-
-#iframe2, #iframe3 {
+/* Menús desplegables */
+.dropdown-content {
     display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
 }
 
-/* Botones */
-#toggleButton {
-    position: fixed;
-    top: 10px;
-    left: calc(49%);
-    width: 32px;
-    height: 32px;
-    background: url('DUP.png') no-repeat center center;
-    background-size: cover;
-    border: none;
-    cursor: pointer;
-    z-index: 1000;
+.dropdown-content a {
+    color: black;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
 }
 
-#toggleIframe2ButtonMobile {
-    /* Ocultar este botón por defecto */
-    display: none;
+.dropdown-content a:hover {
+    background-color: #ddd;
 }
 
-#toggleIframe3Button {
-    position: fixed;
-    top: 10px;
-    left: 55px;
-    width: 32px;
-    height: 32px;
-    background: url('CRO.png') no-repeat center center;
-    background-size: cover;
-    border: none;
-    cursor: pointer;
-    z-index: 1000;
+/* Estilo unificado para mostrar el menú al agregar la clase 'show' */
+.dropdown.show .dropdown-content {
     display: block;
 }
 
-/* Menús desplegables */
-.dropdown {
-    position: fixed;
-    top: 10px;
-    z-index: 1001;
-}
+/* Alineación de los menús en móviles en orientación vertical */
+@media (max-width: 1300px) and (orientation: portrait) {
+    #container {
+        flex-direction: column;
+    }
 
-#iframe1Menu {
-    left: 10px;
-}
+    #iframe1,
+    #iframe2 {
+        width: 100%;
+    }
 
-#iframe2Menu {
-    right: 10px;
-    left: auto;
-}
+    #iframe1 {
+        height: 50%;
+    }
 
-.dropdown button {
-    background-color: #0c7a20;
-    color: white;
-    padding: 8px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-}
+    #iframe2 {
+        height: 50%;
+    }
 
-.dropdown button::after {
-    content: '';
-    display: inline-block;
-    margin-left: 5px;
-    vertical-align: middle;
-    border-width: 5px;
-    borde
+    /* Alinear menús desplegables */
+    #iframe1Menu {
+        top: 10px;
+        left: 10px;
+    }
+
+    #iframe2Menu {
+        top: calc(50% + 10px); /* Mantiene la separación vertical */
+        left: 10px; /* Alinear horizontalmente con el menú de iframe1 */
+    }
+
+    /* Alinear contenido de menús desplegables */
+    #iframe1MenuContent,
+    #iframe2MenuContent {
+        left: 0; /* Alinear los contenidos de ambos menús */
+        top: 40px; /* Asegurar que se muestre debajo del botón */
+    }
+}

@@ -98,29 +98,40 @@ iframe {
     border-color: white transparent transparent transparent;
 }
 
+/* Estilo mejorado para los menús desplegables */
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
-    min-width: 180px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    background-color: #ffffff; /* Fondo blanco */
+    min-width: 200px; /* Aumentar el tamaño mínimo */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3); /* Sombra suave para todo el menú */
+    border-radius: 8px; /* Bordes redondeados */
+    z-index: 1;
+    padding: 10px 0; /* Añadir padding vertical */
 }
 
 .dropdown-content a {
     color: black;
-    padding: 8px 12px;
+    padding: 12px 16px; /* Más espacio alrededor del texto */
     text-decoration: none;
     display: block;
+    font-weight: bold; /* Hacer el texto más destacado */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombreado del texto */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave en el hover */
+    border-radius: 5px; /* Bordes redondeados en cada enlace */
 }
 
 .dropdown-content a:hover {
-    background-color: #ddd;
+    background-color: #f1f1f1; /* Color de fondo en hover */
+    color: #0c7a20; /* Color de texto al pasar el mouse */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4); /* Más sombra en el hover */
 }
 
 /* Mostrar el menú al agregar la clase 'show' */
 .dropdown.show .dropdown-content {
     display: block;
 }
+
 
 /* Alinear el menú de iframe2 hacia la izquierda */
 #iframe2Menu .dropdown-content {

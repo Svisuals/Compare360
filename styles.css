@@ -224,7 +224,7 @@ iframe {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #000000; /* Fondo negro completamente opaco */
+    background: linear-gradient(135deg, #2f2f2f, #565656); /* Degradado basado en la imagen */
     display: flex;
     justify-content: center;
     align-items: center;

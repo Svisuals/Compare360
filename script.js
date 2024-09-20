@@ -102,12 +102,16 @@ function adjustLayout() {
             iframe2.style.width = '100%';
             iframe2.style.height = iframe2.style.display === 'block' ? '50%' : '0';
         } else {
-            // En orientación horizontal, ambos iframes ocupan el 50% del ancho y el 100% de la altura
-            iframe1.style.width = '50%';
+            // En orientación horizontal, ajustar según la visibilidad de iframe2
+            if (iframe2.style.display === 'none') {
+                iframe1.style.width = '100%';
+                iframe2.style.width = '0%';
+            } else {
+                iframe1.style.width = '50%';
+                iframe2.style.width = '50%';
+            }
             iframe1.style.height = '100%';
-            iframe2.style.width = '50%';
             iframe2.style.height = '100%';
-            iframe2.style.display = 'block'; // Asegurar que iframe2 sea visible si está activo
         }
     } else {
         // En modo escritorio, los iframes ocupan toda la altura y se distribuyen por ancho

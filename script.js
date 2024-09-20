@@ -102,7 +102,7 @@ function adjustLayout() {
             iframe2.style.width = '100%';
             iframe2.style.height = iframe2.style.display === 'block' ? '50%' : '0';
         } else {
-            // En orientación horizontal, ajustar según la visibilidad de iframe2
+            // En orientación horizontal o cuadrada, ajustar según la visibilidad de iframe2
             if (iframe2.style.display === 'none') {
                 iframe1.style.width = '100%';
                 iframe2.style.width = '0%';
@@ -137,6 +137,7 @@ function adjustLayout() {
     iframe1Menu.style.position = 'fixed';
     iframe2Menu.style.position = 'fixed';
 }
+
 window.addEventListener('resize', adjustLayout);
 window.addEventListener('orientationchange', adjustLayout);
 adjustLayout();

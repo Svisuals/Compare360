@@ -238,20 +238,19 @@ iframe {
 }
 
 #loginLogo {
-    max-width: 120px; /* Tamaño del logo */
+    max-width: 360px; /* Tamaño del logo */ 
     height: auto;
     margin-bottom: 20px;
 }
 
 /* Estilos para el formulario de inicio de sesión */
 #loginForm {
-    background-color: #ffffff;
+    background-color: transparent; /* Hacer el fondo transparente */
+    border: none; /* Eliminar el borde */
+    box-shadow: none; /* Eliminar las sombras */
     padding: 20px 30px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     max-width: 350px;
-    width: 100%; /* Para que el formulario no exceda el 100% */
+    width: 100%;
     font-family: 'Open Sans', sans-serif;
     display: flex;
     flex-direction: column;
@@ -260,7 +259,7 @@ iframe {
 
 #loginForm h2 {
     margin-bottom: 20px;
-    color: #0c7a20;
+    color: white; /* Color del texto en blanco */
     font-size: 1.5em;
     font-weight: bold;
 }
@@ -269,7 +268,7 @@ iframe {
     display: block;
     margin: 10px 0 5px;
     text-align: left;
-    color: #333;
+    color: white; /* Color de las etiquetas en blanco */
     font-size: 0.95em;
 }
 
@@ -280,6 +279,12 @@ iframe {
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 0.95em;
+    background-color: #f5f5f5; /* Fondo claro para los inputs */
+    color: #ffffff; /* Texto blanco en los inputs */
+}
+
+#loginForm input::placeholder {
+    color: #a9a9a9; /* Color para los placeholders */
 }
 
 #loginForm button {
@@ -292,6 +297,8 @@ iframe {
     cursor: pointer;
     font-size: 1em;
     transition: background-color 0.3s ease;
+    margin-top: 10px; /* Espacio entre el botón y los inputs */
+    text-align: center;
 }
 
 #loginForm button:hover {
@@ -302,6 +309,13 @@ iframe {
     color: red;
     margin-top: 10px;
     display: none;
+}
+
+/* Centrar botón */
+#loginForm button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Media Query para pantallas más pequeñas */
@@ -329,4 +343,3 @@ iframe {
         padding: 5px;
     }
 }
-

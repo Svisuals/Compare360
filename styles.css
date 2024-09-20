@@ -132,7 +132,7 @@ iframe {
 /* Media Queries */
 
 /* Dispositivos móviles */
-@media (max-width: 768px) {
+@media (max-width: 1300px) {
     #toggleButton {
         display: block; /* Mostrar botón DUP en móviles */
         position: fixed;
@@ -212,7 +212,7 @@ iframe {
 }
 
 /* Orientación horizontal en móviles */
-@media (max-width: 768px) and (orientation: landscape) {
+@media (max-width: 1300px) and (orientation: landscape) {
     html, body {
         height: 100%; /* Asegurar que html y body ocupen 100% de la altura */
         margin: 0;

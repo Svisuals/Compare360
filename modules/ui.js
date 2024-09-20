@@ -1,34 +1,63 @@
 // modules/ui.js
-export const UIEnhancements = (() => {
-    const init = () => {
-        setupResponsiveIframes();
-        setupAccessibilityFeatures();
-    };
 
-    const setupResponsiveIframes = () => {
-        // Implementar lazy loading adicional si es necesario
-        // Actualmente, los iframes tienen loading="lazy", pero puedes añadir más lógica aquí
-    };
+import { updateIframeSrc } from './iframe.js';
 
-    const setupAccessibilityFeatures = () => {
-        // Asegurar que los botones sean accesibles via teclado
-        const buttons = document.querySelectorAll('#controls button, .dropdown button');
-        buttons.forEach(button => {
-            button.setAttribute('tabindex', '0');
-        });
+export function initializeUI(adjustLayoutCallback) {
+    const iframe1Menu = document.getElementById('iframe1Menu');
+    const iframe2Menu = document.getElementById('iframe2Menu');
+    const iframe1MenuButton = document.getElementById('iframe1MenuButton');
+    const iframe2MenuButton = document.getElementById('iframe2MenuButton');
+    const iframe1MenuContent = document.getElementById('iframe1MenuContent');
+    const iframe2MenuContent = document.getElementById('iframe2MenuContent');
+    const iframe1 = document.getElementById('iframe1');
+    const iframe2 = document.getElementById('iframe2');
+    const iframe3 = document.getElementById('iframe3');
+    const toggleIframe3Button = document.getElementById('toggleIframe3Button');
 
-        // Mejorar la navegación con el teclado
-        const dropdowns = document.querySelectorAll('.dropdown');
-        dropdowns.forEach(dropdown => {
-            const button = dropdown.querySelector('button');
-            button.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    button.click();
-                }
-            });
-        });
-    };
+    // Event listener para el botón del menú de iframe1
+    iframe1MenuButton.addEventListener('click', () => {
+        iframe1Menu.classList.toggle('show');
+    });
 
-    return { init };
-})();
+    // Event listener para los enlaces del menú de iframe1
+    iframe1MenuContent.addEventListener('click', (event) => {
+        if (event.target.tagName === 'A') {
+            updateIframeSrc(iframe1, event.target.href);
+            iframe1Menu.classList.remove('show');
+            event.preventDefault();
+        }
+    });
+
+    // Event listener para el botón del menú de iframe2
+    iframe2MenuButton.addEventListener('click', () => {
+        iframe2Menu.classList.toggle('show');
+    });
+
+    // Event listener para los enlaces del menú de iframe2
+    iframe2MenuContent.addEventListener('click', (event) => {
+        if (event.target.tagName === 'A') {
+            updateIframeSrc(iframe2, event.target.href);
+            iframe2Menu.classList.remove('show');
+            event.preventDefault();
+        }
+    });
+
+    // Cerrar los menús si el usuario hace clic fuera de ellos
+    window.addEventListener('click', (event) => {
+        if (!event.target.matches('#iframe1MenuButton')) {
+            iframe1Menu.classList.remove('show');
+        }
+        if (!event.target.matches('#iframe2MenuButton')) {
+            iframe2Menu.classList.remove('show');
+        }
+    });
+
+    // Función para ajustar el layout, se pasa como callback
+    function adjustLayout() {
+        adjustLayoutCallback();
+    }
+
+    // Escuchar eventos de cambio de tamaño y orientación
+    window.addEventListener('resize', adjustLayout);
+    window.addEventListener('orientationchange', adjustLayout);
+}

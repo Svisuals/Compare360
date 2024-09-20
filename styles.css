@@ -83,4 +83,237 @@ iframe {
 .dropdown button {
     background-color: #0c7a20;
     color: white;
-   
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    position: relative; /* Para o pseudo-elemento ficar corretamente posicionado */
+}
+
+.dropdown button::after {
+    content: '';
+    display: inline-block;
+    margin-left: 5px;
+    vertical-align: middle;
+    border-width: 5px;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+}
+
+/* Ajustar a cor da flecha quando o menu estiver aberto */
+.dropdown.show button::after {
+    border-color: transparent transparent white transparent; /* Flecha para cima */
+}
+
+/* Dropdown content */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 180px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+/* Mostrar o menu ao adicionar a classe 'show' */
+.dropdown.show .dropdown-content {
+    display: block;
+}
+
+/* Media Queries */
+
+/* Media Query para telas com largura ou altura <= 768px */
+@media (max-width: 768px), (max-height: 768px) {
+    #loginForm {
+        /* Reduzir o padding em 50% */
+        padding: 10px 15px; /* Original: 20px 30px */
+
+        /* Ajustar a largura máxima do formulário */
+        max-width: 300px; /* Ajuste conforme necessário */
+
+        /* Manter o formulário centrado */
+        /* Já está centrado por flexbox em #loginOverlay, não é necessário ajustar position */
+    }
+
+    #loginForm h2 {
+        /* Reduzir o tamanho da fonte em 20% */
+        font-size: 1.2em; /* Ajuste conforme necessário */
+    }
+
+    #loginForm label,
+    #loginForm input,
+    #loginForm button {
+        /* Reduzir o tamanho da fonte em 10% */
+        font-size: 0.9em;
+    }
+
+    #loginForm input {
+        /* Reduzir o padding dos inputs */
+        padding: 4px; /* Original: 8px */
+    }
+
+    #loginForm button {
+        /* Reduzir o padding do botão */
+        padding: 5px; /* Original: 10px */
+    }
+}
+
+/* Orientação vertical em dispositivos móveis */
+@media (max-width: 768px) and (orientation: portrait) {
+    #container {
+        flex-direction: column;
+    }
+
+    #iframe1,
+    #iframe2 {
+        width: 100%;
+    }
+
+    #iframe1 {
+        height: 50%;
+    }
+
+    #iframe2 {
+        height: 50%;
+    }
+
+    /* Posicionar menus */
+    #iframe1Menu {
+        top: 10px;
+        left: 10px;
+    }
+
+    #iframe2Menu {
+        top: 10px; /* Revertido para o topo */
+        left: 10px; /* Alinhado à esquerda */
+        transform: none; /* Remover transformações */
+    }
+
+    /* Posicionar botão */
+    #toggleButton {
+        top: 10px;
+        right: 10px;
+        left: auto;
+    }
+}
+
+/* Orientação horizontal em dispositivos móveis */
+@media (max-width: 1300px) and (orientation: landscape) {
+    html, body {
+        height: 100%; /* Assegurar que html e body ocupem 100% da altura */
+        margin: 0;
+        padding: 0;
+    }
+
+    #container {
+        height: 100%; /* Assegurar que o contêiner ocupe 100% da altura */
+        width: 100%;  /* Assegurar que o contêiner ocupe 100% do largura */
+        flex-direction: row; /* Disposição horizontal */
+    }
+
+    #iframe1, #iframe2 {
+        width: 50%;  /* Ambos os iframes ocupam 50% do largura */
+        height: 100%; /* Ambos os iframes ocupam 100% da altura */
+        display: block; /* Assegurar que permaneçam visíveis */
+    }
+    /* Ocultar botão cronograma e iframe3 */
+    #toggleIframe3Button {
+        display: none;
+    }
+
+    #iframe3 {
+        display: none;
+    }
+
+    /* Posicionar menus */
+    #iframe1Menu {
+        top: 10px;
+        left: 10px;
+    }
+
+    #iframe2Menu {
+        top: 10px;
+        right: 10px;
+        left: auto;
+    }
+
+    /* Posicionar botão */
+    #toggleButton {
+        top: 10px;
+        right: 10px;
+        left: calc(49%);
+    }
+}
+
+/* Estilos para a tela de início de sessão */
+#loginOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000; /* Fundo preto completamente opaco */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* Superior a outros elementos */
+}
+
+#loginForm {
+    background-color: #ffffff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+#loginForm h2 {
+    margin-bottom: 20px;
+    color: #0c7a20;
+}
+
+#loginForm label {
+    display: block;
+    margin: 10px 0 5px;
+    text-align: left;
+    color: #333;
+}
+
+#loginForm input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#loginForm button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0c7a20;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#loginForm button:hover {
+    background-color: #095c16;
+}
+
+.error {
+    color: red;
+    margin-top: 10px;
+    display: none;
+}

@@ -216,15 +216,3 @@ iframe {
         left: calc(49%);
     }
 }
-
-/* Asegurar que en pantallas cuadradas, flex-direction sea row */
-@media (max-width: 1300px) and (min-aspect-ratio: 1/1) {
-    #container {
-        flex-direction: row !important;
-    }
-
-    #iframe1, #iframe2 {
-        width: 50% !important;
-        height: 100% !important;
-    }
-}

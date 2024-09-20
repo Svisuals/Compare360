@@ -23,7 +23,7 @@ authForm.addEventListener('submit', (event) => {
     }
 });
 
-// Obter elementos do DOM
+// Resto do código existente
 const toggleButton = document.getElementById('toggleButton');
 const iframe1 = document.getElementById('iframe1');
 const iframe2 = document.getElementById('iframe2');
@@ -72,7 +72,7 @@ iframe2MenuContent.addEventListener('click', (event) => {
     }
 });
 
-// Event listener para o botão 'DUP'
+// Event listener para o botão 'DUP' (agora único)
 toggleButton.addEventListener('click', () => {
     const isMobileLandscape = window.innerWidth <= 1300 && window.innerHeight < window.innerWidth;
 
@@ -82,11 +82,9 @@ toggleButton.addEventListener('click', () => {
             iframe2.style.display = 'block';
             iframe1.style.width = '50%';
             iframe2.style.width = '50%';
-            iframe2Menu.style.display = 'block'; // Mostrar menu do iframe2
         } else {
             iframe2.style.display = 'none';
             iframe1.style.width = '100%';
-            iframe2Menu.style.display = 'none'; // Ocultar menu do iframe2
         }
     } else {
         // Modo normal (desktop ou móvel vertical)
@@ -165,4 +163,34 @@ function adjustLayout() {
         if (iframe2.style.display === 'block') {
             iframe1.style.width = '50%';
             iframe2.style.width = '50%';
-            iframe2.style.height = '100
+            iframe2.style.height = '100%';  // Assegurar que iframe2 ocupe toda a altura
+            iframe3.style.display = 'none';
+        } else if (iframe3.style.display === 'block') {
+            iframe1.style.width = '50%';
+            iframe3.style.width = '50%';
+            iframe2.style.height = '0';  // Assegurar que iframe2 esteja oculto corretamente
+        } else {
+            iframe1.style.width = '100%';
+            iframe2.style.height = '0';  // Assegurar que iframe2 esteja oculto corretamente
+        }
+    }
+
+    // Assegurar que os menus não afetem a posição dos botões
+    iframe1Menu.style.position = 'fixed';
+    iframe2Menu.style.position = 'fixed';
+}
+
+// Eventos de redimensionamento e mudança de orientação
+window.addEventListener('resize', adjustLayout);
+window.addEventListener('orientationchange', adjustLayout);
+adjustLayout();
+
+// Fechar o menu se o usuário clicar fora dele
+window.onclick = function(event) {
+    if (!event.target.matches('#iframe1MenuButton')) {
+        iframe1Menu.classList.remove('show');
+    }
+    if (!event.target.matches('#iframe2MenuButton')) {
+        iframe2Menu.classList.remove('show');
+    }
+};

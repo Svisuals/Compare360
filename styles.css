@@ -157,8 +157,8 @@ iframe {
     }
 
     #iframe2Menu {
-        top: calc(50% + 10px);
-        left: 10px;
+        top: calc(50% + 10px); /* Mantiene la separación vertical */
+        left: 10px; /* Ajusta para alinear horizontalmente con el de arriba */
     }
 
     /* Posicionar botón */

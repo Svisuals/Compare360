@@ -269,7 +269,7 @@ iframe {
     display: block;
     margin: 10px 0 5px;
     text-align: left;
-    color: white; /* Color de las etiquetas en blanco */
+    color: #000000; /* Cambia las etiquetas a color negro */
     font-size: 0.95em;
 }
 
@@ -281,8 +281,9 @@ iframe {
     border-radius: 6px;
     font-size: 0.95em;
     background-color: #f5f5f5; /* Fondo claro para los inputs */
-    color: #ffffff; /* Texto blanco en los inputs */
+    color: #000000; /* Cambia el texto dentro de los inputs a negro */
 }
+
 
 #loginForm input::placeholder {
     color: #a9a9a9; /* Color para los placeholders */

@@ -238,7 +238,7 @@ iframe {
 }
 
 #loginLogo {
-    max-width: 120px; /* Tamaño del logo */
+    max-width: 360px; /* Tamaño del logo */
     height: auto;
     margin-bottom: 20px;
 }

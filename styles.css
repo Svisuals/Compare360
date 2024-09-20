@@ -87,6 +87,7 @@ iframe {
     font-size: 16px;
     border: none;
     cursor: pointer;
+    position: relative; /* Para o pseudo-elemento ficar corretamente posicionado */
 }
 
 .dropdown button::after {
@@ -99,6 +100,12 @@ iframe {
     border-color: white transparent transparent transparent;
 }
 
+/* Ajustar a cor da flecha quando o menu estiver aberto */
+.dropdown.show button::after {
+    border-color: transparent transparent white transparent; /* Flecha para cima */
+}
+
+/* Dropdown content */
 .dropdown-content {
     display: none;
     position: absolute;
@@ -123,16 +130,46 @@ iframe {
     display: block;
 }
 
-/* Alinhar o menu do iframe2 para a direita */
-#iframe2Menu .dropdown-content {
-    right: 0;
-    left: auto;
-}
-
 /* Media Queries */
 
+/* Media Query para telas com largura ou altura <= 768px */
+@media (max-width: 768px), (max-height: 768px) {
+    #loginForm {
+        /* Reduzir o padding em 50% */
+        padding: 10px 15px; /* Original: 20px 30px */
+
+        /* Ajustar a largura máxima do formulário */
+        max-width: 300px; /* Ajuste conforme necessário */
+
+        /* Manter o formulário centrado */
+        /* Já está centrado por flexbox em #loginOverlay, não é necessário ajustar position */
+    }
+
+    #loginForm h2 {
+        /* Reduzir o tamanho da fonte em 20% */
+        font-size: 1.2em; /* Ajuste conforme necessário */
+    }
+
+    #loginForm label,
+    #loginForm input,
+    #loginForm button {
+        /* Reduzir o tamanho da fonte em 10% */
+        font-size: 0.9em;
+    }
+
+    #loginForm input {
+        /* Reduzir o padding dos inputs */
+        padding: 4px; /* Original: 8px */
+    }
+
+    #loginForm button {
+        /* Reduzir o padding do botão */
+        padding: 5px; /* Original: 10px */
+    }
+}
+
 /* Orientação vertical em dispositivos móveis */
-@media (max-width: 1300px) and (orientation: portrait) {
+@media (max-width: 768px) and (orientation: portrait) {
     #container {
         flex-direction: column;
     }
@@ -157,12 +194,12 @@ iframe {
     }
 
     #iframe2Menu {
-        top: 10px; /* Alinhar al top */
-        left: 10px; /* Alinhar a la izquierda */
-        transform: none; /* Remover transformaciones */
+        top: 10px; /* Revertido para o topo */
+        left: 10px; /* Alinhado à esquerda */
+        transform: none; /* Remover transformações */
     }
 
-    /* Posicionar botón */
+    /* Posicionar botão */
     #toggleButton {
         top: 10px;
         right: 10px;
@@ -210,7 +247,7 @@ iframe {
         left: auto;
     }
 
-    /* Posicionar botón */
+    /* Posicionar botão */
     #toggleButton {
         top: 10px;
         right: 10px;
@@ -279,40 +316,4 @@ iframe {
     color: red;
     margin-top: 10px;
     display: none;
-}
-
-/* Media Query para telas com largura ou altura <= 768px */
-@media (max-width: 768px), (max-height: 768px) {
-    #loginForm {
-        /* Reduzir o padding em 50% */
-        padding: 10px 15px; /* Original: 20px 30px */
-
-        /* Ajustar a largura máxima do formulário */
-        max-width: 300px; /* Ajuste conforme necessário */
-
-        /* Manter o formulário centrado */
-        /* Já está centrado por flexbox em #loginOverlay, não é necessário ajustar position */
-    }
-
-    #loginForm h2 {
-        /* Reduzir o tamanho da fonte em 20% */
-        font-size: 1.2em; /* Ajuste conforme necessário */
-    }
-
-    #loginForm label,
-    #loginForm input,
-    #loginForm button {
-        /* Reduzir o tamanho da fonte em 10% */
-        font-size: 0.9em;
-    }
-
-    #loginForm input {
-        /* Reduzir o padding dos inputs */
-        padding: 4px; /* Original: 8px */
-    }
-
-    #loginForm button {
-        /* Reduzir o padding do botão */
-        padding: 5px; /* Original: 10px */
-    }
 }

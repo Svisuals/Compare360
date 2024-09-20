@@ -21,7 +21,6 @@ iframe {
     height: 100%;
     border: none;
     display: none; /* Inicialmente oculta todos los iframes */
-    transition: width 0.3s ease, height 0.3s ease; /* Transiciones suaves */
 }
 
 #iframe1 {

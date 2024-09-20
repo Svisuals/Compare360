@@ -46,7 +46,6 @@ iframe {
 }
 
 #toggleIframe2ButtonMobile {
-    /* Ocultar este botón por defecto */
     display: none;
 }
 
@@ -172,23 +171,23 @@ iframe {
 /* Orientación horizontal en móviles */
 @media (max-width: 1300px) and (orientation: landscape) {
     html, body {
-        height: 100%; /* Asegurar que html y body ocupen 100% de la altura */
+        height: 100%;
         margin: 0;
         padding: 0;
     }
 
     #container {
-        height: 100%; /* Asegurar que el contenedor ocupe 100% de la altura */
-        width: 100%;  /* Asegurar que el contenedor ocupe el 100% del ancho */
-        flex-direction: row; /* Disposición horizontal */
+        height: 100%;
+        width: 100%;
+        flex-direction: row;
     }
 
     #iframe1, #iframe2 {
-        width: 50%;  /* Ambos iframes ocupan el 50% del ancho */
-        height: 100%; /* Ambos iframes ocupan el 100% de la altura */
-        display: block; /* Asegurar que se mantengan visibles */
+        width: 50%;
+        height: 100%;
+        display: block;
     }
-    /* Ocultar botón cronograma e iframe3 */
+
     #toggleIframe3Button {
         display: none;
     }
@@ -224,25 +223,29 @@ iframe {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #2f2f2f, #565656); /* Degradado gris oscuro */
+    background: linear-gradient(135deg, #2f2f2f, #565656);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 2000; /* Superior a otros elementos */
-    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.7); /* Sombra interna para el efecto de profundidad */
+    z-index: 2000;
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.7); /* Sombra interna */
 }
 
 #loginForm {
     background-color: #ffffff;
     padding: 20px 30px;
-    border-radius: 8px;
+    border-radius: 12px;
     text-align: center;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); /* Sombra externa suave */
+    max-width: 350px;
+    font-family: 'Open Sans', sans-serif;
 }
 
 #loginForm h2 {
     margin-bottom: 20px;
     color: #0c7a20;
+    font-size: 1.5em;
+    font-weight: bold;
 }
 
 #loginForm label {
@@ -250,14 +253,16 @@ iframe {
     margin: 10px 0 5px;
     text-align: left;
     color: #333;
+    font-size: 0.95em;
 }
 
 #loginForm input {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
+    padding: 10px;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 6px;
+    font-size: 0.95em;
 }
 
 #loginForm button {
@@ -266,53 +271,44 @@ iframe {
     background-color: #0c7a20;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
 }
 
 #loginForm button:hover {
     background-color: #095c16;
 }
 
-.error {
+#errorMessage {
     color: red;
     margin-top: 10px;
     display: none;
 }
 
-/* Media Query para pantallas con ancho o altura <= 768px */
+/* Media Query para pantallas más pequeñas */
 @media (max-width: 768px), (max-height: 768px) {
     #loginForm {
-        /* Reducir el padding al 50% */
-        padding: 10px 15px; /* Original: 20px 30px */
-
-        /* Opcional: Ajustar el tamaño máximo del formulario */
-        max-width: 300px; /* Ajusta según necesidad */
-
-        /* Mantener el formulario centrado */
-        /* Ya está centrado por flexbox en #loginOverlay, no es necesario ajustar position */
+        padding: 10px 15px;
+        max-width: 300px;
     }
 
     #loginForm h2 {
-        /* Reducir el tamaño de la fuente al 80% */
-        font-size: 1.2em; /* Ajusta según necesidad */
+        font-size: 1.2em;
     }
 
     #loginForm label,
     #loginForm input,
     #loginForm button {
-        /* Reducir el tamaño de la fuente al 90% */
         font-size: 0.9em;
     }
 
     #loginForm input {
-        /* Reducir el padding de los inputs */
-        padding: 4px; /* Original: 8px */
+        padding: 4px;
     }
 
     #loginForm button {
-        /* Reducir el padding del botón */
-        padding: 5px; /* Original: 10px */
+        padding: 5px;
     }
 }

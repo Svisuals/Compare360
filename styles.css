@@ -174,7 +174,7 @@ iframe {
 }
 
 /* Orientación vertical en móviles */
-@media (max-width: 768px) and (orientation: portrait) {
+@media (max-width: 1300px) and (orientation: portrait) {
     #container {
         flex-direction: column;
     }

@@ -131,48 +131,6 @@ iframe {
 
 /* Media Queries */
 
-/* Dispositivos móviles */
-@media (max-width: 1300px) {
-    #toggleButton {
-        display: block; /* Mostrar botón DUP en móviles */
-        position: fixed;
-        top: 10px;
-        right: 10px; /* Alinear a la derecha */
-        left: auto;   /* Anular propiedad 'left' */
-    }
-
-    #toggleIframe3Button {
-        display: none; /* Ocultar botón cronograma en móviles */
-    }
-
-    #container {
-        flex-direction: column; /* Disposición vertical */
-    }
-
-    iframe {
-        width: 100%;
-        height: 100%;
-    }
-
-    /* Ocultar iframe2 e iframe3 en móviles inicialmente */
-    #iframe2,
-    #iframe3 {
-        display: none;
-    }
-
-    /* Posicionar el menú de iframe2 a la izquierda en móviles */
-    #iframe2Menu {
-        left: 10px;
-        right: auto;
-    }
-
-    /* Alinear el menú de iframe2 hacia la izquierda */
-    #iframe2Menu .dropdown-content {
-        left: 0;
-        right: auto;
-    }
-}
-
 /* Orientación vertical en móviles */
 @media (max-width: 1300px) and (orientation: portrait) {
     #container {
@@ -254,6 +212,6 @@ iframe {
     #toggleButton {
         top: 10px;
         right: 10px;
-        left: calc(50%);
+        left: calc(49%);
     }
 }

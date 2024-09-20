@@ -64,7 +64,7 @@ iframe {
     display: block;
 }
 
-/* Menús desplegables */
+/* Menus dropdown */
 .dropdown {
     position: fixed;
     top: 10px;
@@ -123,7 +123,7 @@ iframe {
     display: block;
 }
 
-/* Alinear o menu do iframe2 para a esquerda */
+/* Alinear o menu do iframe2 para a direita */
 #iframe2Menu .dropdown-content {
     right: 0;
     left: auto;
@@ -157,8 +157,9 @@ iframe {
     }
 
     #iframe2Menu {
-        top: calc(50% + 10px);
-        left: 10px;
+        top: 10px; /* Revertido para o topo */
+        left: 10px; /* Alinhado à esquerda */
+        transform: none; /* Removido o translateY */
     }
 
     /* Posicionar botão */
@@ -313,14 +314,5 @@ iframe {
     #loginForm button {
         /* Reduzir o padding do botão */
         padding: 5px; /* Original: 10px */
-    }
-
-    /* Ajustar o menu do iframe2 no modo vertical para alinhar à esquerda e centralizar verticalmente */
-    @media (max-width: 768px) and (orientation: portrait) {
-        #iframe2Menu {
-            top: 50%; /* Centralizar verticalmente */
-            left: 10px; /* Alinhar à esquerda */
-            transform: translateY(-50%);
-        }
     }
 }

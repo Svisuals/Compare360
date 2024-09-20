@@ -158,7 +158,16 @@ iframe {
 
     #iframe2Menu {
         top: calc(50% + 10px); /* Mantiene la separación vertical */
-        left: 10px; /* Ajusta para alinear horizontalmente con el de arriba */
+        left: 10px; /* Alinear con el menú de iframe1 */
+    }
+
+    /* Menús desplegables */
+    #iframe1MenuContent {
+        left: 10px; /* Alinear el contenido del menú desplegable de iframe1 */
+    }
+
+    #iframe2MenuContent {
+        left: 10px; /* Alinear el contenido del menú desplegable de iframe2 */
     }
 
     /* Posicionar botón */
@@ -285,33 +294,24 @@ iframe {
     #loginForm {
         /* Reducir el padding al 50% */
         padding: 10px 15px; /* Original: 20px 30px */
-
-        /* Opcional: Ajustar el tamaño máximo del formulario */
         max-width: 300px; /* Ajusta según necesidad */
-
-        /* Mantener el formulario centrado */
-        /* Ya está centrado por flexbox en #loginOverlay, no es necesario ajustar position */
     }
 
     #loginForm h2 {
-        /* Reducir el tamaño de la fuente al 80% */
         font-size: 1.2em; /* Ajusta según necesidad */
     }
 
     #loginForm label,
     #loginForm input,
     #loginForm button {
-        /* Reducir el tamaño de la fuente al 90% */
         font-size: 0.9em;
     }
 
     #loginForm input {
-        /* Reducir el padding de los inputs */
         padding: 4px; /* Original: 8px */
     }
 
     #loginForm button {
-        /* Reducir el padding del botón */
         padding: 5px; /* Original: 10px */
     }
 }

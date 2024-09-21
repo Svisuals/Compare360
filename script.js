@@ -117,7 +117,7 @@ function adjustLayout() {
     const isPortrait = window.innerHeight > window.innerWidth;
 
     if (isMobile) {
-        // En modo móvil, ocultamos iframe3
+        // En modo móvil, ocultamos iframe3 y su botón
         iframe3.style.display = 'none';
         toggleIframe3Button.style.display = 'none';
 
@@ -128,12 +128,18 @@ function adjustLayout() {
             iframe2.style.width = '100%';
             iframe2.style.height = window.getComputedStyle(iframe2).display === 'block' ? '50%' : '0';
         } else {
-            // En orientación horizontal, ambos iframes ocupan el 50% del ancho y el 100% de la altura
-            iframe1.style.width = '50%';
-            iframe1.style.height = '100%';
-            iframe2.style.width = '50%';
-            iframe2.style.height = '100%';
-            iframe2.style.display = 'block'; // Asegurar que iframe2 sea visible si está activo
+            // En orientación horizontal, mostrar u ocultar iframe2 según su estado actual
+            if (window.getComputedStyle(iframe2).display === 'block') {
+                iframe1.style.width = '50%';
+                iframe1.style.height = '100%';
+                iframe2.style.width = '50%';
+                iframe2.style.height = '100%';
+            } else {
+                iframe1.style.width = '100%';
+                iframe1.style.height = '100%';
+                iframe2.style.width = '0';
+                iframe2.style.height = '0';
+            }
         }
     } else {
         // En modo escritorio, los iframes ocupan toda la altura y se distribuyen por ancho

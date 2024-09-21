@@ -74,7 +74,7 @@ iframe2MenuContent.addEventListener('click', (event) => {
 
 // Event listener para el botón 'DUP' (ahora único)
 toggleButton.addEventListener('click', () => {
-    if (iframe2.style.display === 'none') {
+    if (window.getComputedStyle(iframe2).display === 'none') {
         iframe2.style.display = 'block';
         iframe2Menu.style.display = 'block'; // Mostrar menú de iframe2
         iframe1.style.width = '50%';
@@ -94,7 +94,7 @@ toggleButton.addEventListener('click', () => {
 
 // Event listener para el botón del cronograma
 toggleIframe3Button.addEventListener('click', () => {
-    if (iframe3.style.display === 'none') {
+    if (window.getComputedStyle(iframe3).display === 'none') {
         iframe3.style.display = 'block';
         iframe1.style.width = '50%';
         iframe3.style.width = '50%';
@@ -117,60 +117,42 @@ function adjustLayout() {
     const isPortrait = window.innerHeight > window.innerWidth;
 
     if (isMobile) {
-        // En modo móvil, ocultamos iframe3 y su botón
+        // En modo móvil, ocultamos iframe3
         iframe3.style.display = 'none';
         toggleIframe3Button.style.display = 'none';
 
         if (isPortrait) {
             // En orientación vertical, iframes dividen la altura
             iframe1.style.width = '100%';
-            iframe1.style.height = iframe2.style.display === 'block' ? '50%' : '100%';
+            iframe1.style.height = window.getComputedStyle(iframe2).display === 'block' ? '50%' : '100%';
             iframe2.style.width = '100%';
-            iframe2.style.height = iframe2.style.display === 'block' ? '50%' : '0';
-            iframe2.style.display = iframe2.style.display === 'block' ? 'block' : 'none';
-
-            // Mostrar botones y menús necesarios
-            toggleButton.style.display = 'block';
-            iframe1Menu.style.display = 'block';
+            iframe2.style.height = window.getComputedStyle(iframe2).display === 'block' ? '50%' : '0';
         } else {
-            // En orientación horizontal, mostrar solo iframe1
-            iframe1.style.width = '100%';
+            // En orientación horizontal, ambos iframes ocupan el 50% del ancho y el 100% de la altura
+            iframe1.style.width = '50%';
             iframe1.style.height = '100%';
-            iframe2.style.display = 'none';
-            iframe2Menu.style.display = 'none';
-            iframe2.style.width = '0';
-            iframe2.style.height = '0';
-
-            // Ocultar botones y menús adicionales
-            toggleButton.style.display = 'none';
-            iframe2Menu.style.display = 'none';
-            iframe1Menu.style.display = 'block';
+            iframe2.style.width = '50%';
+            iframe2.style.height = '100%';
+            iframe2.style.display = 'block'; // Asegurar que iframe2 sea visible si está activo
         }
     } else {
         // En modo escritorio, los iframes ocupan toda la altura y se distribuyen por ancho
         iframe1.style.height = '100%';
         toggleIframe3Button.style.display = 'block';
 
-        if (iframe2.style.display === 'block') {
+        if (window.getComputedStyle(iframe2).display === 'block') {
             iframe1.style.width = '50%';
             iframe2.style.width = '50%';
-            iframe2.style.height = '100%';
+            iframe2.style.height = '100%';  // Asegurarse de que iframe2 ocupe toda la altura
             iframe3.style.display = 'none';
-        } else if (iframe3.style.display === 'block') {
+        } else if (window.getComputedStyle(iframe3).display === 'block') {
             iframe1.style.width = '50%';
             iframe3.style.width = '50%';
-            iframe2.style.display = 'none';
-            iframe2.style.height = '0';
+            iframe2.style.height = '0';  // Asegurarse de que iframe2 esté oculto correctamente
         } else {
             iframe1.style.width = '100%';
-            iframe2.style.display = 'none';
-            iframe2.style.height = '0';
+            iframe2.style.height = '0';  // Asegurar que iframe2 esté oculto correctamente
         }
-
-        // Mostrar botones y menús necesarios
-        toggleButton.style.display = 'block';
-        iframe1Menu.style.display = 'block';
-        iframe2Menu.style.display = 'block';
     }
 
     // Asegurar que los menús no afecten la posición de los botones
@@ -184,10 +166,10 @@ adjustLayout();
 
 // Cerrar el menú si el usuario hace clic fuera de él
 window.onclick = function(event) {
-    if (!event.target.matches('#iframe1MenuButton')) {
+    if (!event.target.closest('#iframe1MenuButton')) {
         iframe1Menu.classList.remove('show');
     }
-    if (!event.target.matches('#iframe2MenuButton')) {
+    if (!event.target.closest('#iframe2MenuButton')) {
         iframe2Menu.classList.remove('show');
     }
 };

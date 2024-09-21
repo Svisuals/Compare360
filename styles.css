@@ -159,14 +159,21 @@ iframe {
         height: 50%;
     }   
 
+    /* Posicionar menú del iframe2 */
     #iframe2Menu {
         top: calc(50% + 10px);
         left: 10px;    
     }
 
-    /* Ajustar dimensiones del contenido del menú de iframe2 */
+    /* Ajustar dimensiones del botón del menú del iframe2 */
+    #iframe2Menu button {
+        padding: 8px;         /* Igual que el botón del iframe1 */
+        font-size: 16px;      /* Igual que el botón del iframe1 */
+    }
+
+    /* Ajustar dimensiones del contenido del menú del iframe2 */
     #iframe2Menu .dropdown-content {
-        min-width: 200px; /* Igual que el menú del iframe1 */
+        min-width: 200px;     /* Igual que el menú del iframe1 */
     }
 
     /* Posicionar botón */
@@ -254,97 +261,4 @@ iframe {
 
 /* Estilos para el formulario de inicio de sesión */
 #loginForm {
-    background-color: transparent; /* Hacer el fondo transparente */
-    border: none; /* Eliminar el borde */
-    box-shadow: none; /* Eliminar las sombras */
-    padding: 20px 30px;
-    max-width: 350px;
-    width: 100%;
-    font-family: 'Open Sans', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centra el contenido del formulario */
-}
-
-#loginForm h2 {
-    margin-bottom: 20px;
-    color: white; /* Color del texto en blanco */
-    font-size: 1.5em;
-    font-weight: bold;
-}
-
-#loginForm label {
-    display: block;
-    margin: 10px 0 5px;
-    text-align: left;
-    color: #000000; /* Cambia las etiquetas a color negro */
-    font-size: 0.95em;
-}
-
-#loginForm input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 0.95em;
-    background-color: #f5f5f5; /* Fondo claro para los inputs */
-    color: #000000; /* Cambia el texto dentro de los inputs a negro */
-}
-
-#loginForm input::placeholder {
-    color: #a9a9a9; /* Color para los placeholders */
-}
-
-#loginForm button {
-    width: 100%;
-    max-width: 200px; /* Controla el ancho máximo del botón */
-    padding: 10px;
-    background-color: #0c7a20;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
-    margin-top: 10px; /* Espacio entre el botón y los inputs */
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#loginForm button:hover {
-    background-color: #095c16;
-}
-
-#errorMessage {
-    color: red;
-    margin-top: 10px;
-    display: none;
-}
-
-/* Media Query para pantallas más pequeñas */
-@media (max-width: 768px), (max-height: 768px) {
-    #loginForm {
-        padding: 10px 15px;
-        max-width: 300px;
-    }
-
-    #loginForm h2 {
-        font-size: 1.2em;
-    }
-
-    #loginForm label,
-    #loginForm input,
-    #loginForm button {
-        font-size: 0.9em;
-    }
-
-    #loginForm input {
-        padding: 4px;
-    }
-
-    #loginForm button {
-        padding: 5px;
-    }
-}
+    background-color: transpare

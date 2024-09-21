@@ -132,7 +132,6 @@ iframe {
     display: block;
 }
 
-
 /* Alinear el menú de iframe2 hacia la izquierda */
 #iframe2Menu .dropdown-content {
     right: 0;
@@ -193,37 +192,33 @@ iframe {
         flex-direction: row;
     }
 
-    #iframe1, #iframe2 {
-        width: 50%;
+    #iframe1 {
+        width: 100%;
         height: 100%;
         display: block;
     }
 
-    #toggleIframe3Button {
+    #iframe2, #iframe3 {
         display: none;
     }
 
-    #iframe3 {
+    /* Ocultar botones y menús de iframe2 y iframe3 */
+    #toggleIframe3Button, #iframe2Menu, #iframe2MenuButton {
         display: none;
     }
 
-    /* Posicionar menús */
+    /* Posicionar el menú de iframe1 */
     #iframe1Menu {
         top: 10px;
         left: 10px;
     }
 
-    #iframe2Menu {
-        top: 10px;
-        right: 10px;
-        left: auto;
-    }
-
-    /* Posicionar botón */
+    /* Posicionar el botón de toggle */
     #toggleButton {
         top: 10px;
         right: 10px;
-        left: calc(49%);
+        left: auto;
+        display: none; /* Ocultar el botón si no es necesario */
     }
 }
 
@@ -241,7 +236,6 @@ iframe {
     z-index: 2000;
     box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.7); /* Sombra interna para oscurecer los bordes */
 }
-
 
 #loginContent {
     display: flex;
@@ -294,7 +288,6 @@ iframe {
     background-color: #f5f5f5; /* Fondo claro para los inputs */
     color: #000000; /* Cambia el texto dentro de los inputs a negro */
 }
-
 
 #loginForm input::placeholder {
     color: #a9a9a9; /* Color para los placeholders */

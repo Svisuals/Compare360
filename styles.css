@@ -86,9 +86,6 @@ iframe {
     font-size: 16px;
     border: none;
     cursor: pointer;
-    /* Establecer dimensiones uniformes para ambos botones */
-    width: 50px;
-    height: 50px;
 }
 
 .dropdown button::after {
@@ -106,7 +103,7 @@ iframe {
     display: none;
     position: absolute;
     background-color: #ffffff; /* Fondo blanco */
-    min-width: 200px; /* Tamaño mínimo común */
+    min-width: 200px; /* Tamaño mínimo común para ambos menús */
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3); /* Sombra suave para todo el menú */
     border-radius: 8px; /* Bordes redondeados */
     z-index: 1;
@@ -162,13 +159,7 @@ iframe {
         height: 50%;
     }
 
-    /* Ajustar dimensiones del botón del menú de iframe2 */
-    #iframe2Menu button {
-        width: 50px;  /* Igual que el botón del iframe1 */
-        height: 50px; /* Igual que el botón del iframe1 */
-    }
-
-    /* Asegurar que el contenido del menú tenga las mismas dimensiones */
+    /* Ajustar dimensiones del contenido del menú de iframe2 */
     #iframe2Menu .dropdown-content {
         min-width: 200px; /* Igual que el menú del iframe1 */
     }

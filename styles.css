@@ -157,6 +157,11 @@ iframe {
 
     #iframe2 {
         height: 50%;
+    }   
+
+    #iframe2Menu {
+        top: calc(50% + 10px);
+        left: 10px;    
     }
 
     /* Ajustar dimensiones del contenido del menú de iframe2 */

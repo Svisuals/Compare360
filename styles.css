@@ -363,8 +363,8 @@ iframe {
     #loginForm button {
         width: 100%;
         max-width: 200px;
-       margin-top: 10px;
-       margin-left: 18%; /* Ajusta este valor para mover el botón hacia la derecha */
-       text-align: center;
+        margin-top: 10px;
+        margin-left: 10%; /* Ajusta este valor para mover el botón hacia la derecha */
+        text-align: center;
     }
 }

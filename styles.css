@@ -158,6 +158,11 @@ iframe {
     #iframe2 {
         height: 50%;
     }   
+    /* Estilo mejorado para los menús desplegables */
+    .dropdown-content {
+  
+        min-width: 200px; /* Tamaño mínimo común para ambos menús */
+    }
 
     /* Posicionar menú del iframe2 */
     #iframe2Menu {

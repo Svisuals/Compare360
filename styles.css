@@ -1,5 +1,67 @@
 /* Estilos generales */
-/* ... (el resto de tus estilos permanece igual) ... */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+#container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    flex-direction: row; /* Por defecto, dividir horizontalmente */
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: none; /* Inicialmente oculta todos los iframes */
+}
+
+#iframe1 {
+    display: block; /* Mostrar iframe1 por defecto */
+}
+
+#iframe2, #iframe3 {
+    display: none;
+}
+
+/* Botones */
+#toggleButton {
+    position: fixed;
+    top: 10px;
+    left: calc(49%);
+    width: 32px;
+    height: 32px;
+    background: url('DUP.png') no-repeat center center;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+#toggleIframe2ButtonMobile {
+    display: none;
+}
+
+#toggleIframe3Button {
+    position: fixed;
+    top: 10px;
+    left: 55px;
+    width: 32px;
+    height: 32px;
+    background: url('CRO.png') no-repeat center center;
+    background-size: cover;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+    display: block;
+}
 
 /* Menús desplegables */
 .dropdown {
@@ -15,6 +77,25 @@
 #iframe2Menu {
     right: 10px;
     left: auto;
+}
+
+.dropdown button {
+    background-color: #0c7a20;
+    color: white;
+    padding: 8px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown button::after {
+    content: '';
+    display: inline-block;
+    margin-left: 5px;
+    vertical-align: middle;
+    border-width: 5px;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
 }
 
 /* Estilo para los menús desplegables */
@@ -40,8 +121,7 @@
     border-radius: 5px;
 }
 
-.dropdown-content a:hover,
-.dropdown-content a:active {
+.dropdown-content a:hover {
     background-color: #f1f1f1;
     color: #0c7a20;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
@@ -52,7 +132,7 @@
     display: block;
 }
 
-/* Alinear el menú de iframe2 hacia la izquierda o derecha según la orientación */
+/* Alinear el menú de iframe2 hacia la izquierda */
 #iframe2Menu .dropdown-content {
     right: 0;
     left: auto;
@@ -62,7 +142,22 @@
 
 /* Orientación vertical en móviles */
 @media (max-width: 1300px) and (orientation: portrait) {
-    /* ... (otros estilos) ... */
+    #container {
+        flex-direction: column;
+    }
+
+    #iframe1,
+    #iframe2 {
+        width: 100%;
+    }
+
+    #iframe1 {
+        height: 50%;
+    }
+
+    #iframe2 {
+        height: 50%;
+    }
 
     /* Posicionar menús en el lado izquierdo */
     #iframe1Menu {
@@ -76,12 +171,67 @@
         right: auto;
     }
 
-    /* Ajustar el contenido del menú desplegable de iframe2 */
+    /* **Nuevo código para ajustar la dirección de apertura del menú** */
     #iframe2Menu .dropdown-content {
-        left: 0; /* Alinear a la izquierda del botón */
+        left: 0;
         right: auto;
+    }
+
+    /* Posicionar botón */
+    #toggleButton {
+        top: 10px;
+        right: 10px;
+        left: auto;
     }
 }
 
 /* Orientación horizontal en móviles */
-/* ... (el resto de tus estilos permanece igual) ... */
+@media (max-width: 1300px) and (orientation: landscape) {
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    #container {
+        height: 100%;
+        width: 100%;
+        flex-direction: row;
+    }
+
+    #iframe1, #iframe2 {
+        width: 50%;
+        height: 100%;
+        display: block;
+    }
+
+    #toggleIframe3Button {
+        display: none;
+    }
+
+    #iframe3 {
+        display: none;
+    }
+
+    /* Posicionar menús */
+    #iframe1Menu {
+        top: 10px;
+        left: 10px;
+    }
+
+    #iframe2Menu {
+        top: 10px;
+        right: 10px;
+        left: auto;
+    }
+
+    /* Posicionar botón */
+    #toggleButton {
+        top: 10px;
+        right: 10px;
+        left: calc(49%);
+    }
+}
+
+/* Estilos para la pantalla de inicio de sesión */
+/* ... (resto del código permanece igual) */

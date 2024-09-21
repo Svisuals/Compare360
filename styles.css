@@ -1,4 +1,4 @@
-/* Estilos generales */
+/* Estilos gerais */
 body, html {
     margin: 0;
     padding: 0;
@@ -13,25 +13,25 @@ body, html {
     width: 100%;
     height: 100%;
     position: relative;
-    flex-direction: row; /* Por defecto, dividir horizontalmente */
+    flex-direction: row; /* Por padrão, dividir horizontalmente */
 }
 
 iframe {
     width: 100%;
     height: 100%;
     border: none;
-    display: none; /* Inicialmente oculta todos los iframes */
+    display: none; /* Inicialmente oculta todos os iframes */
 }
 
 #iframe1 {
-    display: block; /* Mostrar iframe1 por defecto */
+    display: block; /* Mostrar iframe1 por padrão */
 }
 
 #iframe2, #iframe3 {
     display: none;
 }
 
-/* Botones */
+/* Botões */
 #toggleButton {
     position: fixed;
     top: 10px;
@@ -63,7 +63,7 @@ iframe {
     display: block;
 }
 
-/* Menús desplegables */
+/* Menus suspensos */
 .dropdown {
     position: fixed;
     top: 10px;
@@ -98,42 +98,41 @@ iframe {
     border-color: white transparent transparent transparent;
 }
 
-/* Estilo mejorado para los menús desplegables */
+/* Estilo aprimorado para os menus suspensos */
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #ffffff; /* Fondo blanco */
-    min-width: 200px; /* Aumentar el tamaño mínimo */
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3); /* Sombra suave para todo el menú */
-    border-radius: 8px; /* Bordes redondeados */
+    background-color: #ffffff; /* Fundo branco */
+    min-width: 200px; /* Aumentar o tamanho mínimo */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3); /* Sombra suave para todo o menu */
+    border-radius: 8px; /* Bordas arredondadas */
     z-index: 1;
-    padding: 10px 0; /* Añadir padding vertical */
+    padding: 10px 0; /* Adicionar padding vertical */
 }
 
 .dropdown-content a {
     color: black;
-    padding: 12px 16px; /* Más espacio alrededor del texto */
+    padding: 12px 16px; /* Mais espaço ao redor do texto */
     text-decoration: none;
     display: block;
-    font-weight: bold; /* Hacer el texto más destacado */
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombreado del texto */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave en el hover */
-    border-radius: 5px; /* Bordes redondeados en cada enlace */
+    font-weight: bold; /* Destacar o texto */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombra do texto */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transição suave no hover */
+    border-radius: 5px; /* Bordas arredondadas em cada link */
 }
 
 .dropdown-content a:hover {
-    background-color: #f1f1f1; /* Color de fondo en hover */
-    color: #0c7a20; /* Color de texto al pasar el mouse */
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4); /* Más sombra en el hover */
+    background-color: #f1f1f1; /* Cor de fundo no hover */
+    color: #0c7a20; /* Cor do texto ao passar o mouse */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4); /* Mais sombra no hover */
 }
 
-/* Mostrar el menú al agregar la clase 'show' */
+/* Mostrar o menu ao adicionar a classe 'show' */
 .dropdown.show .dropdown-content {
     display: block;
 }
 
-
-/* Alinear el menú de iframe2 hacia la izquierda */
+/* Alinhar o menu do iframe2 à esquerda */
 #iframe2Menu .dropdown-content {
     right: 0;
     left: auto;
@@ -141,7 +140,7 @@ iframe {
 
 /* Media Queries */
 
-/* Orientación vertical en móviles */
+/* Orientação vertical em dispositivos móveis */
 @media (max-width: 1300px) and (orientation: portrait) {
     #container {
         flex-direction: column;
@@ -160,7 +159,7 @@ iframe {
         height: 50%;
     }
 
-    /* Posicionar menús */
+    /* Posicionar menus */
     #iframe1Menu {
         top: 10px;
         left: 10px;
@@ -171,7 +170,7 @@ iframe {
         left: 10px;
     }
 
-    /* Posicionar botón */
+    /* Posicionar botão */
     #toggleButton {
         top: 10px;
         right: 10px;
@@ -179,7 +178,7 @@ iframe {
     }
 }
 
-/* Orientación horizontal en móviles */
+/* Orientação horizontal em dispositivos móveis */
 @media (max-width: 1300px) and (orientation: landscape) {
     html, body {
         height: 100%;
@@ -207,7 +206,7 @@ iframe {
         display: none;
     }
 
-    /* Posicionar menús */
+    /* Posicionar menus */
     #iframe1Menu {
         top: 10px;
         left: 10px;
@@ -219,7 +218,7 @@ iframe {
         left: auto;
     }
 
-    /* Posicionar botón */
+    /* Posicionar botão */
     #toggleButton {
         top: 10px;
         right: 10px;
@@ -227,21 +226,20 @@ iframe {
     }
 }
 
-/* Estilos para la pantalla de inicio de sesión */
+/* Estilos para a tela de início de sessão */
 #loginOverlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #000000; /* Fondo negro */
+    background-color: #000000; /* Fundo preto */
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 2000;
-    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.7); /* Sombra interna para oscurecer los bordes */
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.7); /* Sombra interna para escurecer as bordas */
 }
-
 
 #loginContent {
     display: flex;
@@ -250,28 +248,28 @@ iframe {
 }
 
 #loginLogo {
-    max-width: 360px; /* Tamaño del logo */ 
+    max-width: 360px; /* Tamanho do logo */ 
     height: auto;
     margin-bottom: 20px;
 }
 
-/* Estilos para el formulario de inicio de sesión */
+/* Estilos para o formulário de início de sessão */
 #loginForm {
-    background-color: transparent; /* Hacer el fondo transparente */
-    border: none; /* Eliminar el borde */
-    box-shadow: none; /* Eliminar las sombras */
+    background-color: transparent; /* Fundo transparente */
+    border: none; /* Remover a borda */
+    box-shadow: none; /* Remover as sombras */
     padding: 20px 30px;
     max-width: 350px;
     width: 100%;
     font-family: 'Open Sans', sans-serif;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centra el contenido del formulario */
+    align-items: center; /* Centralizar o conteúdo do formulário */
 }
 
 #loginForm h2 {
     margin-bottom: 20px;
-    color: white; /* Color del texto en blanco */
+    color: white; /* Cor do texto em branco */
     font-size: 1.5em;
     font-weight: bold;
 }
@@ -280,7 +278,7 @@ iframe {
     display: block;
     margin: 10px 0 5px;
     text-align: left;
-    color: #000000; /* Cambia las etiquetas a color negro */
+    color: #000000; /* Mudar as etiquetas para cor preta */
     font-size: 0.95em;
 }
 
@@ -291,18 +289,17 @@ iframe {
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 0.95em;
-    background-color: #f5f5f5; /* Fondo claro para los inputs */
-    color: #000000; /* Cambia el texto dentro de los inputs a negro */
+    background-color: #f5f5f5; /* Fundo claro para os inputs */
+    color: #000000; /* Mudar o texto dentro dos inputs para preto */
 }
 
-
 #loginForm input::placeholder {
-    color: #a9a9a9; /* Color para los placeholders */
+    color: #a9a9a9; /* Cor para os placeholders */
 }
 
 #loginForm button {
     width: 100%;
-    max-width: 200px; /* Controla el ancho máximo del botón */
+    max-width: 200px; /* Controla a largura máxima do botão */
     padding: 10px;
     background-color: #0c7a20;
     color: white;
@@ -311,7 +308,7 @@ iframe {
     cursor: pointer;
     font-size: 1em;
     transition: background-color 0.3s ease;
-    margin-top: 10px; /* Espacio entre el botón y los inputs */
+    margin-top: 10px; /* Espaço entre o botão e os inputs */
     text-align: center;
     margin-left: auto;
     margin-right: auto;
@@ -327,7 +324,7 @@ iframe {
     display: none;
 }
 
-/* Media Query para pantallas más pequeñas */
+/* Media Query para telas menores */
 @media (max-width: 768px), (max-height: 768px) {
     #loginForm {
         padding: 10px 15px;

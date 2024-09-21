@@ -171,9 +171,10 @@ iframe {
         font-size: 16px;      /* Igual que el botón del iframe1 */
     }
 
-    /* Ajustar dimensiones del contenido del menú del iframe2 */
-    #iframe2Menu .dropdown-content {
-        min-width: 200px;     /* Igual que el menú del iframe1 */
+    /* Ajustar posicion del contenido del menú del iframe2 */
+   #iframe2Menu .dropdown-content {
+        left: 0;
+        right: auto;
     }
 
     /* Posicionar botón */

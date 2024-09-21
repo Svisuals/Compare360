@@ -117,7 +117,7 @@ function adjustLayout() {
     const isPortrait = window.innerHeight > window.innerWidth;
 
     if (isMobile) {
-        // En modo móvil, ocultamos iframe3
+        // En modo móvil, ocultamos iframe3 y su botón
         iframe3.style.display = 'none';
         toggleIframe3Button.style.display = 'none';
 
@@ -127,13 +127,24 @@ function adjustLayout() {
             iframe1.style.height = iframe2.style.display === 'block' ? '50%' : '100%';
             iframe2.style.width = '100%';
             iframe2.style.height = iframe2.style.display === 'block' ? '50%' : '0';
+            iframe2.style.display = iframe2.style.display === 'block' ? 'block' : 'none';
+
+            // Mostrar botones y menús necesarios
+            toggleButton.style.display = 'block';
+            iframe1Menu.style.display = 'block';
         } else {
-            // En orientación horizontal, ambos iframes ocupan el 50% del ancho y el 100% de la altura
-            iframe1.style.width = '50%';
+            // En orientación horizontal, mostrar solo iframe1
+            iframe1.style.width = '100%';
             iframe1.style.height = '100%';
-            iframe2.style.width = '50%';
-            iframe2.style.height = '100%';
-            iframe2.style.display = 'block'; // Asegurar que iframe2 sea visible si está activo
+            iframe2.style.display = 'none';
+            iframe2Menu.style.display = 'none';
+            iframe2.style.width = '0';
+            iframe2.style.height = '0';
+
+            // Ocultar botones y menús adicionales
+            toggleButton.style.display = 'none';
+            iframe2Menu.style.display = 'none';
+            iframe1Menu.style.display = 'block';
         }
     } else {
         // En modo escritorio, los iframes ocupan toda la altura y se distribuyen por ancho
@@ -143,16 +154,23 @@ function adjustLayout() {
         if (iframe2.style.display === 'block') {
             iframe1.style.width = '50%';
             iframe2.style.width = '50%';
-            iframe2.style.height = '100%';  // Asegurarse de que iframe2 ocupe toda la altura
+            iframe2.style.height = '100%';
             iframe3.style.display = 'none';
         } else if (iframe3.style.display === 'block') {
             iframe1.style.width = '50%';
             iframe3.style.width = '50%';
-            iframe2.style.height = '0';  // Asegurarse de que iframe2 esté oculto correctamente
+            iframe2.style.display = 'none';
+            iframe2.style.height = '0';
         } else {
             iframe1.style.width = '100%';
-            iframe2.style.height = '0';  // Asegurar que iframe2 esté oculto correctamente
+            iframe2.style.display = 'none';
+            iframe2.style.height = '0';
         }
+
+        // Mostrar botones y menús necesarios
+        toggleButton.style.display = 'block';
+        iframe1Menu.style.display = 'block';
+        iframe2Menu.style.display = 'block';
     }
 
     // Asegurar que los menús no afecten la posición de los botones

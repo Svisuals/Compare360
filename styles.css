@@ -308,7 +308,7 @@ iframe {
 
 #loginForm button {
     width: 100%;
-    max-width: 200px; /* Controla el ancho máximo del botón */
+    max-width: 200px;
     padding: 10px;
     background-color: #0c7a20;
     color: white;
@@ -317,9 +317,8 @@ iframe {
     cursor: pointer;
     font-size: 1em;
     transition: background-color 0.3s ease;
-    margin-top: 10px; /* Espacio entre el botón y los inputs */
-    margin-left: auto; /* Añadir margen automático a la izquierda */
-    margin-right: auto; /* Añadir margen automático a la derecha */
+    margin-top: 10px;
+    margin-left: 30%; /* Ajusta este valor para mover el botón hacia la derecha */
     text-align: center;
 }
 

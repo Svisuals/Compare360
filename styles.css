@@ -260,6 +260,7 @@ iframe {
     max-width: 360px; /* Tamaño del logo */ 
     height: auto;
     margin-bottom: 20px;
+    margin-left: 15%; /* Ajusta este valor para mover la imagen a la derecha */
 }
 
 /* Estilos para el formulario de inicio de sesión */

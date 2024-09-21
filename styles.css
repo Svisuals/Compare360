@@ -104,6 +104,8 @@ iframe {
     position: absolute;
     background-color: #ffffff; /* Fondo blanco */
     min-width: 200px; /* Tamaño mínimo común para ambos menús */
+    max-width: 300px; /* Limitar ancho máximo */
+    width: 60%; /* Ajustar el ancho al 60% del contenedor */
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3); /* Sombra suave para todo el menú */
     border-radius: 8px; /* Bordes redondeados */
     z-index: 1;

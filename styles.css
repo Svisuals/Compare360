@@ -157,12 +157,7 @@ iframe {
 
     #iframe2 {
         height: 50%;
-    }  
-    
-     #iframe2Menu .dropdown-content {
-        min-width: 200px; /* Ajustar el tamaño mínimo para que coincida con el superior */
-        padding: 10px 0; /* Asegúrate de que el padding también sea igual */
-    }
+    }   
 
     /* Posicionar menú del iframe2 */
     #iframe2Menu {

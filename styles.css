@@ -159,16 +159,9 @@ iframe {
         height: 50%;
     }  
     
-    /* Estilo mejorado para los menús desplegables */
-   .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #ffffff; /* Fondo blanco */
-        min-width: 200px; /* Tamaño mínimo común para ambos menús */
-        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3); /* Sombra suave para todo el menú */
-        border-radius: 8px; /* Bordes redondeados */
-        z-index: 1;
-        padding: 10px 0; /* Añadir padding vertical */
+     #iframe2Menu .dropdown-content {
+        min-width: 200px; /* Ajustar el tamaño mínimo para que coincida con el superior */
+        padding: 10px 0; /* Asegúrate de que el padding también sea igual */
     }
 
     /* Posicionar menú del iframe2 */
